@@ -1,15 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './fonts/Poppins/Poppins-Regular.ttf';
-import './index.css';
-import App from './App';
+
+// import { ThemeProvider } from 'styled-components';
+
+
+// import 'sanitize.css';
+// import theme from './utils/theme';
+import GlobalStyle from './utils/GlobalStyle';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+
+
+const MainContainer = () => (
+    <>
+     <GlobalStyle />
+        <App />
+    </>
+);
+
+
+ReactDOM.render(<MainContainer />,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
