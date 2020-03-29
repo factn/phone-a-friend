@@ -19,7 +19,7 @@ const Nav = () => {
             <NavDiv>Home</NavDiv>
             <NavDiv>Phone a Friend</NavDiv>
             <NavDiv>Take a Call</NavDiv>
-            <NavDiv>Contact Us</NavDiv>        
+            <NavDiv>Contact Us</NavDiv>
         </NavContainer>
     )
 }

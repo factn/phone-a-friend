@@ -7,6 +7,7 @@ const MainDiv = styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 96%;
+    height: 55px;
     margin: 0 40px 0 40px;
 `;
 

@@ -15,15 +15,26 @@ const MainDiv = styled.nav`
     justify-content: space-between;
 `;
 
-const MainSplash = () => (
-        <>
-            <MainDiv>
-                <CallOrReceive color={PEACH} btnCopy="Phone a Friend" />
-                <CallOrReceive color={LAVENDER} btnCopy="Take a Call" />
-            </MainDiv> 
-            <MainJumbo />
-        </>
-    )
+type Props = {
+    makeCall: () => void;
+    receiveCall: () => void;
+}
+
+const MainSplash: React.FunctionComponent<Props> = ({ makeCall, receiveCall }) => (
+    <>
+        <MainDiv>
+            <CallOrReceive
+                click={makeCall}
+                color={PEACH}
+                btnCopy="Phone a Friend" />
+            <CallOrReceive
+                click={receiveCall}
+                color={LAVENDER}
+                btnCopy="Take a Call" />
+        </MainDiv>
+        <MainJumbo />
+    </>
+)
 
 
 export default MainSplash
