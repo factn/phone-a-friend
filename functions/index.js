@@ -27,50 +27,48 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
 exports.matchMeNow = functions.https.onRequest((request, response) => {
     let userID = request.body.userID;
     let usersCollection = db.collection('users');
-    let volunteerCollection = db.collection('volunteers');
+    let volunteersCollection = db.collection('volunteers');
 
-    let currentUserZipCode = null;
-    let currentUsergenderPreference = null;
-    let currentUserLanguage = null;
-
-    let matchingVolunteersList = [];
-
-    usersCollection.where('userID', '==', userID).get()
+    usersCollection.doc(userID).get()
     .then(currentUserDoc => {
         if (currentUserDoc.empty) {
             error = "Did not find any users with id " + userID;
             console.log(error);
-            response.send(error);
+            response.status(500).send(error);
             }
-            
+
         else {
-                let matchingVolunteersSnapshot = null;
-                currentUserZipCode = currentUserDoc.data().zipCode;
-                currentUsergenderPreference = currentUserDoc.data().genderPreference;
-                currentUserLanguage = currentUserDoc.data().currentUserLanguage;
+                let matchingVolunteersList=[];
+                let matchingVolunteersSnapshot;
+                let currentUserZipCode = currentUserDoc.data().zipCode;
+                let currentUsergenderPreference = currentUserDoc.data().genderPreference;
+                let currentUserLanguage = currentUserDoc.data().language;
                 // might make sense to filter through "CanChat" flag first/create index?
-                if (currentUsergenderPref != "no preference") {
-                    matchingVolunteersSnapshot = volunteerCollection.where('canChat' == true).where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage).where('gender' == currentUsergenderPreference);
+                if (currentUsergenderPreference != "no preference") {
+                    matchingVolunteersSnapshot = volunteersCollection.where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('language', '==', currentUserLanguage).where('gender', '==', currentUsergenderPreference);
                     }
                 else {
-                    matchingVolunteersSnapshot = volunteerCollection.where('canChat' == true).where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage);
+                    matchingVolunteersSnapshot = volunteersCollection.where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('language', '==', currentUserLanguage);
                     }
                 
-                    matchingVolunteersSnapshot.forEach(doc => {
-                    matchingVolunteersList.push(doc);
-                    });
-         
-                numOfMatches = matchingVolunteersList.length;
-                console.log("Number of matches: " + numOfMatches);
-                randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
-                console.log("Selected entry number: " + randomSelction);
-                selectedVulunteerUID  = docList[randomSelction].id;
-                response.send(selectedVulunteerUID);
+                    matchingVolunteersSnapshot.get()
+                .then(matchingVolunteersSnapshot => {
+                    matchingVolunteersSnapshot.forEach(doc=> {
+                        console.log("id: " + doc.id);
+                        matchingVolunteersList.push(doc);
+                        numOfMatches = matchingVolunteersList.length;
+                        console.log("Number of matches: " + numOfMatches);
+                        randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
+                        console.log("Selected entry number: " + randomSelction);
+                        selectedVulunteerUID  = matchingVolunteersList[randomSelction].id;
+                        response.status(200).send(selectedVulunteerUID);
+                    })
+                });
+                
             }
         })
     .catch(err => {
-        console.log('Hit an error when trying to find a match', err);
-        response.send(err, 500);
+        console.log('Hit an error when trying to find a match', error);
+        response.status(500).send(error);
   });
 });
-
