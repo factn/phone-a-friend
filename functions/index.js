@@ -5,7 +5,7 @@ const db = admin.firestore();
 
 exports.updateUserAvailability = functions.https.onRequest((request, response) => {
     let usersCollection = db.collection('users');
-    userID = request.body.userID;
+    let userID = request.body.userID;
     isAvailable = request.body.isAvailable;
     usersCollection.where('userID', '==', userID).get()
     .then(userSnapshot => {
@@ -24,35 +24,52 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
       });
 });
 
-
-exports.matchMe = functions.https.onRequest((request, response) => {
+exports.matchMeNow = functions.https.onRequest((request, response) => {
+    let userID = request.body.userID;
     let usersCollection = db.collection('users');
-    usersCollection.where('CanChat', '==', true).get()
-    .then(userSnapshot => {
-        if (userSnapshot.empty) {
-            error = "Did not find anyone available to chat at this time";
+    let volunteerCollection = db.collection('volunteers');
+
+    let currentUserZipCode = null;
+    let currentUsergenderPreference = null;
+    let currentUserLanguage = null;
+
+    let matchingVolunteersList = [];
+
+    usersCollection.where('userID', '==', userID).get()
+    .then(currentUserDoc => {
+        if (currentUserDoc.empty) {
+            error = "Did not find any users with id " + userID;
             console.log(error);
             response.send(error);
             }
-        else {  
-            let docList=[];
-            userSnapshot.forEach(doc => {
-                docList.push(doc);
-                });
+        else {
+                let matchingVolunteersSnapshot = null;
+                currentUserZipCode = currentUserDoc.data().zipCode;
+                currentUsergenderPreference = currentUserDoc.data().genderPreference;
+                currentUserLanguage = currentUserDoc.data().currentUserLanguage;
+         
+                if (currentUsergenderPref != "no preference") {
+                    matchingVolunteersSnapshot = volunteerCollection.where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage).where('gender' == currentUsergenderPreference);
+                    }
+                else {
+                    matchingVolunteersSnapshot = volunteerCollection.where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage);
+                    }
                 
-            numOfMatches = docList.length;
-            console.log("Number of matches: " + numOfMatches);
-            randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
-            console.log("Selected entry number: " + randomSelction);
-            console.log(docList[randomSelction].data().PhoneNumber);
-            selectedDocID = docList[randomSelction].id;
-            console.log ("the id: " + selectedDocID);
-            usersCollection.doc(selectedDocID).update({CanChat: false});
-            response.send("Found ");
-            }
-    }) 
-  .catch(err => {
-    console.log('Hit an error when trying to find a match', err);
-    response.send(err, 500);
+                    matchingVolunteersSnapshot.forEach(doc => {
+                    matchingVolunteersList.push(doc);
+                    });
+         
+                numOfMatches = matchingVolunteersList.length;
+                console.log("Number of matches: " + numOfMatches);
+                randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
+                console.log("Selected entry number: " + randomSelction);
+                selectedVulunteerUID  = docList[randomSelction].id;
+                response.send(selectedVulunteerUID);
+                }
+            })
+    .catch(err => {
+        console.log('Hit an error when trying to find a match', err);
+        response.send(err, 500);
   });
 });
+
