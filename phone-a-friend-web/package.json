@@ -30,6 +30,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build && cp build/index.html build/404.html && cp CNAME build/",
+    "deploy": "surge build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -48,5 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "surge": "^0.21.3"
+  }
 }

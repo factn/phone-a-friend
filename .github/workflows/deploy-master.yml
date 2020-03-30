@@ -1,0 +1,38 @@
+name: deploy-master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Packages
+        run: |
+          cd phone-a-friend-web
+          npm install
+      - name: Surge deploy
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          REACT_APP_ENVIRONMENT: development
+          REACT_APP_FIREBASE_API_KEY: AIzaSyDbY_LxYo4Dro-Z-QHZLdUq9Jx2-5WEYY4
+          REACT_APP_FIREBASE_AUTH_DOMAIN: phoneafriend-dev.firebaseapp.com
+          REACT_APP_FIREBASE_DB_URL: https://phoneafriend-dev.firebaseio.com
+          REACT_APP_FIREBASE_PROJECT_ID: phoneafriend-dev
+          REACT_APP_FIREBASE_STORAGE_BUCKET: phoneafriend-dev.appspot.com
+          REACT_APP_FIREBASE_MESSAGE_SENDER_ID: 816563952106
+          REACT_APP_FIREBASE_APP_ID: 1:816563952106:web:083afd954f599056c0ba93
+          REACT_APP_FIREBASE_MEASUREMENT_ID: G-4X2KB64PLQ
+        run: |
+          export
+          cd phone-a-friend-web
+          npm run deploy
