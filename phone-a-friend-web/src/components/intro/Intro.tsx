@@ -49,10 +49,9 @@ const DivR = styled(Div50)`
 type Props = {
   color: string;
   copy: string;
-  getStarted: () => void;
 };
 
-const Intro: React.FunctionComponent<Props> = ({ color, copy, getStarted }) => {
+const Intro: React.FunctionComponent<Props> = ({ color, copy }) => {
   return (
     <MainDiv color={color}>
       <DivL>
@@ -68,7 +67,7 @@ const Intro: React.FunctionComponent<Props> = ({ color, copy, getStarted }) => {
           tempore, commodi maxime eaque?
         </Blurb>
         <Link to="/login">
-          <Button role="button" onClick={() => getStarted()}>
+          <Button role="button">
             Get Started
           </Button>
         </Link>

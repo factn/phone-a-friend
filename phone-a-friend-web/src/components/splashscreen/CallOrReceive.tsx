@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 type Props = {
   btnCopy: string;
   color: string;
-  click: () => void;
+  path: string;
 };
 
 const MainDiv = styled.div`
@@ -35,15 +35,15 @@ const Button = styled.div`
 const CallOrReceive: React.FunctionComponent<Props> = ({
   color,
   btnCopy,
-  click
+  path = "/login"
 }) => (
   <MainDiv color={color}>
     <h1>I want to</h1>
     <div>
       <FaPhone />
     </div>
-    <Link to="/login">
-      <Button role="button" onClick={() => click()}>
+    <Link to={path}>
+      <Button role="button">
         {btnCopy}
       </Button>
     </Link>

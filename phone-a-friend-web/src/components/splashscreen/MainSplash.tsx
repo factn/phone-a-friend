@@ -4,7 +4,7 @@ import CallOrReceive from './CallOrReceive'
 import MainJumbo from './MainJumbo'
 import { PEACH } from '../../utils/Colors';
 import { LAVENDER } from '../../utils/Colors'
-
+import { CALLER_PATH, CALLEE_PATH,  LOGIN_PATH } from '../../Paths';
 
 const MainDiv = styled.nav`
     width: 750px;
@@ -15,22 +15,19 @@ const MainDiv = styled.nav`
     justify-content: space-between;
 `;
 
-type Props = {
-    makeCall: () => void;
-    receiveCall: () => void;
-}
+type Props = { loggedin:boolean };
 
-const MainSplash: React.FunctionComponent<Props> = ({ makeCall, receiveCall }) => (
+const MainSplash:React.FunctionComponent<Props> = ({ loggedin }) => (
     <>
         <MainDiv>
             <CallOrReceive
-                click={makeCall}
                 color={PEACH}
-                btnCopy="Phone a Friend" />
+                btnCopy="Phone a Friend"
+                path={loggedin ? CALLER_PATH : LOGIN_PATH} />
             <CallOrReceive
-                click={receiveCall}
                 color={LAVENDER}
-                btnCopy="Take a Call" />
+                btnCopy="Take a Call"
+                path={loggedin ? CALLEE_PATH : LOGIN_PATH} />
         </MainDiv>
         <MainJumbo />
     </>
