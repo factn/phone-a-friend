@@ -60,6 +60,10 @@ function App() {
         }
     }
 
+    const handleGetStarted  = () => {
+        setCurrScreen(REGISTER_SCREEN);
+    }
+
     return (
             <MainDiv>
                 <Header />
@@ -72,6 +76,7 @@ function App() {
                 <Intro 
                     color={(role === CALLER) ? PEACH : LAVENDER} 
                     copy={(role === CALLER) ? 'Phone a Friend' : "Receive a Call"} 
+                    getStarted={handleGetStarted}
                 />
                 } 
             </MainDiv>
