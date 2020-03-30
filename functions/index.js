@@ -42,17 +42,18 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
             console.log(error);
             response.send(error);
             }
+            
         else {
                 let matchingVolunteersSnapshot = null;
                 currentUserZipCode = currentUserDoc.data().zipCode;
                 currentUsergenderPreference = currentUserDoc.data().genderPreference;
                 currentUserLanguage = currentUserDoc.data().currentUserLanguage;
-         
+                // might make sense to filter through "CanChat" flag first/create index?
                 if (currentUsergenderPref != "no preference") {
-                    matchingVolunteersSnapshot = volunteerCollection.where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage).where('gender' == currentUsergenderPreference);
+                    matchingVolunteersSnapshot = volunteerCollection.where('canChat' == true).where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage).where('gender' == currentUsergenderPreference);
                     }
                 else {
-                    matchingVolunteersSnapshot = volunteerCollection.where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage);
+                    matchingVolunteersSnapshot = volunteerCollection.where('canChat' == true).where('zipCode' == currentUserZipCode).where('language' == currentUserLanguage);
                     }
                 
                     matchingVolunteersSnapshot.forEach(doc => {
@@ -65,8 +66,8 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
                 console.log("Selected entry number: " + randomSelction);
                 selectedVulunteerUID  = docList[randomSelction].id;
                 response.send(selectedVulunteerUID);
-                }
-            })
+            }
+        })
     .catch(err => {
         console.log('Hit an error when trying to find a match', err);
         response.send(err, 500);
