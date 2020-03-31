@@ -25,18 +25,17 @@ const Disclaimer = styled.div`
     margin: 0;
 `;
 
-const MainJumbo = () => {
-    return (
+const MainJumbo = () => 
         <MainDiv>
             <HeadLine>Hi! Let's Connect</HeadLine>
-            <CopyDiv>We understand how important human connection is, especially in times
-            of isolation and uncertainty. Whether you want to phone someone for a chat
-            or take a call from someone reaching out, PhoneAFriend.care will get you set useImperativeHandle(
-            in no time.
+            <CopyDiv>
+                We understand how important human connection is, especially in times
+                of isolation and uncertainty. Whether you want to phone someone for a chat
+                or take a call from someone reaching out, PhoneAFriend.care will get you set up
+                in no time.
             </CopyDiv>
             <Disclaimer>Note - we do not offer professional advice</Disclaimer>
         </MainDiv>
-    )
-}
+);
 
 export default MainJumbo
