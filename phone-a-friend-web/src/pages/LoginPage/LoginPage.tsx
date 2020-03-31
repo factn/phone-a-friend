@@ -21,7 +21,7 @@ const LoginPage = () => {
     return () => {
       unlistenToAuth();
     };
-  }, []);
+  }, [dispatch, history]);
 
   const openAuth = () => setAuthVisible(true);
   const closeAuth = () => setAuthVisible(false);
