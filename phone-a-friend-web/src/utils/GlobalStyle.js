@@ -16,11 +16,14 @@ const GlobalStyle = createGlobalStyle `
         font-family: 'Poppins';
         font-size: 17px;
     }
+    a {
+        text-decoration:none;
+    }
 
     @media (max-width: 900px) {
      html { font-size: 15px; }
     }
-    
+
     @media (max-width: 400px) {
      html { font-size: 13px; }
     }

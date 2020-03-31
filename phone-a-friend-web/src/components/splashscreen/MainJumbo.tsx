@@ -2,22 +2,36 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-const MainDiv = styled.nav`
-    width: 80%;
+const MainDiv = styled.div`
+    height: 100%;
+    padding: 0 20% 0 20%;
     overflow:hidden;
-    margin: 0 auto 0 auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 `;
-const P = styled.div`
-    margin:0;
+const CopyDiv = styled.p`
     font-size: .8rem;
+`;
+const HeadLine = styled.h1`
+    font-size: 3.4rem;
+`;
+
+const Disclaimer = styled.p`
+    font-size: .5rem;
 `;
 
 const MainJumbo = () => {
     return (
         <MainDiv>
-            <h1>Hi! Let's Connect</h1>
-            <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam vitae repellendus minima, ipsum, ipsa pariatur autem, totam mollitia necessitatibus
-                 libero corrupti facilis. Tempora eveniet, quasi quod incidunt officia labore. Harum!</P>
+            <HeadLine>Hi! Let's Connect</HeadLine>
+            <CopyDiv>We understand how important human connection is, especially in times
+            of isolation and uncertainty. Whether you want to phone someone for a chat
+            or take a call from someone reaching out, PhoneAFriend.care will get you set useImperativeHandle(
+            in no time.
+            </CopyDiv>
+            <Disclaimer>Note - we do not offer professional advice</Disclaimer>
         </MainDiv>
     )
 }

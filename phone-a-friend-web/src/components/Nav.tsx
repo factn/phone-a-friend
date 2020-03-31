@@ -1,5 +1,7 @@
 import React from 'react';
+import {BrowserRouter as Router,  Link } from "react-router-dom";
 import styled from 'styled-components';
+import { CALLER_PATH, CALLEE_PATH, CONTACT_PATH } from '../Paths'; 
 
 const NavContainer = styled.nav`
     display: flex;
@@ -16,10 +18,12 @@ const NavDiv = styled.nav`
 const Nav = () => {
     return (
         <NavContainer>
-            <NavDiv>Home</NavDiv>
-            <NavDiv>Phone a Friend</NavDiv>
-            <NavDiv>Take a Call</NavDiv>
-            <NavDiv>Contact Us</NavDiv>
+            <Router>
+                <Link to="/"><NavDiv>Home</NavDiv></Link>
+                <Link to={CALLER_PATH}><NavDiv>Phone a Friend</NavDiv></Link>
+                <Link to={CALLEE_PATH}><NavDiv>Take a Call</NavDiv></Link>
+                <Link to={CONTACT_PATH}><NavDiv>Contact Us</NavDiv></Link>
+            </Router>
         </NavContainer>
     )
 }
