@@ -19,7 +19,7 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
         }
     })
     .catch(error => {
-        console.log("Hit an unexpected error when trying to update availablity ", err);
+        console.log("Hit an unexpected error when trying to update availablity ", error);
         response.status(500).send(error);
       });
 });
@@ -27,7 +27,6 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
 // curl -X POST <local path to firebase fuunction> -H "Content-Type:application/json"  -d '{"userID":"<id>"}'
 exports.matchMeNow = functions.https.onRequest((request, response) => {
     let userID = request.body.userID;
-    // let userID = 'JG39wKP4ffieibDuhx2s';
     let usersCollection = db.collection('users');
     let volunteersCollection = db.collection('volunteers');
     usersCollection.doc(userID).get()
@@ -44,7 +43,6 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
                 let currentUserZipCode = currentUserDoc.data().zipCode;
                 let currentUsergenderPreference = currentUserDoc.data().genderPreference;
                 let currentUserLanguage = currentUserDoc.data().language;
-                
                 // might make sense to filter through "CanChat" flag first/create index?
                 if (currentUsergenderPreference != "no preference") {
                     matchingVolunteersSnapshot = volunteersCollection.where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
