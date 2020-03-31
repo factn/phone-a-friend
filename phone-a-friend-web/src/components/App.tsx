@@ -15,7 +15,9 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import MainSplash from "./splashscreen/MainSplash";
 import styled from "styled-components";
 import Header from "./Header";
+import Footer from "./Footer"
 import Intro from "./intro/Intro";
+import Register from "./register/index"
 
 // import Register from "./register/";
 import { PEACH } from "../utils/Colors";
@@ -25,13 +27,14 @@ import { LAVENDER } from "../utils/Colors";
 import { CALLER_PATH, CALLEE_PATH, REGISTER_PATH, LOGIN_PATH, LOGGED_IN_PATH } from '../Paths';
 
 const MainDiv = styled.div`
-  width: 750px;
-  height: 463px;
+  width: 96vw;
+height: 96vh;
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   margin: 0 auto 0 auto;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
@@ -40,7 +43,6 @@ const MainDiv = styled.div`
 function App() {
     // set to false to bi-pass login
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-
 
     return (
         <MainDiv>
@@ -68,6 +70,9 @@ function App() {
                             copy={"Receive a Call"}
                         />
                     </Route>
+                    <Route path={REGISTER_PATH}>
+                        <Register color={PEACH}/>
+                    </Route>
 
 
                     <Route default path="/">
@@ -75,6 +80,7 @@ function App() {
                     </Route>
                 </Switch>
             </Router>
+            <Footer />
         </MainDiv>
     );
 }
