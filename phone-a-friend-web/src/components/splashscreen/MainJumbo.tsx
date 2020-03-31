@@ -8,18 +8,21 @@ const MainDiv = styled.div`
     overflow:hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content:space-around;
     align-items: center;
 `;
-const CopyDiv = styled.p`
+const CopyDiv = styled.div`
     font-size: .8rem;
+    margin: 0;
 `;
-const HeadLine = styled.h1`
+const HeadLine = styled.div`
     font-size: 3.4rem;
+    margin: 0;
 `;
 
-const Disclaimer = styled.p`
+const Disclaimer = styled.div`
     font-size: .5rem;
+    margin: 0;
 `;
 
 const MainJumbo = () => {

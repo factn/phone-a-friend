@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import CallOrReceive from './CallOrReceive'
 import MainJumbo from './MainJumbo'
 import BottomBanner from './BottomBanner'
-import { PEACH } from '../../utils/Colors';
-import { LAVENDER } from '../../utils/Colors'
+import { PEACH, LAVENDER } from '../../utils/Colors';
 import { CALLER_PATH, CALLEE_PATH, LOGIN_PATH } from '../../Paths';
 
 const MainDiv = styled.nav`
@@ -31,6 +30,7 @@ const FlexBox = styled.div<Iprops>`
     flex-grow: ${props => props.grow};
 `;
 
+
 type Props = { loggedin: boolean };
 
 const MainSplash: React.FunctionComponent<Props> = ({ loggedin }) => (
@@ -44,7 +44,8 @@ const MainSplash: React.FunctionComponent<Props> = ({ loggedin }) => (
                 <CallOrReceive
                     color={LAVENDER}
                     btnCopy="Take a Call"
-                    path={loggedin ? CALLEE_PATH : LOGIN_PATH} />
+                    path={loggedin ? CALLEE_PATH : LOGIN_PATH}
+                    leftHandBool={false} />
             </IwantDiv>
         </FlexBox>
         <FlexBox grow={2}>
