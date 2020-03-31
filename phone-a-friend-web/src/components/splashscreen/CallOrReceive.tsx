@@ -1,22 +1,27 @@
 import React from "react";
-import { FaPhone } from "react-icons/fa";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LeftHandImage from '../../images/handL.png'
+import RightHandImage from '../../images/handR.png'
 
 type Props = {
-  btnCopy: string;
-  color: string;
-  path: string;
+    btnCopy: string;
+    color: string;
+    path: string;
+    leftHandBool?: boolean;
 };
 
-const MainDiv = styled.div`
-height: 100%;
+interface IProps {
+    readonly color: string;
+}
+
+const MainDiv = styled.div<IProps>`
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background: ${props => props.color};
+  background-color: ${props => props.color};
 `;
 
 const Button = styled.div`
@@ -32,22 +37,34 @@ const Button = styled.div`
   cursor: pointer;
 `;
 
-const CallOrReceive: React.FunctionComponent<Props> = ({
-  color,
-  btnCopy,
-  path = "/login"
+type ImgProps = {
+    leftHandBool: boolean
+}
+const ImgDiv = styled.div<ImgProps>`
+    align-self: ${props => props.leftHandBool ? 'flex-end' : 'flex-start'};
+`;
+
+const CallOrReceive: React.FC<Props> = ({
+    color,
+    btnCopy,
+    path = "/login",
+    leftHandBool = true
 }) => (
-  <MainDiv color={color}>
-    <h1>I want to</h1>
-    <div>
-      <FaPhone />
-    </div>
-    <Link to={path}>
-      <Button role="button">
-        {btnCopy}
-      </Button>
-    </Link>
-  </MainDiv>
-);
+        <MainDiv color={color}>
+            <h1>I want to</h1>
+            <ImgDiv leftHandBool={leftHandBool}>
+                {leftHandBool ?
+                    <img src={LeftHandImage} alt="hand" />
+                    :
+                    <img src={RightHandImage} alt="hand" />
+                }
+            </ImgDiv>
+            <Link to={path}>
+                <Button role="button">
+                    {btnCopy}
+                </Button>
+            </Link>
+        </MainDiv>
+    );
 
 export default CallOrReceive;
