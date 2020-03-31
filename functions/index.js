@@ -4,9 +4,9 @@ admin.initializeApp();
 const db = admin.firestore();
 
 exports.updateUserAvailability = functions.https.onRequest((request, response) => {
-    let usersCollection = db.collection('users');
     let userID = request.body.userID;
     isAvailable = request.body.isAvailable;
+    let usersCollection = db.collection('users');
     usersCollection.where('userID', '==', userID).get()
     .then(userSnapshot => {
         if (userSnapshot.empty) {
@@ -16,6 +16,7 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
             }
         else {
             db.collection('users').doc(userID).update({CanChat: isAvailable});
+            response.status(200).send("updated");
         }
     })
     .catch(error => {
@@ -24,7 +25,6 @@ exports.updateUserAvailability = functions.https.onRequest((request, response) =
       });
 });
 
-// curl -X POST <local path to firebase fuunction> -H "Content-Type:application/json"  -d '{"userID":"<id>"}'
 exports.matchMeNow = functions.https.onRequest((request, response) => {
     let userID = request.body.userID;
     let usersCollection = db.collection('users');
@@ -43,12 +43,41 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
                 let currentUserZipCode = currentUserDoc.data().zipCode;
                 let currentUsergenderPreference = currentUserDoc.data().genderPreference;
                 let currentUserLanguage = currentUserDoc.data().language;
-                // might make sense to filter through "CanChat" flag first/create index?
-                if (currentUsergenderPreference != "no preference") {
-                    matchingVolunteersSnapshot = volunteersCollection.where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
+                let now = new Date();
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
+                let nowInMinutes = hours*60 + minutes;
+                let dayOfWeek = now.getDay();
+                let today = "";
+                switch (dayOfWeek) {
+                    case 1:
+                        today = "mon";
+                        break;
+                    case 2:
+                        today = "tue";
+                        break;
+                    case 3:
+                        today = "wed";
+                        break;
+                    case 4:
+                        today = "thu";
+                        break;
+                    case 5:
+                        today = "fri";
+                        break;
+                    case 6:
+                        today = "sat";
+                        break;
+                    case 7:
+                        today = "sun";
+                        break;        
+                }                
+
+                if (currentUsergenderPreference != "noPreference") {
+                    matchingVolunteersSnapshot = volunteersCollection.where(`${today}.start`, '<', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
                     }
                 else {
-                    matchingVolunteersSnapshot = volunteersCollection.where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode);
+                    matchingVolunteersSnapshot = volunteersCollection.where(`${today}.start`, '<', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode);
                     }
                 
                     matchingVolunteersSnapshot.get()
@@ -59,16 +88,23 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
                             response.status(200).send(null);
                             }
                         else {
-                        matchingVolunteersSnapshot.forEach(doc=> {
-                            console.log("id: " + doc.id);
-                            matchingVolunteersList.push(doc);
-                            numOfMatches = matchingVolunteersList.length;
-                            console.log("Number of matches: " + numOfMatches);
-                            randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
-                            console.log("Selected entry number: " + randomSelction);
-                            selectedVulunteerUID  = matchingVolunteersList[randomSelction].id;
-                            response.status(200).send(selectedVulunteerUID);
+                            matchingVolunteersSnapshot.forEach(doc=> {
+                                let windowEnd = doc.get(`${today}.end`)
+                                if (windowEnd>=nowInMinutes+30){
+                                    matchingVolunteersList.push(doc);
+                                }
                             })
+                                numOfMatches = matchingVolunteersList.length;
+                                if (numOfMatches) {
+                                    randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
+                                    selectedVulunteerUID  = matchingVolunteersList[randomSelction].id;
+                                    response.status(200).send(selectedVulunteerUID);
+                                }
+                                else {
+                                    message = "Could not find any available matches for user " + userID;
+                                    console.log(message);
+                                    response.status(200).send(null);
+                                }
                         }
                     })
                 }
