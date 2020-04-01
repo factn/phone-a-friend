@@ -1,22 +1,30 @@
 import React from 'react'
 import styled from 'styled-components';
 import { LIGHT_BLUE } from '../../utils/Colors'
-
+import { OUTSIDE_MARGIN } from '../../utils/Constants'
 interface Iprops {
-
-    bg: string;
+    outsideMargin?: string;
+    bg?: string;
 }
 
 const MainDiv = styled.nav<Iprops>`
-    background: ${props => props.bg};
-    width: 100%;
-    height: 100%;
-    overflow:hidden;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items:center;
+    margin-left: ${props => props.outsideMargin};
+    margin-right: ${props => props.outsideMargin};
 `;
+
+
+const WrapperDiv = styled.div<Iprops>`
+    background: ${props => props.bg};
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+`;
+
 
 const Button = styled.div`
   border: 2px solid black;
@@ -31,18 +39,26 @@ const Button = styled.div`
   cursor: pointer;
 `;
 
+const Container = styled.div`
+    width: 44%;
+    input {
+    width: 100%;
+    }
+`;
 
 const BottomBanner = () => {
     return (
-        <MainDiv bg={LIGHT_BLUE}>
+        <WrapperDiv bg={LIGHT_BLUE} >
+        <MainDiv outsideMargin={OUTSIDE_MARGIN}>
             <h2>Stay Connected</h2>
-            <div>
+            <Container>
                 <input id="namedInput" 
                     placeholder="Your email address"
                     type="text" name="email"/>
-            </div>
+            </Container>
             <Button role="buttton">Submit</Button>
         </MainDiv>
+        </WrapperDiv>
     )
 }
 
