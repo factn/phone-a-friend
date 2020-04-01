@@ -17,7 +17,7 @@ const MainDiv = styled.nav<Iprops>`
 `;
 
 
-const WrapperDiv = styled.div<Iprops>`
+const Container = styled.div<Iprops>`
     background: ${props => props.bg};
     height: 100%;
     display: flex;
@@ -39,26 +39,26 @@ const Button = styled.div`
   cursor: pointer;
 `;
 
-const Container = styled.div`
+const InputWrapper = styled.div`
     width: 44%;
     input {
-    width: 100%;
+        width: 100%;
     }
 `;
 
 const BottomBanner = () => {
     return (
-        <WrapperDiv bg={LIGHT_BLUE} >
-        <MainDiv outsideMargin={OUTSIDE_MARGIN}>
-            <h2>Stay Connected</h2>
-            <Container>
-                <input id="namedInput" 
-                    placeholder="Your email address"
-                    type="text" name="email"/>
-            </Container>
-            <Button role="buttton">Submit</Button>
-        </MainDiv>
-        </WrapperDiv>
+        <Container bg={LIGHT_BLUE} >
+            <MainDiv outsideMargin={OUTSIDE_MARGIN}>
+                <h2>Stay Connected</h2>
+                <InputWrapper>
+                    <input id="namedInput" 
+                        placeholder="Your email address"
+                        type="text" name="email"/>
+                </InputWrapper>
+                <Button role="buttton">Submit</Button>
+            </MainDiv>
+        </Container>
     )
 }
 
