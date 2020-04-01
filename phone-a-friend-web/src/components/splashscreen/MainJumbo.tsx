@@ -12,8 +12,10 @@ const MainDiv = styled.div`
     align-items: center;
 `;
 const CopyDiv = styled.div`
+    font-family: 'Lora';
     font-size: .8rem;
     margin: 0;
+    text-align:center;
 `;
 const HeadLine = styled.div`
     font-size: 3.4rem;
@@ -21,21 +23,22 @@ const HeadLine = styled.div`
 `;
 
 const Disclaimer = styled.div`
+    font-family: 'Lora';
     font-size: .5rem;
     margin: 0;
 `;
 
 const MainJumbo = () => (
-        <MainDiv>
-            <HeadLine>Hi! Let's Connect</HeadLine>
-            <CopyDiv>
-                We understand how important human connection is, especially in times
-                of isolation and uncertainty. Whether you want to phone someone for a chat
-                or take a call from someone reaching out, PhoneAFriend.care will get you set up
-                in no time.
+    <MainDiv>
+        <HeadLine>Hi! Let's Connect</HeadLine>
+        <CopyDiv>
+            We understand how important human connection is, especially in times
+            of isolation and uncertainty. Whether you want to phone someone for a chat
+            or take a call from someone reaching out, PhoneAFriend.care will get you set up
+            in no time.
             </CopyDiv>
-            <Disclaimer>Note - we do not offer professional advice</Disclaimer>
-        </MainDiv>
+        <Disclaimer>Note - we do not offer professional advice</Disclaimer>
+    </MainDiv>
 );
 
 export default MainJumbo
