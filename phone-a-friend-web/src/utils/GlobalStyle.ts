@@ -1,8 +1,6 @@
-import {
-    createGlobalStyle
-} from 'styled-components';
-import Poppins from '../fonts/Poppins/Poppins-Regular.ttf'
-import Lora from '../fonts/Lora/Lora-VariableFont_wght.ttf'
+import { createGlobalStyle } from "styled-components";
+import Poppins from "../fonts/Poppins/Poppins-Regular.ttf";
+import Lora from "../fonts/Lora/Lora-VariableFont_wght.ttf";
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -20,6 +18,14 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-display: auto;
   }
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+    }
+
     html {
         font-family: 'Poppins';
         font-size: 17px;

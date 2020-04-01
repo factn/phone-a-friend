@@ -16,17 +16,17 @@ import {
   VOLUNTEER_SIGN_UP_PATH,
   USER_SIGN_UP_PATH,
   VOLUNTEER_PATH,
-  USER_PATH
+  USER_PATH,
 } from "../Paths";
-import UserSignUpPage from "../pages/UserSignUpPage/UserSignUpPage";
+import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
 import VolunteerSignUpPage from "../pages/VolunteerSignUpPage/VolunteerSignUpPage";
 
 const MainDiv = styled.div`
-  width: 96vw;
-  height: 96vh;
+  overflow: scroll;
+  width: 100vw;
+  height: 100vh;
   border: 1px solid black;
   border-radius: 10px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,7 +63,7 @@ function App() {
           </Route>
 
           <ProtectedRoute path={USER_SIGN_UP_PATH}>
-            <UserSignUpPage />
+            <UserSignUpManager />
           </ProtectedRoute>
 
           <ProtectedRoute path={VOLUNTEER_SIGN_UP_PATH}>

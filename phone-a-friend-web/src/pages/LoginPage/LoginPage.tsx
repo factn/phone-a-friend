@@ -23,16 +23,15 @@ const LoginPage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const unlistenToAuth = firebase.auth().onAuthStateChanged(authUser => {
+    const unlistenToAuth = firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
-        dispatch({ type: "USER_LOGIN", user: authUser.uid });
+        dispatch({ type: "USER_LOGIN", userId: authUser.uid });
         const { from } = hasFromInLocationState(location)
           ? location.state
           : { from: "/account" };
-        // history.push(from);
         history.replace(from);
       } else {
-        dispatch({ type: "USER_LOGIN", user: "" });
+        dispatch({ type: "USER_LOGIN", userId: "" });
       }
     });
     return () => {

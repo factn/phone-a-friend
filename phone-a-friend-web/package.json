@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
+    "@types/moment-timezone": "^0.5.13",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
@@ -14,15 +15,21 @@
     "@types/styled-components": "^5.0.1",
     "@welldone-software/why-did-you-render": "^4.0.6",
     "firebase": "^7.13.1",
+    "formik": "^2.1.4",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.28",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
     "react-icons": "^3.9.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-select": "^3.1.0",
     "sanitize.css": "^11.0.0",
     "styled-components": "^5.0.1",
-    "typescript": "~3.7.2"
+    "styled-media-query": "^2.1.2",
+    "typescript": "~3.7.2",
+    "yup": "^0.28.3"
   },
   "repository": {
     "type": "git",
@@ -52,6 +59,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-select": "^3.0.11",
+    "@types/yup": "^0.26.34",
     "surge": "^0.21.3"
   }
 }
