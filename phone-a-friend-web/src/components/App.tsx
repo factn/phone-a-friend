@@ -1,34 +1,31 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useHistory
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage/LoginPage";
-import { useStateValue } from "../contexts/AppContext";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import MainSplash from "./splashscreen/MainSplash";
 import styled from "styled-components";
 import Header from "./Header";
-import Footer from "./Footer"
+import Footer from "./Footer";
 import Intro from "./intro/Intro";
-import Register from "./register/index"
 
-// import Register from "./register/";
 import { PEACH } from "../utils/Colors";
 import { LAVENDER } from "../utils/Colors";
 
-// import SignUp from './SignUp';
-import { CALLER_PATH, CALLEE_PATH, REGISTER_PATH, LOGIN_PATH, LOGGED_IN_PATH } from '../Paths';
+import {
+  LOGIN_PATH,
+  VOLUNTEER_SIGN_UP_PATH,
+  USER_SIGN_UP_PATH,
+  VOLUNTEER_PATH,
+  USER_PATH
+} from "../Paths";
+import UserSignUpPage from "../pages/UserSignUpPage/UserSignUpPage";
+import VolunteerSignUpPage from "../pages/VolunteerSignUpPage/VolunteerSignUpPage";
 
 const MainDiv = styled.div`
   width: 96vw;
-height: 96vh;
+  height: 96vh;
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
@@ -41,52 +38,48 @@ height: 96vh;
 `;
 
 function App() {
-    // set to false to bi-pass login
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+  return (
+    <MainDiv>
+      <Header />
+      <Router>
+        <Switch>
+          <Route path={LOGIN_PATH}>
+            <LoginPage />
+            <MainSplash />
+          </Route>
 
-    return (
-        <MainDiv>
-            <Header />
-            <Router>
-                <Switch>
-                    <Route path={LOGIN_PATH}>
-                        <LoginPage />
-                        <MainSplash loggedin={isLoggedIn} />
-                    </Route>
+          <Route path={USER_PATH}>
+            <Intro
+              signUpPath={USER_SIGN_UP_PATH}
+              color={PEACH}
+              copy={"Phone a Friend"}
+            />
+          </Route>
 
-                    <ProtectedRoute path={LOGGED_IN_PATH}>
-                        <ProtectedRouteTest />
-                    </ProtectedRoute>
+          <Route path={VOLUNTEER_PATH}>
+            <Intro
+              signUpPath={VOLUNTEER_SIGN_UP_PATH}
+              color={LAVENDER}
+              copy={"Receive a Call"}
+            />
+          </Route>
 
-                    <Route path={isLoggedIn ? CALLER_PATH : LOGIN_PATH}>
-                        <Intro
-                            color={PEACH}
-                            copy={"Phone a Friend"}
-                        />
-                    </Route>
-                    <Route path={isLoggedIn ? CALLEE_PATH : LOGIN_PATH}>
-                        <Intro
-                            color={LAVENDER}
-                            copy={"Receive a Call"}
-                        />
-                    </Route>
-                    <Route path={REGISTER_PATH}>
-                        <Register color={PEACH}/>
-                    </Route>
+          <ProtectedRoute path={USER_SIGN_UP_PATH}>
+            <UserSignUpPage />
+          </ProtectedRoute>
 
+          <ProtectedRoute path={VOLUNTEER_SIGN_UP_PATH}>
+            <VolunteerSignUpPage />
+          </ProtectedRoute>
 
-                    <Route default path="/">
-                        <MainSplash loggedin={isLoggedIn} />
-                    </Route>
-                </Switch>
-            </Router>
-            <Footer />
-        </MainDiv>
-    );
+          <Route default path="/">
+            <MainSplash />
+          </Route>
+        </Switch>
+      </Router>
+      <Footer />
+    </MainDiv>
+  );
 }
-
-const ProtectedRouteTest: React.FC<{}> = () => (
-    <div>User must be logged in to see this</div>
-);
 
 export default App;

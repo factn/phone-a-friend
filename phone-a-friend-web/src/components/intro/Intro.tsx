@@ -49,9 +49,10 @@ const DivR = styled(Div50)`
 type Props = {
   color: string;
   copy: string;
+  signUpPath: string;
 };
 
-const Intro: React.FunctionComponent<Props> = ({ color, copy }) => {
+const Intro: React.FunctionComponent<Props> = ({ color, copy, signUpPath }) => {
   return (
     <MainDiv color={color}>
       <DivL>
@@ -66,10 +67,8 @@ const Intro: React.FunctionComponent<Props> = ({ color, copy }) => {
           nam nisi, reprehenderit perspiciatis? Tenetur officia error nisi
           tempore, commodi maxime eaque?
         </Blurb>
-        <Link to="/login">
-          <Button role="button">
-            Get Started
-          </Button>
+        <Link to={signUpPath}>
+          <Button role="button">Get Started</Button>
         </Link>
       </DivR>
     </MainDiv>
