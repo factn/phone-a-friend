@@ -1,18 +1,27 @@
-import React from 'react'
+import React from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
 import { DARK_BLUE } from '../utils/Colors'
 import { FaTwitter, FaFacebookF } from 'react-icons/fa'
 
 
 interface Iprops {
-    readonly marginLeft?:string;
-    readonly marginRight?:string;
+    readonly marginLeft?: string;
+    readonly marginRight?: string;
 }
-const Button = styled.span<Iprops>`
-    font-size: .6em;
+
+
+const Navs = styled.span<Iprops>`
     color: white;
     margin-left: ${props => props.marginLeft};
     margin-right: ${props => props.marginRight};
+    &:hover {
+        color: yellow;
+    }
+`;
+
+const Button = styled(Navs)`
+    font-size: .6em;
 `;
 
 
@@ -31,29 +40,37 @@ type Props = {
     betweenMargin?: string;
 }
 
-const Footer:React.FC<Props> = ({ outsideMargin='70px', betweenMargin='20px'}) => {
-    return (
+
+const Footer: React.FC<Props> = ({ outsideMargin = '70px', betweenMargin = '20px' }) => (
+    <Router>
         <Main color={DARK_BLUE}>
             <div>
-                <Button role='button' marginLeft={outsideMargin}>
-                    © 2020 PhoneAFriend.care
+                <Link to="/">
+                    <Button marginLeft={outsideMargin}>
+                        © 2020 PhoneAFriend.care
                 </Button>
-                <Button role='button' marginLeft={betweenMargin}>
-                    Privacy Pattern
+                </Link>
+                <Link to="/privacy">
+                    <Button marginLeft={betweenMargin}>
+                        Privacy Policy
                 </Button>
+                </Link>
             </div>
             <div>
-                <Button role='button'  marginRight={betweenMargin}>
-                    <FaTwitter />
-                </Button>
-                <Button role='button' marginRight={outsideMargin}>
-                    <FaFacebookF />
-                </Button>
-
+                <a href="https://www.twitter.com">
+                    <Navs marginRight={betweenMargin}>
+                        <FaTwitter  size={18}/>
+                    </Navs>
+                </a>
+                <a href="https://www.facebook.com">
+                    <Navs marginRight={outsideMargin}>
+                        <FaFacebookF  size={18}/>
+                    </Navs>
+                </a>
             </div>
-
         </Main>
-    )
-}
+    </Router>
+)
+
 
 export default Footer
