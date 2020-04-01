@@ -25,7 +25,7 @@ const Disclaimer = styled.div`
     margin: 0;
 `;
 
-const MainJumbo = () => 
+const MainJumbo = () => (
         <MainDiv>
             <HeadLine>Hi! Let's Connect</HeadLine>
             <CopyDiv>
