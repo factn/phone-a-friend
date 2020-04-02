@@ -1,7 +1,10 @@
 const { db } = require("../config");
 
+const log = message => console.log(message);
+
 function airTableMatching(request, response) {
   let userID = request.body.userID;
+  log("User ID in request: " + userID);
   let usersCollection = db.collection("users");
   let volunteersCollection = db.collection("volunteers");
   usersCollection
