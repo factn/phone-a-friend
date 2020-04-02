@@ -2,18 +2,16 @@ const { db } = require("../config");
 
 function firestoreMatcher(request, response) {
   let userID = request.body.userID;
-  console.log(request.body);
-  console.log(userID);
+  console.log("User ID from request: " + userID);
   let usersCollection = db.collection("users");
   let volunteersCollection = db.collection("volunteers");
-  usersCollection
+  return usersCollection
     .doc(userID)
     .get()
     .then(currentUserDoc => {
       if (!currentUserDoc.exists) {
-        error = "Did not find any users with id " + userID;
-        console.log(error);
-        response.status(404).send(error);
+        console.log("Did not find any users with id " + userID);
+        response.status(404).send("Did not find any users with id " + userID);
       } else {
         console.log("User found");
         let matchingVolunteersList = [];
@@ -46,9 +44,10 @@ function firestoreMatcher(request, response) {
 
         matchingVolunteersSnapshot.get().then(matchingVolunteersSnapshot => {
           if (matchingVolunteersSnapshot.empty) {
-            message = "Could not find any available matches for user " + userID;
-            console.log(message);
-            response.status(200).send(null);
+            console.log(
+              "Could not find any available matches for user " + userID
+            );
+            return response.status(200).send(null);
           } else {
             matchingVolunteersSnapshot.forEach(doc => {
               let windowEnd = doc.get(`${today}.end`);
@@ -60,12 +59,12 @@ function firestoreMatcher(request, response) {
             if (numOfMatches) {
               randomSelction = Math.floor(Math.random() * numOfMatches + 0);
               selectedVulunteerUID = matchingVolunteersList[randomSelction].id;
-              response.status(200).send(selectedVulunteerUID);
+              return response.status(200).send(selectedVulunteerUID);
             } else {
-              message =
-                "Could not find any available matches for user " + userID;
-              console.log(message);
-              response.status(200).send(null);
+              console.log(
+                "Could not find any available matches for user " + userID
+              );
+              return response.status(200).send(null);
             }
           }
         });
@@ -73,7 +72,7 @@ function firestoreMatcher(request, response) {
     })
     .catch(error => {
       console.log("Hit an unexpected error when trying to find a match", error);
-      response.status(500).send(error);
+      return response.status(500).send(error);
     });
 }
 
