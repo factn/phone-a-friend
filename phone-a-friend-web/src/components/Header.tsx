@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from './Nav'
 import styled from 'styled-components';
 import HamburgerNav from './HamburgerNav'
-import useWindowSize from '../hooks/useWindowSize'
+import useWindowWidth from '../hooks/useWindowWidth'
 import { OUTSIDE_MARGIN } from '../utils/Constants'
 
 interface Iprops {
@@ -27,14 +27,13 @@ const Headline = styled.h1`
 `;
 
 const Header = () => {
-    const size = useWindowSize();
-    console.log(size)
+    const windowWidth = useWindowWidth();
     return (
         <Container>
             <MainDiv outsideMargin={OUTSIDE_MARGIN}>
                 <Headline>PhoneAFriend.care</Headline>
                 {
-                    (size.width && size.width<1500) ?
+                    (windowWidth<1500) ?
                     <HamburgerNav /> :
                     <Nav />
                 }
@@ -43,5 +42,7 @@ const Header = () => {
         </Container>
     )
 }
+
+Header.whyDidYouRender = true;
 
 export default Header;
