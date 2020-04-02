@@ -73,23 +73,23 @@ exports.matchMeNow = functions.https.onRequest((request, response) => {
                         break;        
                 }                
 
-                if (currentUsergenderPreference != "noPreference") {
-                    matchingVolunteersSnapshot = volunteersCollection.where(`${today}.start`, '<', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
+                if ((currentUsergenderPreference == "Male")|| (currentUsergenderPreference == "Female")) {
+                    matchingVolunteersSnapshot = volunteersCollection.where(`availability.${today}.start`, '<=', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
                     }
                 else {
-                    matchingVolunteersSnapshot = volunteersCollection.where(`${today}.start`, '<', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode);
+                    matchingVolunteersSnapshot = volunteersCollection.where(`availability.${today}.start`, '<=', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode);
                     }
                 
                     matchingVolunteersSnapshot.get()
                     .then(matchingVolunteersSnapshot => {
                         if (matchingVolunteersSnapshot.empty) {
-                            message = "Could not find any available matches for user " + userID;
+                            message = "Could not find any potential matches for user " + userID;
                             console.log(message);
                             response.status(200).send(null);
                             }
                         else {
                             matchingVolunteersSnapshot.forEach(doc=> {
-                                let windowEnd = doc.get(`${today}.end`)
+                                let windowEnd = doc.get(`availability.${today}.end`);
                                 if (windowEnd>=nowInMinutes+30){
                                     matchingVolunteersList.push(doc);
                                 }
