@@ -7,7 +7,7 @@ const {
   CURRENT_MATCHES_COLLECTION
 } = require("../config/constants");
 
-async function matchUsersAndVolunteers(req, res) {
+  async function matchUsersAndVolunteers() {
   const usersCollection = db.collection(USERS_COLLECTION);
   const volunteersCollection = db.collection(VOLUNTEERS_COLLECTION);
 
@@ -34,7 +34,7 @@ async function matchUsersAndVolunteers(req, res) {
   const matches = buildMatches(usersAvailable, volunteersAvailable);
 
   if (matches.length === 0) {
-    return res.status(200).send(matches);
+    return;
   } else {
     let batch = db.batch();
 
@@ -59,7 +59,7 @@ async function matchUsersAndVolunteers(req, res) {
 
     return batch.commit().then(commitResponse => {
       console.log(commitResponse);
-      return res.status(200).send(matches);
+      return;
     });
   }
 }

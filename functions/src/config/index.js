@@ -1,4 +1,4 @@
-var serviceAccount = require("../../.env.airtable.json");
+// var serviceAccount = require("../../.env.airtable.json");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 // admin.initializeApp({

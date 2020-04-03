@@ -16,9 +16,12 @@ const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
 /**
  * Run at 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm
  */
-exports.scheduledAirtableMatcher = functions.https.onRequest(
-  matchUsersAndVolunteers
-);
+exports.scheduledAirtableMatcher = functions.pubsub.schedule('every 2 hours from 08:00 to 23:59')
+  .timeZone('Europe/London')
+  .onRun((context) => {
+    matchUsersAndVolunteers();
+    return null;
+  });
 
 exports.reformatAvailability = functions.firestore
   .document("users/{userId}")
