@@ -40,5 +40,5 @@ const MainJumbo = () => (
         <Disclaimer>Note - we do not offer professional advice</Disclaimer>
     </MainDiv>
 );
-
+MainJumbo.whyDidYouRender = true;
 export default MainJumbo

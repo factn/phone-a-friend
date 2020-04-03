@@ -9,15 +9,30 @@ import GlobalStyle from "./utils/GlobalStyle";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { AppProvider } from "./contexts/AppContext";
+import whyDidYouRender from "@welldone-software/why-did-you-render";
 
-const MainContainer = () => (
-  <>
-    <GlobalStyle />
-    <AppProvider>
-      <App />
-    </AppProvider>
-  </>
-);
+const MainContainer = () => {
+
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+        whyDidYouRender(React, {
+            onlyLogs: true,
+            titleColor: "green",
+            diffNameColor: "darkturquoise"
+        });
+    }
+    
+
+    return (
+        <>
+            <GlobalStyle />
+            <AppProvider>
+                <App />
+            </AppProvider>
+        </>
+    )
+};
+
+MainContainer.whyDidYouRender = true;
 
 ReactDOM.render(<MainContainer />, document.getElementById("root"));
 
