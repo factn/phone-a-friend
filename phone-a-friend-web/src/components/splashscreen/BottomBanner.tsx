@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
-import { LIGHT_BLUE } from '../../utils/Colors'
 import { OUTSIDE_MARGIN } from '../../utils/Constants'
+import * as Colors from '../../Colors';
+
 interface Iprops {
     outsideMargin?: string;
-    bg?: string;
+    bgColor?: string;
 }
 
 const MainDiv = styled.nav<Iprops>`
@@ -18,7 +19,7 @@ const MainDiv = styled.nav<Iprops>`
 
 
 const Container = styled.div<Iprops>`
-    background: ${props => props.bg};
+    background: ${props => props.bgColor};
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -48,7 +49,7 @@ const InputWrapper = styled.div`
 
 const BottomBanner = () => {
     return (
-        <Container bg={LIGHT_BLUE} >
+        <Container bgColor={Colors.LIGHT_BLUE} >
             <MainDiv outsideMargin={OUTSIDE_MARGIN}>
                 <h2>Stay Connected</h2>
                 <InputWrapper>

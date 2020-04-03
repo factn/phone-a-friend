@@ -9,9 +9,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import Intro from "./intro/Intro";
-
-import { PEACH } from "../utils/Colors";
-import { LAVENDER } from "../utils/Colors";
+import * as Colors from '../Colors';
 
 import {
   LOGIN_PATH,
@@ -51,7 +49,7 @@ function App() {
           <Route path={USER_PATH}>
             <Intro
               signUpPath={USER_SIGN_UP_PATH}
-              color={PEACH}
+              bgColor={Colors.PEACH}
               copy={"Phone a Friend"}
             />
           </Route>
@@ -59,7 +57,7 @@ function App() {
           <Route path={VOLUNTEER_PATH}>
             <Intro
               signUpPath={VOLUNTEER_SIGN_UP_PATH}
-              color={LAVENDER}
+              bgColor={Colors.LAVENDER}
               copy={"Receive a Call"}
             />
           </Route>
@@ -81,5 +79,7 @@ function App() {
     </MainDiv>
   );
 }
+
+App.whyDidYouRender = true;
 
 export default App;

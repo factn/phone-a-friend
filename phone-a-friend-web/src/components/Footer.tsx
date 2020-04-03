@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
-import { DARK_BLUE } from '../utils/Colors'
+import { DARK_BLUE } from '../Colors'
 import { FaTwitter, FaFacebookF } from 'react-icons/fa'
 import { OUTSIDE_MARGIN } from '../utils/Constants'
 

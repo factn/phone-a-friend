@@ -4,7 +4,7 @@ import {
 import Poppins from '../fonts/Poppins/Poppins-Regular.ttf'
 import Lora from '../fonts/Lora/Lora-VariableFont_wght.ttf'
 
-const GlobalStyle = createGlobalStyle `
+const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'Poppins';
     src: url(${Poppins}) format('truetype');
@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle `
     font-style: normal;
     font-display: auto;
   }
-
     html {
         font-family: 'Poppins';
         font-size: 17px;

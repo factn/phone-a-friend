@@ -9,7 +9,7 @@ interface Iprops {
     outsideMargin?: string;
 }
 
-const Container = styled.div<Iprops>`
+const Container = styled.div`
     width: 100%;
     height: 55px;
 `;
@@ -17,7 +17,6 @@ const MainDiv = styled.div<Iprops>`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-   
     margin-left: ${props => props.outsideMargin};
     margin-right: ${props => props.outsideMargin};
 `;

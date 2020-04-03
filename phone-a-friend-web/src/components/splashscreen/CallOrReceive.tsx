@@ -6,13 +6,13 @@ import RightHandImage from "../../images/handR.png";
 
 type Props = {
   btnCopy: string;
-  color: string;
+  bgColor: string;
   path: string;
   leftHandBool?: boolean;
 };
 
 interface IProps {
-  readonly color: string;
+  readonly bgColor: string;
 }
 
 const MainDiv = styled.div<IProps>`
@@ -21,7 +21,7 @@ const MainDiv = styled.div<IProps>`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: ${props => props.color};
+  background-color: ${props => props.bgColor};
 `;
 
 const Button = styled.div`
@@ -45,12 +45,12 @@ const ImgDiv = styled.div<ImgProps>`
 `;
 
 const CallOrReceive: React.FC<Props> = ({
-  color,
+  bgColor,
   btnCopy,
   path,
   leftHandBool = true
 }) => (
-  <MainDiv color={color}>
+  <MainDiv bgColor={bgColor}>
     <h1>I want to</h1>
     <ImgDiv leftHandBool={leftHandBool}>
       {leftHandBool ? (

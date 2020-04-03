@@ -2,14 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const MainDiv = styled.main`
+
+interface Iprops {
+    readonly bgColor: string;
+  };
+
+const MainDiv = styled.main<Iprops>`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: ${props => props.color};
+  background: ${props => props.bgColor};
 `;
 
 const Headline = styled.p`
@@ -47,14 +52,14 @@ const DivR = styled(Div50)`
 `;
 
 type Props = {
-  color: string;
+  bgColor: string;
   copy: string;
   signUpPath: string;
 };
 
-const Intro: React.FunctionComponent<Props> = ({ color, copy, signUpPath }) => {
+const Intro: React.FunctionComponent<Props> = ({ bgColor, copy, signUpPath }) => {
   return (
-    <MainDiv color={color}>
+    <MainDiv bgColor={bgColor}>
       <DivL>
         <Headline>I want to</Headline>
         <Headline>{copy}</Headline>

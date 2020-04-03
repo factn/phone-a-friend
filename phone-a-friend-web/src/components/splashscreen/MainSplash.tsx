@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CallOrReceive from "./CallOrReceive";
 import MainJumbo from "./MainJumbo";
 import BottomBanner from "./BottomBanner";
-import { PEACH, LAVENDER } from "../../utils/Colors";
+import  * as Colors from '../../Colors'
 import { USER_PATH, VOLUNTEER_PATH } from "../../Paths";
 
 const MainDiv = styled.nav`
@@ -35,12 +35,12 @@ const MainSplash: React.FunctionComponent = () => (
     <FlexBox grow={4}>
       <IwantDiv>
         <CallOrReceive
-          color={PEACH}
+          bgColor={Colors.PEACH}
           btnCopy="Phone a Friend"
           path={USER_PATH}
         />
         <CallOrReceive
-          color={LAVENDER}
+           bgColor={Colors.LAVENDER}
           btnCopy="Take a Call"
           path={VOLUNTEER_PATH}
           leftHandBool={false}
