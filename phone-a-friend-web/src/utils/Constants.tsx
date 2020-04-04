@@ -1,1 +1,1 @@
-export  const OUTSIDE_MARGIN = '70px';
+export  const OUTSIDE_MARGIN = '5%';
