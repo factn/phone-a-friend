@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Button from "../buttons/Button";
 
 
 interface Iprops {
@@ -25,18 +26,7 @@ const Headline = styled.p`
 const Blurb = styled.p`
   font-size: 0.8em;
 `;
-const Button = styled.div`
-  border: 2px solid black;
-  font-size: 0.8rem;
-  padding: 6px;
-  width: 142px;
-  height: 11px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+
 
 const Div50 = styled.div`
   width: 50%;
@@ -73,7 +63,7 @@ const Intro: React.FunctionComponent<Props> = ({ bgColor, copy, signUpPath }) =>
           tempore, commodi maxime eaque?
         </Blurb>
         <Link to={signUpPath}>
-          <Button role="button">Get Started</Button>
+          <Button>Get Started</Button>
         </Link>
       </DivR>
     </MainDiv>

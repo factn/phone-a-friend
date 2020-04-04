@@ -44,7 +44,7 @@ const BottomBanner = () => {
         type="text"
         name="email"
       />
-      <Button title="Submit" />
+      <Button>Submit</Button>
     </MainDiv>
   );
 };
