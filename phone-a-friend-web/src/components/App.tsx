@@ -9,7 +9,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import Intro from "./intro/Intro";
-import * as Colors from '../Colors';
+import * as Colors from "../Colors";
 
 import {
   LOGIN_PATH,
@@ -20,19 +20,25 @@ import {
 } from "../Paths";
 import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
 import VolunteerSignUpPage from "../pages/VolunteerSignUpPage/VolunteerSignUpPage";
+import media from "styled-media-query";
 
 const MainDiv = styled.div`
   overflow: scroll;
   width: 100vw;
-  height: 100vh;
-  border: 1px solid black;
-  border-radius: 10px;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto 0 auto;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+
+  ${media.greaterThan("medium")`
+    width: 800px;
+  `}
+
+  ${media.greaterThan("large")`
+    width: 1200px;
+  `}
 `;
 
 function App() {

@@ -3,8 +3,9 @@ import styled from "styled-components";
 import CallOrReceive from "./CallOrReceive";
 import MainJumbo from "./MainJumbo";
 import BottomBanner from "./BottomBanner";
-import  * as Colors from '../../Colors'
+import * as Colors from "../../Colors";
 import { USER_PATH, VOLUNTEER_PATH } from "../../Paths";
+import media from "styled-media-query";
 
 const MainDiv = styled.nav`
   width: 100%;
@@ -17,42 +18,38 @@ const MainDiv = styled.nav`
 
 const IwantDiv = styled.div`
   height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
+
+  ${media.greaterThan("medium")`
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    padding-bottom: 24px;
+  `}
 `;
 
 interface Iprops {
   readonly grow: number;
 }
 
-const FlexBox = styled.div<Iprops>`
-  flex-grow: ${props => props.grow};
-`;
-
 const MainSplash: React.FunctionComponent = () => (
   <MainDiv>
-    <FlexBox grow={4}>
-      <IwantDiv>
-        <CallOrReceive
-          bgColor={Colors.PEACH}
-          btnCopy="Phone a Friend"
-          path={USER_PATH}
-        />
-        <CallOrReceive
-           bgColor={Colors.LAVENDER}
-          btnCopy="Take a Call"
-          path={VOLUNTEER_PATH}
-          leftHandBool={false}
-        />
-      </IwantDiv>
-    </FlexBox>
-    <FlexBox grow={2}>
-      <MainJumbo />
-    </FlexBox>
-    <FlexBox grow={1}>
-      <BottomBanner />
-    </FlexBox>
+    <IwantDiv>
+      <CallOrReceive
+        bgColor={Colors.PEACH}
+        btnCopy="Phone a Friend"
+        path={USER_PATH}
+      />
+      <CallOrReceive
+        bgColor={Colors.LAVENDER}
+        btnCopy="Take a Call"
+        path={VOLUNTEER_PATH}
+        leftHandBool={false}
+      />
+    </IwantDiv>
+    <MainJumbo />
+    <BottomBanner />
   </MainDiv>
 );
 
