@@ -40,6 +40,7 @@ const UserSignUpManager: React.FC<{}> = () => {
 
   useEffect(() => {
     history.push(url + "/" + 1);
+    // eslint-disable-next-line
   }, []);
 
   function handleSubmit(values: Partial<User>) {

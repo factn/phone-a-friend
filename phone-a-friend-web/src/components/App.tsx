@@ -25,19 +25,19 @@ import media from "styled-media-query";
 const MainDiv = styled.div`
   overflow: scroll;
   width: 100vw;
-  /* height: 100vh; */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
 
   ${media.greaterThan("medium")`
-    width: 800px;
+  border: 1px solid black;
+  border-radius: 10px;
   `}
 
   ${media.greaterThan("large")`
-    width: 1200px;
+    width: 100vw;
   `}
 `;
 

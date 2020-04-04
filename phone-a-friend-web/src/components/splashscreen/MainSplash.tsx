@@ -7,25 +7,26 @@ import * as Colors from "../../Colors";
 import { USER_PATH, VOLUNTEER_PATH } from "../../Paths";
 import media from "styled-media-query";
 
-const MainDiv = styled.nav`
+const MainDiv = styled.main`
   width: 100%;
   height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1;
 `;
 
 const IwantDiv = styled.div`
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  /* width: 100vw; */
+  grid-template-columns: calc(100vw / 2) calc(100vw / 2);
   overflow: hidden;
 
   ${media.greaterThan("medium")`
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: none;
     padding-bottom: 24px;
+    grid-template-columns: 1fr 1fr;
   `}
 `;
 

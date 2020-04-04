@@ -153,7 +153,7 @@ function mapUTCTimePeriodsToLocalTime(user: UserDtoWithTimePeriods): User {
       } ${hour}:00`;
 
       const utcDateMoment = moment(dateString);
-      const offsetDateMoment = moment.tz(dateString, "Europe/Lisbon");
+      const offsetDateMoment = moment.tz(dateString, timezone);
 
       const offset = calculateUTCToLocalOffset(
         offsetDateMoment.diff(utcDateMoment) / 1000 / 60
