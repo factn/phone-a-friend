@@ -1,28 +1,72 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
-  border: 2px solid black;
+// props passed into the styled component
+type StyledButtonProps = {
+    bgColor: string;
+    color: string;
+    w: number;
+    h: number;
+    marginBottom: number;
+    marginLeft: number;
+    marginTop: number;
+    marginRight: number;
+    hoverColor: string;
+    hoverBgColor: string;
+    hasBorder: boolean;
+
+}
+interface IButton {
+    bgColor?: string;
+    color?: string;
+    w?: number;
+    h?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+    marginTop?: number;
+    marginRight?: number;
+    hoverColor?: string;
+    hoverBgColor?: string;
+    hasBorder?: boolean;
+    children: ReactNode;
+}
+
+const StyledButton = styled.button<IButton>`
+  border: ${props => props.hasBorder ? '2px solid black' : 0};
   font-size: 0.8rem;
-  margin-bottom: 16px;
-  width: 142px;
-  height: 35px;
+  margin-bottom: ${props => `${props.marginBottom}px`};
+  width: ${props => `${props.w}px`};
+  height: ${props => `${props.h}px`};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  color: ${props => props.color};
+  background: ${props => props.bgColor};
   cursor: pointer;
+  :hover {
+        background: ${props => props.hoverBgColor};
+        color:  ${props => props.hoverColor};
+    }
 `;
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
-
-const Button: React.FC = ({ children }) => {
-  return (
-    <StyledButton type="button">
-      {children}
-    </StyledButton>
-  );
-};
+const Button: React.FC<IButton> = ({ children,
+    bgColor = 'transparent',
+    color = 'black',
+    w = 142,
+    h = 35,
+    marginBottom = 0, marginLeft = 0, marginTop = 0, marginRight = 0,
+    hoverColor = 'black', hoverBgColor = 'transparent',
+    hasBorder = true,
+}) => (
+        <StyledButton type="button"
+            bgColor={bgColor} color={color}
+            hoverColor={hoverColor} hoverBgColor={hoverBgColor}
+            w={w} h={h}
+            marginBottom={marginBottom}
+            hasBorder={hasBorder}>
+            {children}
+        </StyledButton>
+    );
 
 export default Button;

@@ -5,3 +5,5 @@ export const LAVENDER = '#AA9BC7';
 export const DARK_BLUE = '#071827';
 
 export const LIGHT_BLUE = '#71D4F1';
+
+export const WHITE = 'white';

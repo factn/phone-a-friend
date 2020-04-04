@@ -63,7 +63,7 @@ const Intro: React.FunctionComponent<Props> = ({ bgColor, copy, signUpPath }) =>
           tempore, commodi maxime eaque?
         </Blurb>
         <Link to={signUpPath}>
-          <Button>Get Started</Button>
+          <Button marginBottom={16}>Get Started</Button>
         </Link>
       </DivR>
     </MainDiv>
