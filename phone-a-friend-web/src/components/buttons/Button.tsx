@@ -5,12 +5,11 @@ const StyledButton = styled.button`
   border: 2px solid black;
   font-size: 0.8rem;
   margin-bottom: 16px;
-  padding: 16px;
   width: 142px;
-  height: 11px;
+  height: 35px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  justify-self: center;
   align-items: center;
   background: transparent;
   cursor: pointer;
@@ -18,10 +17,10 @@ const StyledButton = styled.button`
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<ButtonProps> = ({ ...buttonProps }) => {
+const Button: React.FC = ({ children }) => {
   return (
-    <StyledButton {...buttonProps} role="button">
-      {buttonProps.title}
+    <StyledButton type="button">
+      {children}
     </StyledButton>
   );
 };
