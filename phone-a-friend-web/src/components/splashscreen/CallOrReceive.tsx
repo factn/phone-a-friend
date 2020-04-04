@@ -45,7 +45,7 @@ const CallOrReceive: React.FC<Props> = ({
       )}
     </ImgDiv>
     <Link to={path}>
-      <Button>{btnCopy}</Button>
+      <Button marginBottom={16}>{btnCopy}</Button>
     </Link>
   </MainDiv>
 );
