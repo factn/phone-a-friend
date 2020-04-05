@@ -14,44 +14,36 @@ const MainDiv = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
 `;
 
 const IwantDiv = styled.div`
-  height: 100%;
-  display: grid;
-  /* width: 100vw; */
-  grid-template-columns: calc(100vw / 2) calc(100vw / 2);
   overflow: hidden;
-
   ${media.greaterThan("medium")`
-    padding-bottom: 24px;
-    grid-template-columns: 1fr 1fr;
+    display:flex;
+    flex-direction: row;
   `}
 `;
 
-interface Iprops {
-  readonly grow: number;
-}
-
 const MainSplash: React.FunctionComponent = () => (
-  <MainDiv>
-    <IwantDiv>
-      <CallOrReceive
-        bgColor={Colors.PEACH}
-        btnCopy="Phone a Friend"
-        path={USER_PATH}
-      />
-      <CallOrReceive
-        bgColor={Colors.LAVENDER}
-        btnCopy="Take a Call"
-        path={VOLUNTEER_PATH}
-        leftHandBool={false}
-      />
-    </IwantDiv>
-    <MainJumbo />
-    <BottomBanner />
-  </MainDiv>
+    <MainDiv>
+        <div>
+            <IwantDiv>
+                <CallOrReceive
+                    bgColor={Colors.PEACH}
+                    btnCopy="Phone a Friend"
+                    path={USER_PATH}
+                />
+                <CallOrReceive
+                    bgColor={Colors.LAVENDER}
+                    btnCopy="Take a Call"
+                    path={VOLUNTEER_PATH}
+                    leftHandBool={false}
+                />
+            </IwantDiv>
+            <MainJumbo />
+        </div>
+        <BottomBanner />
+    </MainDiv>
 );
 
 export default MainSplash;

@@ -1,38 +1,41 @@
 import React from "react";
-import Nav from "./Nav";
 import styled from "styled-components";
+import *  as Constants  from "../utils/Constants";
+import Nav from "./Nav";
 import HamburgerNav from "./HamburgerNav";
 import useWindowWidth from "../hooks/useWindowWidth";
-import { OUTSIDE_MARGIN } from "../utils/Constants";
 
 interface Iprops {
   outsideMargin?: string;
+  h?:number;
 }
 
-const Container = styled.div`
+const Container = styled.div<Iprops>`
   width: 100%;
-  height: 55px;
-  box-shadow: 1px 1px 5px #c6c7c9;
+  height: ${(props) => `${props.h}px`};
+  white-space: nowrap;
 `;
 const MainDiv = styled.div<Iprops>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-left: ${(props) => props.outsideMargin};
   margin-right: ${(props) => props.outsideMargin};
 `;
 
 const Headline = styled.h1`
-  font-size: 1rem;
+    font-size: 1.563rem;
+    font-weight: 600;
 `;
 
 const Header = () => {
-  const windowWidth = useWindowWidth();
+  //const windowWidth = useWindowWidth();
   return (
-    <Container>
-      <MainDiv outsideMargin={OUTSIDE_MARGIN}>
+    <Container h={Constants.HEADER_HEIGHT}>
+      <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
         <Headline>PhoneAFriend.care</Headline>
-        {windowWidth < 800 ? <HamburgerNav /> : <Nav />}
+        <Nav h={Constants.HEADER_HEIGHT}/>
       </MainDiv>
     </Container>
   );

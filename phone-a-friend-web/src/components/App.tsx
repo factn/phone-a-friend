@@ -23,14 +23,13 @@ import VolunteerSignUpPage from "../pages/VolunteerSignUpPage/VolunteerSignUpPag
 import media from "styled-media-query";
 
 const MainDiv = styled.div`
+height: 100vh;
   overflow: scroll;
-  width: 100vw;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  align-items: stretch;
   margin: 0 auto;
-
   ${media.greaterThan("medium")`
   border: 1px solid black;
   border-radius: 10px;

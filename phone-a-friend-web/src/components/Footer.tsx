@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import styled from "styled-components";
-import { DARK_BLUE } from '../Colors'
+import *  as Constants  from "../utils/Constants"
+import * as Colors  from  '../Colors'
 import { FaTwitter, FaFacebookF } from 'react-icons/fa'
 import { OUTSIDE_MARGIN } from '../utils/Constants'
 
@@ -9,6 +10,7 @@ interface Iprops {
     readonly marginLeft?: string;
     readonly marginRight?: string;
     readonly outsideMargin?: string;
+    readonly h?:number;
 }
 
 
@@ -26,9 +28,9 @@ const Button = styled(Navs)`
 `;
 
 
-const Main = styled.div`
+const Main = styled.div<Iprops>`
     background: ${props => props.color};
-    height: 50px;
+    height: ${(props) => `${props.h}px`};
     width: 100%;
     display:flex;
     flex-direction:column;
@@ -52,7 +54,7 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ outsideMargin, betweenMargin = '20px' }) => (
     <Router>
-        <Main color={DARK_BLUE}>
+        <Main color={Colors.DARK_BLUE} h={Constants.FOOTER_HEIGHT}>
             <BtnsContainer outsideMargin={OUTSIDE_MARGIN}>
                 <div>
                     <Link to="/">

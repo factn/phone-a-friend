@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import * as Constants from "../../utils/Constants";
 
-const MainDiv = styled.div`
-  height: 100%;
-  padding: 0 20% 0 20%;
+interface Iprops {
+    h?: number;
+  }
+
+const MainDiv = styled.div<Iprops>`
+  padding: 5% 20% 5% 20%;
   margin-bottom: 24px;
   overflow: hidden;
   display: flex;
@@ -20,9 +24,11 @@ const CopyDiv = styled.div`
 `;
 
 const Disclaimer = styled.div`
+    padding-top: 1rem;
   font-family: "Lora";
   font-size: 0.875rem;
 `;
+
 
 const MainJumbo = () => (
   <MainDiv>
