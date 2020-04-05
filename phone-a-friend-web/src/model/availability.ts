@@ -15,6 +15,12 @@ export const TIME_PERIOD_LOOKUP = {
   "22": "22:00-00:00",
 } as const;
 
+export const getStartingHourOfTimePeriod = (timePeriod: TimePeriod) =>
+  timePeriod.split(":")[0];
+
+export const getTimePeriodForHour = (hour: TimePeriodIndex) =>
+  TIME_PERIOD_LOOKUP[hour];
+
 export type DaysOfTheWeek =
   | "monday"
   | "tuesday"
@@ -28,10 +34,10 @@ export type TimePeriodIndex = keyof typeof TIME_PERIOD_LOOKUP;
 export type TimePeriod = typeof TIME_PERIOD_LOOKUP[TimePeriodIndex];
 
 export type Availability = {
-  [day in DaysOfTheWeek]: TimePeriodIndex[];
+  [day in DaysOfTheWeek]: TimePeriod[];
 };
 
-export type AvailabilityDto = {
+export type UTCAvailabilityPeriods = {
   [day in DaysOfTheWeek]: TimePeriod[];
 };
 
@@ -83,3 +89,15 @@ export function mapDayOfWeekToDay(index: number): DaysOfTheWeek {
       return "saturday";
   }
 }
+
+type AvailabilityOption = {
+  label: TimePeriod;
+  value: string;
+};
+
+export const availabilityOptions: AvailabilityOption[] = Object.values(
+  TIME_PERIOD_LOOKUP
+).map((timePeriod) => ({
+  label: timePeriod,
+  value: timePeriod,
+}));

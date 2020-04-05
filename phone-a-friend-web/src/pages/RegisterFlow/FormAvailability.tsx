@@ -5,31 +5,18 @@ import { FormPage } from "../UserSignUpManager/UserSignUpManager";
 import {
   Availability,
   emptyAvailability,
-  TimePeriod,
-  TIME_PERIOD_LOOKUP,
+  availabilityOptions,
 } from "../../model/availability";
 import CustomSelect from "../../components/inputs/CustomSelect";
 import { capitalizeFirstLetter } from "../../utils/string.utils";
 import Checkbox from "../../components/inputs/Checkbox";
 
 type FormAvailabilityProps = {
-  availability: Availability;
+  localTimeAvailability: Availability;
   acceptTerms: boolean;
 };
 
 type FlattenedFormAvailabilityProps = Availability & { acceptTerms: boolean };
-
-type AvailabilityOption = {
-  label: TimePeriod;
-  value: string;
-};
-
-const availabilityOptions: AvailabilityOption[] = Object.entries(
-  TIME_PERIOD_LOOKUP
-).map(([key, timePeriod]) => ({
-  label: timePeriod,
-  value: key,
-}));
 
 const basicInfoSchema = Yup.object().shape({
   acceptTerms: Yup.bool().oneOf(
@@ -70,7 +57,7 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
     ...days
   }: FlattenedFormAvailabilityProps) => {
     onSubmit({
-      availability: {
+      localTimeAvailability: {
         ...days,
       },
       acceptTerms,
@@ -79,7 +66,7 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
   return (
     <Formik
       initialValues={{
-        ...(initialValues?.availability || { ...emptyAvailability }),
+        ...(initialValues?.localTimeAvailability || { ...emptyAvailability }),
         acceptTerms: initialValues?.acceptTerms || false,
       }}
       onSubmit={handleSubmit}

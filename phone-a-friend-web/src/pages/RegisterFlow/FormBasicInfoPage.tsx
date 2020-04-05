@@ -85,22 +85,24 @@ const UserFormPageOne: React.FC<FormPage<UserFormPageOne>> = ({
             label="Zip/Post Code"
             component={TextField}
           />
-          <label style={{ display: "block", marginBottom: 6 }}>Country</label>
-          <Field
-            name="country"
-            placeholder="Country"
-            label="Country"
-            component="select"
-            style={{
-              padding: "14px 10px",
-              width: "100%",
-              backgroundColor: "#ffffff",
-              border: "none",
-            }}
-          >
-            {AllCountryOptions}
-          </Field>
-          <ErrorMessage name="country" component={InputFeedback} />
+          <div>
+            <label style={{ display: "block", marginBottom: 6 }}>Country</label>
+            <Field
+              name="country"
+              placeholder="Country"
+              label="Country"
+              component="select"
+              style={{
+                padding: "14px 10px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+                border: "none",
+              }}
+            >
+              {AllCountryOptions}
+            </Field>
+            <ErrorMessage name="country" component={InputFeedback} />
+          </div>
           <NextContainer type="submit" onClick={submitForm}>
             <span>Next</span>
             <NextArrow height={20} />
