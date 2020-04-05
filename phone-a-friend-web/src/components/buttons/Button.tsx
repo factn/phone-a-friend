@@ -33,7 +33,7 @@ interface IButton {
 
 const StyledButton = styled.button<IButton>`
   border: ${props => props.hasBorder ? '2px solid black' : 0};
-  font-size: 0.8rem;
+  font-size: 1.125rem;
   margin-bottom: ${props => `${props.marginBottom}px`};
   width: ${props => `${props.w}px`};
   height: ${props => `${props.h}px`};
@@ -53,8 +53,8 @@ const StyledButton = styled.button<IButton>`
 const Button: React.FC<IButton> = ({ children,
     bgColor = 'transparent',
     color = 'black',
-    w = 142,
-    h = 35,
+    w = 184,
+    h = 50,
     marginBottom = 0, marginLeft = 0, marginTop = 0, marginRight = 0,
     hoverColor = 'black', hoverBgColor = 'transparent',
     hasBorder = true,

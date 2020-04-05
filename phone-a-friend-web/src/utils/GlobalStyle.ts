@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         font-family: 'Poppins';
-        font-size: 17px;
+        font-size: 16px;
     }
     a {
         text-decoration:none;
