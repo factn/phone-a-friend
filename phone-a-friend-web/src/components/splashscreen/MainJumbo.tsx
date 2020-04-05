@@ -13,24 +13,20 @@ const MainDiv = styled.div`
 `;
 const CopyDiv = styled.div`
   font-family: "Lora";
-  font-size: 0.8rem;
-  margin: 0;
+  font-size: 1.375rem;
+  line-height: 2.25rem;
   text-align: center;
-`;
-const HeadLine = styled.div`
-  font-size: 3.4rem;
-  margin: 0;
+  width: 894px;
 `;
 
 const Disclaimer = styled.div`
   font-family: "Lora";
-  font-size: 0.5rem;
-  margin: 0;
+  font-size: 0.875rem;
 `;
 
 const MainJumbo = () => (
   <MainDiv>
-    <HeadLine>Hi! Let's Connect</HeadLine>
+    <h1>Hi! Let's Connect</h1>
     <CopyDiv>
       We understand how important human connection is, especially in times of
       isolation and uncertainty. Whether you want to phone someone for a chat or

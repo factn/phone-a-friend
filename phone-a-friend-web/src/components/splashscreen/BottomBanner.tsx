@@ -28,6 +28,7 @@ const Input = styled.input`
   width: 44%;
 `;
 
+
 const BottomBanner = () => {
   return (
     <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
@@ -38,7 +39,7 @@ const BottomBanner = () => {
         type="text"
         name="email"
       />
-      <Button>Submit</Button>
+      <Button w={184}>Submit</Button>
     </MainDiv>
   );
 };

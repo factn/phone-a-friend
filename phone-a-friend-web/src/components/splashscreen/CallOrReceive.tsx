@@ -36,7 +36,7 @@ const CallOrReceive: React.FC<Props> = ({
   leftHandBool = true,
 }) => (
   <MainDiv bgColor={bgColor}>
-    <h1>I want to</h1>
+    <h2>I want to</h2>
     <ImgDiv alignSelf={leftHandBool ? "flex-end" : "flex-start"}>
       {leftHandBool ? (
         <img src={LeftHandImage} alt="hand" />
