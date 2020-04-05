@@ -1,11 +1,14 @@
 import { createGlobalStyle } from "styled-components";
+import 'sanitize.css';
 import Poppins from "../fonts/Poppins/Poppins-Regular.ttf";
+import PoppinsSemiBold from "../fonts/Poppins/Poppins-SemiBold.ttf";
 import Lora from "../fonts/Lora/Lora-VariableFont_wght.ttf";
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
     font-family: 'Poppins';
     src: url(${Poppins}) format('truetype');
+    src: url(${PoppinsSemiBold}) format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: auto;
@@ -21,17 +24,23 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
-
-    body {
-        margin: 0;
-    }
-
+    
     html {
-        font-family: 'Poppins';
+        font-family: 'Poppins', Fallback, sans-serif;
         font-size: 16px;
     }
     a {
         text-decoration:none;
+    }
+    h1, h2 {
+        font-weight: 600;
+        margin:0;
+    }
+    h1 {
+        font-size: 4.375rem;
+    }
+    h2 {
+        font-size: 2.5rem;
     }
 
     @media (max-width: 900px) {
