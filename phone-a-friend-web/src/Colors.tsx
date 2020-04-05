@@ -1,9 +1,9 @@
-export const PEACH='#CB8E76';
+export const PEACH='#F8B99C';
 
-export const LAVENDER = '#AA9BC7';
+export const LAVENDER = '#D9CAFA';
 
-export const DARK_BLUE = '#071827';
+export const DARK_BLUE = '#0D2138'; // from design
 
-export const LIGHT_BLUE = '#71D4F1';
+export const LIGHT_BLUE = '#8ADAF4';
 
-export const WHITE = 'white';
+export const WHITE = 'white'

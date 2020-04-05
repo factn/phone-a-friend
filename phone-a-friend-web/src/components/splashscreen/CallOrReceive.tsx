@@ -17,6 +17,8 @@ interface IProps {
 }
 
 const MainDiv = styled.div<IProps>`
+padding-top:10px;
+padding-bottom:10px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,7 +28,10 @@ const MainDiv = styled.div<IProps>`
 `;
 
 const ImgDiv = styled.div<{ alignSelf: string }>`
+padding-top:10px;
+padding-bottom:10px;
   align-self: ${(props) => props.alignSelf};
+  padding: 1
 `;
 
 const CallOrReceive: React.FC<Props> = ({

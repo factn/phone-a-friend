@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import * as Colors from '../../Colors'
 
 // props passed into the styled component
 type StyledButtonProps = {
@@ -32,8 +33,10 @@ interface IButton {
 }
 
 const StyledButton = styled.button<IButton>`
-  border: ${props => props.hasBorder ? '2px solid black' : 0};
+  border: ${props => props.hasBorder ? `3px solid ${props.color}` : 0};
+  box-sizing: border-box;
   font-size: 1.125rem;
+  font-weight:600;
   margin-bottom: ${props => `${props.marginBottom}px`};
   width: ${props => `${props.w}px`};
   height: ${props => `${props.h}px`};
@@ -52,7 +55,7 @@ const StyledButton = styled.button<IButton>`
 
 const Button: React.FC<IButton> = ({ children,
     bgColor = 'transparent',
-    color = 'black',
+    color = Colors.DARK_BLUE,
     w = 256,
     h = 50,
     marginBottom = 0, marginLeft = 0, marginTop = 0, marginRight = 0,

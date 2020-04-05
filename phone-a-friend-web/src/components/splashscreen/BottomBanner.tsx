@@ -8,6 +8,7 @@ import Button from "../buttons/Button";
 interface Iprops {
   outsideMargin: string;
   bgColor: string;
+  h: number;
 }
 
 const MainDiv = styled.div<Iprops>`
@@ -17,7 +18,7 @@ const MainDiv = styled.div<Iprops>`
   align-items: center;
   padding-right: ${(props) => props.outsideMargin};
   padding-left: ${(props) => props.outsideMargin};
-  height: 100%;
+  height: ${(props) => `${props.h}px`};
   background: ${(props) => props.bgColor};
   ${media.lessThan("medium")`
     display:none;
@@ -29,9 +30,10 @@ const Input = styled.input`
 `;
 
 
-const BottomBanner = () => {
-  return (
-    <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
+const BottomBanner = () => (
+    <MainDiv 
+        h={Constants.SIGNUP_HEIGHT}
+        outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
       <h2>Stay Connected</h2>
       <Input
         id="namedInput"
@@ -41,7 +43,7 @@ const BottomBanner = () => {
       />
       <Button w={184}>Submit</Button>
     </MainDiv>
-  );
-};
+);
+
 
 export default BottomBanner;
