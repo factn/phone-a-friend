@@ -7,4 +7,5 @@ const analytics = firebase.analytics();
 
 export const firebaseApp = app;
 export const firebaseAnalytics = analytics;
+export const db = firebaseApp.firestore();
 export default firebase;

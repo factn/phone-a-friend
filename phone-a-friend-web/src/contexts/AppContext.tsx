@@ -1,14 +1,18 @@
 import React from "react";
 import createCtx from "./CtxBuilder";
 import envConfig from "../config/environment";
+import { User } from "../model/user";
 
 const initialState = {
-  user: ""
+  userID: "",
+  currentUser: {} as User,
 };
 
 type AppState = typeof initialState;
 
-type Action = { type: "USER_LOGIN"; user: string };
+type Action =
+  | { type: "USER_LOGIN"; userId: string }
+  | { type: "USER_SAVE_DETAILS"; user: User };
 
 /**
  * Redux style reducer for the whole app
@@ -19,7 +23,9 @@ type Action = { type: "USER_LOGIN"; user: string };
 function globalReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "USER_LOGIN":
-      return { ...state, user: action.user };
+      return { ...state, userID: action.userId };
+    case "USER_SAVE_DETAILS":
+      return { ...state, currentUser: action.user };
     default:
       return state;
   }

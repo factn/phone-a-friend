@@ -1,0 +1,1 @@
+export  const OUTSIDE_MARGIN = '70px';

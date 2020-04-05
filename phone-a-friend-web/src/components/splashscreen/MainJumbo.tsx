@@ -1,25 +1,44 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-
-const MainDiv = styled.nav`
-    width: 80%;
-    overflow:hidden;
-    margin: 0 auto 0 auto 0;
+const MainDiv = styled.div`
+  height: 100%;
+  padding: 0 20% 0 20%;
+  margin-bottom: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
-const P = styled.div`
-    margin:0;
-    font-size: .8rem;
+const CopyDiv = styled.div`
+  font-family: "Lora";
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: center;
+`;
+const HeadLine = styled.div`
+  font-size: 3.4rem;
+  margin: 0;
 `;
 
-const MainJumbo = () => {
-    return (
-        <MainDiv>
-            <h1>Hi! Let's Connect</h1>
-            <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam vitae repellendus minima, ipsum, ipsa pariatur autem, totam mollitia necessitatibus
-                 libero corrupti facilis. Tempora eveniet, quasi quod incidunt officia labore. Harum!</P>
-        </MainDiv>
-    )
-}
+const Disclaimer = styled.div`
+  font-family: "Lora";
+  font-size: 0.5rem;
+  margin: 0;
+`;
 
-export default MainJumbo
+const MainJumbo = () => (
+  <MainDiv>
+    <HeadLine>Hi! Let's Connect</HeadLine>
+    <CopyDiv>
+      We understand how important human connection is, especially in times of
+      isolation and uncertainty. Whether you want to phone someone for a chat or
+      take a call from someone reaching out, PhoneAFriend.care will get you set
+      up in no time.
+    </CopyDiv>
+    <Disclaimer>Note - we do not offer professional advice</Disclaimer>
+  </MainDiv>
+);
+MainJumbo.whyDidYouRender = true;
+export default MainJumbo;
