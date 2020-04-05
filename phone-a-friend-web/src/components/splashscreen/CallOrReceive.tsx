@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import LeftHandImage from "../../images/handL.png";
-import RightHandImage from "../../images/handR.png";
+
+import RightHandImage from "../../images/takecall_icon.svg";
+import LeftHandImage from '../../images/phonefriend_icon.svg'
 import Button from "../buttons/Button";
 
 type Props = {
@@ -10,10 +11,12 @@ type Props = {
   bgColor: string;
   path: string;
   leftHandBool?: boolean;
+  h: number;
 };
 
 interface IProps {
   readonly bgColor: string;
+  readonly h: number;
 }
 
 const MainDiv = styled.div<IProps>`
@@ -25,22 +28,24 @@ padding-bottom:10px;
   justify-content: space-around;
   align-items: center;
   background-color: ${(props) => props.bgColor};
+  height: ${(props) => `${props.h}px`};
 `;
 
 const ImgDiv = styled.div<{ alignSelf: string }>`
-padding-top:10px;
+/* padding-top:10px;
 padding-bottom:10px;
   align-self: ${(props) => props.alignSelf};
-  padding: 1
+  padding: 1; */
 `;
 
 const CallOrReceive: React.FC<Props> = ({
   bgColor,
   btnCopy,
   path,
+  h,
   leftHandBool = true,
 }) => (
-  <MainDiv bgColor={bgColor}>
+  <MainDiv bgColor={bgColor} h={h} >
     <h2>I want to</h2>
     <ImgDiv alignSelf={leftHandBool ? "flex-end" : "flex-start"}>
       {leftHandBool ? (
