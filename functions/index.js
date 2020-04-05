@@ -1,116 +1,53 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-admin.initializeApp();
-const db = admin.firestore();
+const { functions } = require("./src/config");
+const airTableMatchingFunction = require("./src/match/airtable");
+const firestoreMatchingFunction = require("./src/match/firestore");
+const updateUserAvailability = require("./src/update/userAvailability");
+const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
 
-exports.updateUserAvailability = functions.https.onRequest((request, response) => {
-    let userID = request.body.userID;
-    isAvailable = request.body.isAvailable;
-    let usersCollection = db.collection('users');
-    usersCollection.where('userID', '==', userID).get()
-    .then(userSnapshot => {
-        if (userSnapshot.empty) {
-            let error = "Did not find any documents matching user id " + userID;
-            console.log(error);
-            response.status(404).send(error);
-            }
-        else {
-            db.collection('users').doc(userID).update({CanChat: isAvailable});
-            response.status(200).send("updated");
-        }
-    })
-    .catch(error => {
-        console.log("Hit an unexpected error when trying to update availablity ", error);
-        response.status(500).send(error);
-      });
-});
+// exports.updateUserAvailability = functions.https.onRequest(
+// updateUserAvailability
+// );
 
-exports.matchMeNow = functions.https.onRequest((request, response) => {
-    let userID = request.body.userID;
-    let usersCollection = db.collection('users');
-    let volunteersCollection = db.collection('volunteers');
-    usersCollection.doc(userID).get()
-    .then(currentUserDoc => {
-        if (!currentUserDoc.exists) {
-            error = "Did not find any users with id " + userID;
-            console.log(error);
-            response.status(404).send(error);
-            }
+// exports.matchMeAirTable = functions.https.onRequest(airTableMatchingFunction);
 
-        else {
-                let matchingVolunteersList=[];
-                let matchingVolunteersSnapshot;
-                let currentUserZipCode = currentUserDoc.data().zipCode;
-                let currentUsergenderPreference = currentUserDoc.data().genderPreference;
-                let currentUserLanguage = currentUserDoc.data().language;
-                let now = new Date();
-                let hours = now.getHours();
-                let minutes = now.getMinutes();
-                let nowInMinutes = hours*60 + minutes;
-                let dayOfWeek = now.getDay();
-                let today = "";
-                switch (dayOfWeek) {
-                    case 1:
-                        today = "mon";
-                        break;
-                    case 2:
-                        today = "tue";
-                        break;
-                    case 3:
-                        today = "wed";
-                        break;
-                    case 4:
-                        today = "thu";
-                        break;
-                    case 5:
-                        today = "fri";
-                        break;
-                    case 6:
-                        today = "sat";
-                        break;
-                    case 7:
-                        today = "sun";
-                        break;        
-                }                
+// exports.matchMeNow = functions.https.onRequest(firestoreMatchingFunction);
 
-                if ((currentUsergenderPreference == "Male")|| (currentUsergenderPreference == "Female")) {
-                    matchingVolunteersSnapshot = volunteersCollection.where(`availability.${today}.start`, '<=', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode).where('gender', '==', currentUsergenderPreference);
-                    }
-                else {
-                    matchingVolunteersSnapshot = volunteersCollection.where(`availability.${today}.start`, '<=', nowInMinutes).where('languages', 'array-contains', currentUserLanguage).where('canChat', '==', true).where('zipCode', '==', currentUserZipCode);
-                    }
-                
-                    matchingVolunteersSnapshot.get()
-                    .then(matchingVolunteersSnapshot => {
-                        if (matchingVolunteersSnapshot.empty) {
-                            message = "Could not find any potential matches for user " + userID;
-                            console.log(message);
-                            response.status(200).send(null);
-                            }
-                        else {
-                            matchingVolunteersSnapshot.forEach(doc=> {
-                                let windowEnd = doc.get(`availability.${today}.end`);
-                                if (windowEnd>=nowInMinutes+30){
-                                    matchingVolunteersList.push(doc);
-                                }
-                            })
-                                numOfMatches = matchingVolunteersList.length;
-                                if (numOfMatches) {
-                                    randomSelction = Math.floor((Math.random() * numOfMatches) + 0);
-                                    selectedVulunteerUID  = matchingVolunteersList[randomSelction].id;
-                                    response.status(200).send(selectedVulunteerUID);
-                                }
-                                else {
-                                    message = "Could not find any available matches for user " + userID;
-                                    console.log(message);
-                                    response.status(200).send(null);
-                                }
-                        }
-                    })
-                }
-        })
-    .catch(error => {
-        console.log('Hit an unexpected error when trying to find a match', error);
-        response.status(500).send(error);
+/**
+ * Run at 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm
+ */
+exports.scheduledmatchUsersAndVolunteers = functions.pubsub.schedule(functions.config().scheduledmatchvariables.intervals)
+  .timeZone(functions.config().scheduledmatchvariables.timezone)
+  .onRun((context) => {
+    matchUsersAndVolunteers();
+    return null;
   });
-});
+
+exports.reformatAvailability = functions.firestore
+  .document("users/{userId}")
+  .onCreate((snap, context) => {
+    console.log("---NEW USER CREATED---");
+    const newValue = snap.data();
+    const newAvailability = newValue.availability.split(",");
+    return snap.ref.set(
+      {
+        ...newValue,
+        availability: newAvailability
+      },
+      { merge: true }
+    );
+  });
+
+exports.reformatVolunteerAvailability = functions.firestore
+  .document("volunteers/{volunteerId}")
+  .onCreate((snap, context) => {
+    console.log("---NEW VOLUNTEER CREATED---");
+    const newValue = snap.data();
+    const newAvailability = newValue.availability.split(",");
+    return snap.ref.set(
+      {
+        ...newValue,
+        availability: newAvailability
+      },
+      { merge: true }
+    );
+  });
