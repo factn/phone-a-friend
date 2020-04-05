@@ -10,15 +10,19 @@ const NavContainer = styled.nav`
   flex-direction: row;
 `;
 
-const H = 55;
+
 const MARGIN_LEFT = 10
 
-const Nav = () => (
+type Props = {
+    h: number;
+}
+
+const Nav:React.FC<Props> = ({ h }) => (
     <Router>
         <NavContainer>
             <Link to="/">
                 <Button
-                    h={H} marginLeft={MARGIN_LEFT}
+                    h={h} marginLeft={MARGIN_LEFT}
                     hasBorder={false}
                     hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
                     color={Colors.DARK_BLUE}
@@ -28,7 +32,7 @@ const Nav = () => (
             </Link>
             <Link to={USER_PATH}>
                 <Button
-                    h={H} marginLeft={MARGIN_LEFT}
+                    h={h} marginLeft={MARGIN_LEFT}
                     hasBorder={false}
                     hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
                     color={Colors.DARK_BLUE}
@@ -38,7 +42,7 @@ const Nav = () => (
             </Link>
             <Link to={VOLUNTEER_PATH}>
                 <Button
-                    h={H} marginLeft={MARGIN_LEFT}
+                    h={h} marginLeft={MARGIN_LEFT}
                     hasBorder={false}
                     hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
                     color={Colors.DARK_BLUE}
@@ -48,7 +52,7 @@ const Nav = () => (
             </Link>
             <Link to={CONTACT_PATH}>
                 <Button
-                    h={H}
+                    h={h}
                     hasBorder={false}
                     hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
                     color={Colors.DARK_BLUE}

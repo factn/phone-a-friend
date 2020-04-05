@@ -53,7 +53,7 @@ const StyledButton = styled.button<IButton>`
 const Button: React.FC<IButton> = ({ children,
     bgColor = 'transparent',
     color = 'black',
-    w = 184,
+    w = 256,
     h = 50,
     marginBottom = 0, marginLeft = 0, marginTop = 0, marginRight = 0,
     hoverColor = 'black', hoverBgColor = 'transparent',

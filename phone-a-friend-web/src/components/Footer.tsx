@@ -58,12 +58,12 @@ const Footer: React.FC<Props> = ({ outsideMargin, betweenMargin = '20px' }) => (
                     <Link to="/">
                         <Button>
                             © 2020 PhoneAFriend.care
-                </Button>
+                        </Button>
                     </Link>
                     <Link to="/privacy">
                         <Button marginLeft={betweenMargin}>
                             Privacy Policy
-                </Button>
+                        </Button>
                     </Link>
                 </div>
                 <div>
