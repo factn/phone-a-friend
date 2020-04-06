@@ -12,8 +12,8 @@ function useVolunteer(
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    setIsFetching(true);
     if (isEmptyObject(state.currentVolunteer)) {
+      setIsFetching(true);
       getVolunteer(state.userAuthId)
         .then((volunteer) => {
           dispatch({ type: "VOLUNTEER_STORE_DETAILS", volunteer });

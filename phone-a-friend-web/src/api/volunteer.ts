@@ -1,5 +1,5 @@
 import { db } from "../config/firebase";
-import { VolunteerDto } from "../model/volunteer";
+import { VolunteerDto, Volunteer } from "../model/volunteer";
 import { mapResponseError } from "./responseMappers";
 import { as } from "../utils/types.util";
 import {
@@ -19,6 +19,27 @@ export async function createVolunteer(volunteer: VolunteerDto): Promise<void> {
     .collection(VOLUNTEER_COLLECTIONS)
     .doc(volunteer.id)
     .set(volunteerWithAvailabilityInUTCTime)
+    .catch(mapResponseError);
+}
+
+type UpdateVolunteer = Partial<Volunteer> & { id: string };
+
+export async function updateVolunteer(
+  volunteer: UpdateVolunteer
+): Promise<UpdateVolunteer> {
+  const finalVolunteer = volunteer.localTimeAvailability
+    ? {
+        ...volunteer,
+        ...mapLocalTimePeriodsToUTC(volunteer.localTimeAvailability),
+      }
+    : {
+        ...volunteer,
+      };
+  return db
+    .collection(VOLUNTEER_COLLECTIONS)
+    .doc(volunteer.id)
+    .set(finalVolunteer, { merge: true })
+    .then(() => finalVolunteer)
     .catch(mapResponseError);
 }
 

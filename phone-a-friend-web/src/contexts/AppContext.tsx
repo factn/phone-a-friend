@@ -14,8 +14,8 @@ type AppState = typeof initialState;
 
 type Action =
   | { type: "USER_LOGIN"; userId: string }
-  | { type: "USER_STORE_DETAILS"; user: User }
-  | { type: "VOLUNTEER_STORE_DETAILS"; volunteer: Volunteer };
+  | { type: "USER_STORE_DETAILS"; user: Partial<User> }
+  | { type: "VOLUNTEER_STORE_DETAILS"; volunteer: Partial<Volunteer> };
 
 /**
  * Redux style reducer for the whole app
@@ -28,9 +28,15 @@ function globalReducer(state: AppState, action: Action): AppState {
     case "USER_LOGIN":
       return { ...state, userAuthId: action.userId };
     case "USER_STORE_DETAILS":
-      return { ...state, currentUser: action.user };
+      return {
+        ...state,
+        currentUser: { ...state.currentUser, ...action.user },
+      };
     case "VOLUNTEER_STORE_DETAILS":
-      return { ...state, currentVolunteer: action.volunteer };
+      return {
+        ...state,
+        currentVolunteer: { ...state.currentVolunteer, ...action.volunteer },
+      };
     default:
       return state;
   }

@@ -24,9 +24,10 @@ import {
 import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
 import VolunteerSignUpManager from "../pages/VolunteerSignUpManager/VolunteerSignUpManager";
 import AccountPage from "../pages/VolunteerAccountPage/VolunteerAccountPage";
+import UserAccountPage from "../pages/UserAccountPage/UserAccountPage";
 
 const MainDiv = styled.div`
-height: 100vh;
+  height: 100vh;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -71,7 +72,7 @@ function App() {
           </Route>
 
           <ProtectedRoute path={USER_ACCOUNT_PATH}>
-            <div>USER ACCOUNT PAGE</div>
+            <UserAccountPage />
           </ProtectedRoute>
 
           <ProtectedRoute path={VOLUNTEER_ACCOUNT_PATH}>

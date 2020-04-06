@@ -15,6 +15,7 @@ interface CustomSelectProps extends FieldProps {
   isMulti?: boolean;
   placeholder?: string;
   label?: string;
+  isDisabled?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -28,6 +29,7 @@ export const CustomSelect = ({
   field,
   form,
   options,
+  isDisabled,
   isMulti = false,
 }: CustomSelectProps) => {
   const onChange = (option: ValueType<Option | Option[]>) => {
@@ -58,6 +60,7 @@ export const CustomSelect = ({
     <Wrapper>
       <label>{label}</label>
       <Select
+        isDisabled={isDisabled}
         name={field.name}
         value={getValue()}
         onChange={onChange}

@@ -10,6 +10,7 @@ import {
 import CustomSelect from "../../components/inputs/CustomSelect";
 import { capitalizeFirstLetter } from "../../utils/string.utils";
 import Checkbox from "../../components/inputs/Checkbox";
+import FormButton from "../../components/buttons/FormButton";
 
 type FormAvailabilityProps = {
   localTimeAvailability: Availability;
@@ -51,6 +52,7 @@ const availabilityValidation = (values: FlattenedFormAvailabilityProps) => {
 const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
   onSubmit,
   initialValues,
+  options,
 }) => {
   const handleSubmit = ({
     acceptTerms,
@@ -83,6 +85,7 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
                   day
                 )} availability (Select all slots that apply)`}
                 key={day}
+                isDisabled={options?.isDisabled || false}
                 name={day}
                 options={availabilityOptions}
                 component={CustomSelect}
@@ -106,7 +109,10 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
             }
             component={Checkbox}
           />
-          <button onClick={submitForm}>Submit</button>
+          <FormButton
+            onClick={submitForm}
+            title={options?.submitMessage || "Submit"}
+          />
         </>
       )}
     </Formik>

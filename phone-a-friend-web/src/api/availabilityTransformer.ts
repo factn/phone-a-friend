@@ -102,7 +102,6 @@ export function mapUTCTimePeriodsToLocalTime(
       const tempDate = new Date(Date.now());
       const dayOfTheWeek = mapDayToDayOfWeek(day);
       const hour = parseInt(timePeriod.split(":")[0]);
-      console.log(hour);
 
       // Set date to be of day {day}
       tempDate.setDate(
