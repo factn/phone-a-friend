@@ -21,6 +21,25 @@ export async function createUser(user: UserDto): Promise<void> {
     .catch(mapResponseError);
 }
 
+type UpdateUser = Partial<User> & { id: string };
+
+export async function updateUser(user: UpdateUser): Promise<UpdateUser> {
+  const finalUser = user.localTimeAvailability
+    ? {
+        ...user,
+        ...mapLocalTimePeriodsToUTC(user.localTimeAvailability),
+      }
+    : {
+        ...user,
+      };
+  return db
+    .collection(USERS_COLLECTIONS)
+    .doc(user.id)
+    .set(finalUser, { merge: true })
+    .then(() => finalUser)
+    .catch(mapResponseError);
+}
+
 export async function getUser(userId: string): Promise<User> {
   return db
     .collection(USERS_COLLECTIONS)

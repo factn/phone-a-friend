@@ -12,8 +12,8 @@ function useUser(
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    setIsFetching(true);
     if (isEmptyObject(state.currentVolunteer)) {
+      setIsFetching(true);
       getUser(state.userAuthId)
         .then((user) => {
           dispatch({ type: "USER_STORE_DETAILS", user });

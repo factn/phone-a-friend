@@ -36,6 +36,7 @@ type AcceptedTerms = {
 export type FormPage<T> = {
   onSubmit: (values: T) => void;
   initialValues?: Partial<T>;
+  options?: { isDisabled?: boolean; submitMessage?: string };
 };
 
 const TOTAL_STEPS = 5;

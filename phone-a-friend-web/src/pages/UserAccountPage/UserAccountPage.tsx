@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../contexts/AppContext";
-import useVolunteer from "../../hooks/useVolunteer";
 import BaseAccountLayout from "../../layouts/BaseAccountLayout";
 import { isEmptyObject } from "../../utils/object.utils";
-import { VOLUNTEER_BACKGROUND_COLOR } from "../../Colors";
-import { Volunteer } from "../../model/volunteer";
-import { successToast, errorToast } from "../../utils/toast.utils";
+import { USER_BACKGROUND_COLOR } from "../../Colors";
+import useUser from "../../hooks/useUser";
 import FormAvailability from "../RegisterFlow/FormAvailability";
-import { updateVolunteer } from "../../api/volunteer";
+import { User } from "../../model/user";
+import { updateUser } from "../../api/user";
+import { successToast, errorToast } from "../../utils/toast.utils";
 import FormButton from "../../components/buttons/FormButton";
 
 const tabs = ["Account", "Availability"];
 
-const VolunteerAccountPage = () => {
+const UserAccountPage = () => {
   const { state, dispatch } = useStateValue();
   const history = useHistory();
 
-  const [selectedTab, setSelectedTab] = useState<string>(tabs[1]);
+  const [selectedTab, setSelectedTab] = useState<string>(tabs[0]);
   const [editMode, setEditMode] = useState<boolean>(false);
 
-  const { isFetching } = useVolunteer(
+  const { isFetching } = useUser(
     (v) => ({}),
-    () => history.replace("/register/volunteer")
+    () => history.replace("/register/user")
   );
 
-  const handleSubmit = (values: Partial<Volunteer>) => {
-    updateVolunteer({
+  const handleSubmit = (values: Partial<User>) => {
+    updateUser({
       id: state.userAuthId,
       ...values,
     })
-      .then((volunteer) => {
-        successToast("Volunteer updated!");
-        dispatch({ type: "VOLUNTEER_STORE_DETAILS", volunteer });
+      .then((user) => {
+        successToast("User updated!");
+        dispatch({ type: "USER_STORE_DETAILS", user });
         setSelectedTab("Account");
       })
       .catch((err) => errorToast("Error saving availability, try again later"));
@@ -45,11 +45,11 @@ const VolunteerAccountPage = () => {
 
   return (
     <>
-      {!isFetching && !isEmptyObject(state.currentVolunteer) && (
+      {!isFetching && !isEmptyObject(state.currentUser) && (
         <BaseAccountLayout
-          title={`Welcome back, ${state.currentVolunteer.name.split(" ")[0]}`}
+          title={`Welcome back, ${state.currentUser.name.split(" ")[0]}`}
           tabs={tabs}
-          backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
+          backgroundColor={USER_BACKGROUND_COLOR}
           onTabClick={handleTabSelect}
           selectedTab={selectedTab}
         >
@@ -70,7 +70,7 @@ const VolunteerAccountPage = () => {
                 }}
                 initialValues={{
                   localTimeAvailability:
-                    state.currentVolunteer.localTimeAvailability,
+                    state.currentUser.localTimeAvailability,
                 }}
                 onSubmit={handleSubmit}
               />
@@ -82,4 +82,4 @@ const VolunteerAccountPage = () => {
   );
 };
 
-export default VolunteerAccountPage;
+export default UserAccountPage;
