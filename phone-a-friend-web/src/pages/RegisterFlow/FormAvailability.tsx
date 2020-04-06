@@ -79,7 +79,9 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
             .filter((fieldKey) => fieldKey !== "acceptTerms")
             .map((day) => (
               <Field
-                label={`${capitalizeFirstLetter(day)} availability`}
+                label={`${capitalizeFirstLetter(
+                  day
+                )} availability (Select all slots that apply)`}
                 key={day}
                 name={day}
                 options={availabilityOptions}

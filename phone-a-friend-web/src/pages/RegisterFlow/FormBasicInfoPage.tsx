@@ -47,15 +47,14 @@ const UserFormPageOne: React.FC<FormPage<UserFormPageOne>> = ({
 }) => {
   return (
     <Formik
-      initialValues={
-        initialValues || {
-          name: "",
-          email: "",
-          phoneNumber: "",
-          zipcode: "",
-          country: "United States of America",
-        }
-      }
+      initialValues={{
+        name: "",
+        email: "",
+        phoneNumber: "",
+        zipcode: "",
+        country: "United States of America",
+        ...initialValues,
+      }}
       onSubmit={onSubmit}
       validationSchema={basicInfoSchema}
     >

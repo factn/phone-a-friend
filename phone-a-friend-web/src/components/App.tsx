@@ -23,6 +23,7 @@ import {
 } from "../Paths";
 import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
 import VolunteerSignUpManager from "../pages/VolunteerSignUpManager/VolunteerSignUpManager";
+import AccountPage from "../pages/VolunteerAccountPage/VolunteerAccountPage";
 
 const MainDiv = styled.div`
 height: 100vh;
@@ -74,7 +75,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute path={VOLUNTEER_ACCOUNT_PATH}>
-            <div>VOLUNTEER_ACCOUNT PAGE</div>
+            <AccountPage />
           </ProtectedRoute>
 
           <ProtectedRoute path={USER_SIGN_UP_PATH}>

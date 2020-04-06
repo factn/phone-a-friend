@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import firebase from "firebase";
 import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom";
 import { User } from "../../model/user";
 import { emptyAvailability } from "../../model/availability";
@@ -9,7 +10,9 @@ import FormPageIntroduction from "../RegisterFlow/FormPageIntroduction";
 import FormAvailability from "../RegisterFlow/FormAvailability";
 import { useStateValue } from "../../contexts/AppContext";
 import { Volunteer } from "../../model/volunteer";
-import { getVolunteer, createVolunteer } from "../../api/volunteer";
+import { createVolunteer } from "../../api/volunteer";
+import useVolunteer from "../../hooks/useVolunteer";
+import { VOLUNTEER_BACKGROUND_COLOR } from "../../Colors";
 
 const initialState: Volunteer & AcceptedTerms = {
   phoneNumber: "",
@@ -30,39 +33,22 @@ const initialState: Volunteer & AcceptedTerms = {
 type AcceptedTerms = {
   acceptTerms: boolean;
 };
-export type FormPage<T> = {
-  onSubmit: (values: T) => void;
-  initialValues?: T;
-};
 
 const TOTAL_STEPS = 4;
 
 const VolunteerSignUpManager: React.FC<{}> = () => {
   const { state, dispatch } = useStateValue();
   const { path, url } = useRouteMatch();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const history = useHistory();
   const [step, setStep] = useState<number>(1);
   const [formValues, setFormValues] = useState<Volunteer & AcceptedTerms>(
     initialState
   );
 
-  useEffect(() => {
-    setIsLoading(true);
-    getVolunteer(state.userAuthId)
-      .then((volunteer) => {
-        setIsLoading(false);
-        dispatch({ type: "VOLUNTEER_STORE_DETAILS", volunteer });
-        history.replace("/account/volunteer");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err.message);
-        history.replace(url + "/" + 1);
-      });
-
-    // eslint-disable-next-line
-  }, []);
+  const { isFetching, setIsFetching } = useVolunteer(
+    () => history.replace("/account/volunteer"),
+    (err) => history.replace(url + "/" + 1)
+  );
 
   function handleSubmit(values: Partial<User>) {
     const newJourneyValues = {
@@ -72,15 +58,22 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
     setFormValues(newJourneyValues);
 
     if (step === TOTAL_STEPS) {
+      setIsFetching(true);
       createVolunteer({
         ...newJourneyValues,
         id: state.userAuthId,
-      }).then(() => {
-        dispatch({
-          type: "VOLUNTEER_STORE_DETAILS",
-          volunteer: newJourneyValues,
+      })
+        .then(() => {
+          dispatch({
+            type: "VOLUNTEER_STORE_DETAILS",
+            volunteer: newJourneyValues,
+          });
+          setIsFetching(false);
+          history.push("/account/volunteer");
+        })
+        .catch((err) => {
+          setIsFetching(false);
         });
-      });
     } else {
       const nextPage = step + 1;
       setStep(nextPage);
@@ -90,10 +83,11 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
 
   return (
     <>
-      {!isLoading && (
+      {!isFetching && (
         <Switch>
           <Route path={`${path}/4`}>
             <BaseFormLayout
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Select the time slots that you are available"
               step={4}
               totalSteps={TOTAL_STEPS}
@@ -103,6 +97,7 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
           </Route>
           <Route path={`${path}/3`}>
             <BaseFormLayout
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="A little introduction for your callers."
               step={3}
               totalSteps={TOTAL_STEPS}
@@ -112,6 +107,7 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
           </Route>
           <Route path={`${path}/2`}>
             <BaseFormLayout
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Now for a little background."
               step={2}
               totalSteps={TOTAL_STEPS}
@@ -121,11 +117,17 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
           </Route>
           <Route path={""}>
             <BaseFormLayout
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Let's start with an introduction and some contact info."
               step={1}
               totalSteps={TOTAL_STEPS}
             >
-              <FormBasicInfoPage onSubmit={handleSubmit} />
+              <FormBasicInfoPage
+                initialValues={{
+                  phoneNumber: firebase.auth().currentUser?.phoneNumber || "",
+                }}
+                onSubmit={handleSubmit}
+              />
             </BaseFormLayout>
           </Route>
         </Switch>

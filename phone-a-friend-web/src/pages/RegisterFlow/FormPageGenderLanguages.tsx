@@ -39,7 +39,7 @@ const FormPageGenderLanguages: React.FC<FormPage<UserFormPageTwo>> = ({
     <Formik
       initialValues={{
         gender: initialValues?.gender || "",
-        languages: initialValues?.languages.join(", ") || "",
+        languages: initialValues?.languages?.join(", ") || "",
       }}
       onSubmit={transformLanguagesBeforeSaving}
       validationSchema={basicInfoSchema}
