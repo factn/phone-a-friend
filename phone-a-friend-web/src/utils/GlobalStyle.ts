@@ -28,6 +28,8 @@ const GlobalStyle = createGlobalStyle`
     html {
         font-family: 'Poppins', Fallback, sans-serif;
         font-size: 16px;
+          /* border-box box model allows us to add padding and border to our elements without increasing their size */
+        box-sizing: border-box;
     }
     a {
         text-decoration:none;
