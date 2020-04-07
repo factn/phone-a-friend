@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import media from "styled-media-query";
 import CallOrReceive from "./CallOrReceive";
 import Heart from "./Heart";
 import MainJumbo from "./MainJumbo";
 import BottomBanner from "./BottomBanner";
 import * as Colors from "../../Colors";
 import * as Constants from "../../utils/Constants";
-import { USER_PATH, VOLUNTEER_PATH } from "../../Paths";
-import media from "styled-media-query";
+import * as Paths from "../../Paths";
 
 const MainDiv = styled.main`
   width: 100%;
@@ -52,13 +52,13 @@ const MainSplash: React.FunctionComponent = () => (
           h={Constants.SPLASH_IWANT}
           bgColor={Colors.PEACH}
           btnCopy="Phone a Friend"
-          path={USER_PATH}
+          path={Paths.USER_PATH}
         />
         <CallOrReceive
           h={Constants.SPLASH_IWANT}
           bgColor={Colors.LAVENDER}
           btnCopy="Take a Call"
-          path={VOLUNTEER_PATH}
+          path={Paths.VOLUNTEER_PATH}
           leftHandBool={false}
         />
       </IwantDiv>

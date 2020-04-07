@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from './buttons/Button';
-import { CONTACT_PATH, USER_PATH, VOLUNTEER_PATH } from "../Paths";
+import * as Paths from "../Paths";
 import * as Colors from '../Colors'
 
 const NavContainer = styled.nav`
@@ -11,57 +11,47 @@ const NavContainer = styled.nav`
 `;
 
 
-const MARGIN_LEFT = 10
-
 type Props = {
     h: number;
 }
 
-const Nav:React.FC<Props> = ({ h }) => (
-    <Router>
+const propsObj = {
+    hasBorder: false,
+    hoverColor: 'white',
+    hoverBgColor: Colors.DARK_BLUE,
+    color: Colors.DARK_BLUE,
+}
+
+const Nav: React.FC<Props> = ({ h }) => (
+
         <NavContainer>
             <Link to="/">
-                <Button
-                    h={h} marginLeft={MARGIN_LEFT}
-                    hasBorder={false}
-                    hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
-                    color={Colors.DARK_BLUE}
-                >
+                <Button h={h} {...propsObj}>
                     Home
                 </Button>
             </Link>
-            <Link to={USER_PATH}>
-                <Button
-                    h={h} marginLeft={MARGIN_LEFT}
-                    hasBorder={false}
-                    hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
-                    color={Colors.DARK_BLUE}
-                >
+            <Link to={Paths.USER_PATH}>
+                <Button h={h} {...propsObj}>
                     Phone a Friend
                 </Button>
             </Link>
-            <Link to={VOLUNTEER_PATH}>
-                <Button
-                    h={h} marginLeft={MARGIN_LEFT}
-                    hasBorder={false}
-                    hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
-                    color={Colors.DARK_BLUE}
-                >
+            <Link to={Paths.VOLUNTEER_PATH}>
+                <Button h={h} {...propsObj}>
                     Take a Call
                 </Button>
             </Link>
-            <Link to={CONTACT_PATH}>
-                <Button
-                    h={h}
-                    hasBorder={false}
-                    hoverColor='white' hoverBgColor={Colors.DARK_BLUE}
-                    color={Colors.DARK_BLUE}
-                >
+            <Link to={Paths.CONTACT_PATH}>
+                <Button h={h} {...propsObj}>
                     Contact Us
                 </Button>
             </Link>
+            <Link to={Paths.LOGIN_PATH}>
+                <Button h={h} {...propsObj}>
+                    Log In
+                </Button>
+            </Link>
         </NavContainer>
-    </Router>
+
 );
 
 
