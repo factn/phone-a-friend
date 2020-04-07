@@ -1,29 +1,21 @@
-import { GenderPreference } from "./gender";
-import { Availability, AvailabilityDto } from "./availability";
+import { GenderPreference, Gender } from "./gender";
+import { Availability, UTCAvailabilityPeriods } from "./availability";
 
-type BaseUser = {
+export type User = {
   phoneNumber: string;
   name: string;
+  email: string;
   country: string;
   zipcode: string;
   languages: string[];
   introduction: string;
   genderPreference: GenderPreference;
-};
-
-type BaseUserDto = {
-  id: string;
-} & BaseUser;
-
-export type User = BaseUser & {
-  availability: Availability;
+  gender: Gender;
+  localTimeAvailability: Availability;
+  utcAvailability: UTCAvailabilityPeriods;
+  timezone: string;
 };
 
 export type UserDto = {
   id: string;
 } & User;
-
-export type UserDtoWithTimePeriods = {
-  utcAvailability: AvailabilityDto;
-  timezone: string;
-} & BaseUserDto;

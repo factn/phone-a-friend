@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import *  as Constants  from "../utils/Constants";
+import * as Constants from "../utils/Constants";
 import Nav from "./Nav";
-import HamburgerNav from "./HamburgerNav";
-import useWindowWidth from "../hooks/useWindowWidth";
 
 interface Iprops {
   outsideMargin?: string;
-  h?:number;
+  h?: number;
 }
 
 const Container = styled.div<Iprops>`
@@ -25,8 +23,8 @@ const MainDiv = styled.div<Iprops>`
 `;
 
 const Headline = styled.h1`
-    font-size: 1.563rem;
-    font-weight: 600;
+  font-size: 1.563rem;
+  font-weight: 600;
 `;
 
 const Header = () => {
@@ -35,7 +33,7 @@ const Header = () => {
     <Container h={Constants.HEADER_HEIGHT}>
       <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
         <Headline>PhoneAFriend.care</Headline>
-        <Nav h={Constants.HEADER_HEIGHT}/>
+        <Nav h={Constants.HEADER_HEIGHT} />
       </MainDiv>
     </Container>
   );

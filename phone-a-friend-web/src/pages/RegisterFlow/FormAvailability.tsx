@@ -5,31 +5,19 @@ import { FormPage } from "../UserSignUpManager/UserSignUpManager";
 import {
   Availability,
   emptyAvailability,
-  TimePeriod,
-  TIME_PERIOD_LOOKUP,
+  availabilityOptions,
 } from "../../model/availability";
 import CustomSelect from "../../components/inputs/CustomSelect";
 import { capitalizeFirstLetter } from "../../utils/string.utils";
 import Checkbox from "../../components/inputs/Checkbox";
+import FormButton from "../../components/buttons/FormButton";
 
 type FormAvailabilityProps = {
-  availability: Availability;
+  localTimeAvailability: Availability;
   acceptTerms: boolean;
 };
 
 type FlattenedFormAvailabilityProps = Availability & { acceptTerms: boolean };
-
-type AvailabilityOption = {
-  label: TimePeriod;
-  value: string;
-};
-
-const availabilityOptions: AvailabilityOption[] = Object.entries(
-  TIME_PERIOD_LOOKUP
-).map(([key, timePeriod]) => ({
-  label: timePeriod,
-  value: key,
-}));
 
 const basicInfoSchema = Yup.object().shape({
   acceptTerms: Yup.bool().oneOf(
@@ -64,13 +52,14 @@ const availabilityValidation = (values: FlattenedFormAvailabilityProps) => {
 const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
   onSubmit,
   initialValues,
+  options,
 }) => {
   const handleSubmit = ({
     acceptTerms,
     ...days
   }: FlattenedFormAvailabilityProps) => {
     onSubmit({
-      availability: {
+      localTimeAvailability: {
         ...days,
       },
       acceptTerms,
@@ -79,7 +68,7 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
   return (
     <Formik
       initialValues={{
-        ...(initialValues?.availability || { ...emptyAvailability }),
+        ...(initialValues?.localTimeAvailability || { ...emptyAvailability }),
         acceptTerms: initialValues?.acceptTerms || false,
       }}
       onSubmit={handleSubmit}
@@ -92,8 +81,11 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
             .filter((fieldKey) => fieldKey !== "acceptTerms")
             .map((day) => (
               <Field
-                label={`${capitalizeFirstLetter(day)} availability`}
+                label={`${capitalizeFirstLetter(
+                  day
+                )} availability (Select all slots that apply)`}
                 key={day}
+                isDisabled={options?.isDisabled || false}
                 name={day}
                 options={availabilityOptions}
                 component={CustomSelect}
@@ -117,7 +109,10 @@ const FormAvailability: React.FC<FormPage<FormAvailabilityProps>> = ({
             }
             component={Checkbox}
           />
-          <button onClick={submitForm}>Submit</button>
+          <FormButton
+            onClick={submitForm}
+            title={options?.submitMessage || "Submit"}
+          />
         </>
       )}
     </Formik>

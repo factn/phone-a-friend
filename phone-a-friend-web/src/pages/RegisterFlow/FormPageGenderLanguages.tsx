@@ -39,7 +39,7 @@ const FormPageGenderLanguages: React.FC<FormPage<UserFormPageTwo>> = ({
     <Formik
       initialValues={{
         gender: initialValues?.gender || "",
-        languages: initialValues?.languages.join(", ") || "",
+        languages: initialValues?.languages?.join(", ") || "",
       }}
       onSubmit={transformLanguagesBeforeSaving}
       validationSchema={basicInfoSchema}
@@ -68,8 +68,8 @@ const FormPageGenderLanguages: React.FC<FormPage<UserFormPageTwo>> = ({
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </Field>
+            <ErrorMessage name="gender" component={InputFeedback} />
           </div>
-          <ErrorMessage name="gender" component={InputFeedback} />
           <Field
             name="languages"
             placeholder="List your languages with a comma seperating each one. E.g: Spanish, Chinese, Portuguese"

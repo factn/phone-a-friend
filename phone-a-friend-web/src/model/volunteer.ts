@@ -1,5 +1,5 @@
 import { Gender } from "./gender";
-import { Availability } from "./availability";
+import { Availability, UTCAvailabilityPeriods } from "./availability";
 
 export type VolunteerDto = {
   id: string;
@@ -8,12 +8,14 @@ export type VolunteerDto = {
 export type Volunteer = {
   phoneNumber: string;
   name: string;
+  email: string;
   country: string;
   zipcode: string;
   languages: string[];
   introduction: string;
   gender: Gender;
   dateOfBirth: string;
-  canChat: boolean;
-  availability: Availability;
+  localTimeAvailability: Availability;
+  utcAvailability: UTCAvailabilityPeriods;
+  timezone: string;
 };

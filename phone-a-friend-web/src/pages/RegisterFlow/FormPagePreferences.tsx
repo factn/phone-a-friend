@@ -11,12 +11,12 @@ import {
 
 type FormPagePreferencesProps = {
   genderPreference: GenderPreference;
-  canChatNow: "yes" | "no";
+  // canChatNow: "yes" | "no";
 };
 
 const basicInfoSchema = Yup.object().shape({
   genderPreference: Yup.string().required("Gender preference is required"),
-  canChatNow: Yup.string().required("Introduction is required"),
+  // canChatNow: Yup.string().required("Introduction is required"),
 });
 
 const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({
@@ -27,7 +27,7 @@ const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({
     <Formik
       initialValues={{
         genderPreference: initialValues?.genderPreference || "noPreference",
-        canChatNow: initialValues?.canChatNow || "yes",
+        // canChatNow: initialValues?.canChatNow || "yes",
       }}
       onSubmit={onSubmit}
       validationSchema={basicInfoSchema}

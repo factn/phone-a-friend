@@ -17,7 +17,7 @@ const ProtectedRoute: React.FC<PropsWithChildren<RouteProps>> = ({
     <Route
       {...rest}
       render={({ location }) =>
-        state.userID !== "" ? (
+        state.userAuthId !== "" ? (
           <>{children}</>
         ) : (
           <Redirect

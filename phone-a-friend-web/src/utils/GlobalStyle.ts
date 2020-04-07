@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import 'sanitize.css';
+import "sanitize.css";
 import Poppins from "../fonts/Poppins/Poppins-Regular.ttf";
 import PoppinsSemiBold from "../fonts/Poppins/Poppins-SemiBold.ttf";
 import Lora from "../fonts/Lora/Lora-VariableFont_wght.ttf";
@@ -37,13 +37,14 @@ const GlobalStyle = createGlobalStyle`
     h1, h2 {
         font-weight: 600;
         margin:0;
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
     h1 {
         font-size: 4.375rem;
     }
     h2 {
         font-size: 2.5rem;
+        /* white-space: break-spaces; */
     }
 
     @media (max-width: 900px) {

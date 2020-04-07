@@ -2,17 +2,20 @@ import React from "react";
 import createCtx from "./CtxBuilder";
 import envConfig from "../config/environment";
 import { User } from "../model/user";
+import { Volunteer } from "../model/volunteer";
 
 const initialState = {
-  userID: "",
+  userAuthId: "",
   currentUser: {} as User,
+  currentVolunteer: {} as Volunteer,
 };
 
 type AppState = typeof initialState;
 
 type Action =
   | { type: "USER_LOGIN"; userId: string }
-  | { type: "USER_SAVE_DETAILS"; user: User };
+  | { type: "USER_STORE_DETAILS"; user: Partial<User> }
+  | { type: "VOLUNTEER_STORE_DETAILS"; volunteer: Partial<Volunteer> };
 
 /**
  * Redux style reducer for the whole app
@@ -23,9 +26,17 @@ type Action =
 function globalReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "USER_LOGIN":
-      return { ...state, userID: action.userId };
-    case "USER_SAVE_DETAILS":
-      return { ...state, currentUser: action.user };
+      return { ...state, userAuthId: action.userId };
+    case "USER_STORE_DETAILS":
+      return {
+        ...state,
+        currentUser: { ...state.currentUser, ...action.user },
+      };
+    case "VOLUNTEER_STORE_DETAILS":
+      return {
+        ...state,
+        currentVolunteer: { ...state.currentVolunteer, ...action.volunteer },
+      };
     default:
       return state;
   }

@@ -7,22 +7,22 @@ import FormBasicInfoPage from "../RegisterFlow/FormBasicInfoPage";
 import BaseFormLayout from "../../layouts/BaseFormLayout";
 import FormPageGenderLanguages from "../RegisterFlow/FormPageGenderLanguages";
 import FormPageIntroduction from "../RegisterFlow/FormPageIntroduction";
-import FormPagePreferences from "../RegisterFlow/FormPagePreferences";
 import FormAvailability from "../RegisterFlow/FormAvailability";
 import { useStateValue } from "../../contexts/AppContext";
-import { createUser } from "../../api/user";
-import useUser from "../../hooks/useUser";
-import { USER_BACKGROUND_COLOR } from "../../Colors";
+import { Volunteer } from "../../model/volunteer";
+import { createVolunteer } from "../../api/volunteer";
+import useVolunteer from "../../hooks/useVolunteer";
+import { VOLUNTEER_BACKGROUND_COLOR } from "../../Colors";
 
-const initialState: User & AcceptedTerms = {
+const initialState: Volunteer & AcceptedTerms = {
   phoneNumber: "",
   name: "",
   email: "",
+  dateOfBirth: "",
   country: "",
   zipcode: "",
   languages: [],
   introduction: "",
-  genderPreference: "noPreference",
   gender: "male",
   localTimeAvailability: emptyAvailability,
   utcAvailability: emptyAvailability,
@@ -33,25 +33,20 @@ const initialState: User & AcceptedTerms = {
 type AcceptedTerms = {
   acceptTerms: boolean;
 };
-export type FormPage<T> = {
-  onSubmit: (values: T) => void;
-  initialValues?: Partial<T>;
-  options?: { isDisabled?: boolean; submitMessage?: string };
-};
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 4;
 
-const UserSignUpManager: React.FC<{}> = () => {
+const VolunteerSignUpManager: React.FC<{}> = () => {
   const { state, dispatch } = useStateValue();
   const { path, url } = useRouteMatch();
   const history = useHistory();
   const [step, setStep] = useState<number>(1);
-  const [formValues, setFormValues] = useState<User & AcceptedTerms>(
+  const [formValues, setFormValues] = useState<Volunteer & AcceptedTerms>(
     initialState
   );
 
-  const { isFetching, setIsFetching } = useUser(
-    () => history.replace("/account/user"),
+  const { isFetching, setIsFetching } = useVolunteer(
+    () => history.replace("/account/volunteer"),
     (err) => history.replace(url + "/" + 1)
   );
 
@@ -64,17 +59,19 @@ const UserSignUpManager: React.FC<{}> = () => {
 
     if (step === TOTAL_STEPS) {
       setIsFetching(true);
-      createUser({
+      createVolunteer({
         ...newJourneyValues,
         id: state.userAuthId,
       })
         .then(() => {
+          dispatch({
+            type: "VOLUNTEER_STORE_DETAILS",
+            volunteer: newJourneyValues,
+          });
           setIsFetching(false);
-          dispatch({ type: "USER_STORE_DETAILS", user: newJourneyValues });
-          history.push("/account/user");
+          history.push("/account/volunteer");
         })
         .catch((err) => {
-          console.log(err);
           setIsFetching(false);
         });
     } else {
@@ -88,30 +85,20 @@ const UserSignUpManager: React.FC<{}> = () => {
     <>
       {!isFetching && (
         <Switch>
-          <Route path={`${path}/5`}>
+          <Route path={`${path}/4`}>
             <BaseFormLayout
-              backgroundColor={USER_BACKGROUND_COLOR}
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Select the time slots that you are available"
-              step={5}
+              step={4}
               totalSteps={TOTAL_STEPS}
             >
               <FormAvailability onSubmit={handleSubmit} />
             </BaseFormLayout>
           </Route>
-          <Route path={`${path}/4`}>
-            <BaseFormLayout
-              backgroundColor={USER_BACKGROUND_COLOR}
-              title="Almost done! Let's set up your call."
-              step={4}
-              totalSteps={TOTAL_STEPS}
-            >
-              <FormPagePreferences onSubmit={handleSubmit} />
-            </BaseFormLayout>
-          </Route>
           <Route path={`${path}/3`}>
             <BaseFormLayout
-              backgroundColor={USER_BACKGROUND_COLOR}
-              title="Anything you want your caller to know before chatting?"
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
+              title="A little introduction for your callers."
               step={3}
               totalSteps={TOTAL_STEPS}
             >
@@ -120,7 +107,7 @@ const UserSignUpManager: React.FC<{}> = () => {
           </Route>
           <Route path={`${path}/2`}>
             <BaseFormLayout
-              backgroundColor={USER_BACKGROUND_COLOR}
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Now for a little background."
               step={2}
               totalSteps={TOTAL_STEPS}
@@ -130,7 +117,7 @@ const UserSignUpManager: React.FC<{}> = () => {
           </Route>
           <Route path={""}>
             <BaseFormLayout
-              backgroundColor={USER_BACKGROUND_COLOR}
+              backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Let's start with an introduction and some contact info."
               step={1}
               totalSteps={TOTAL_STEPS}
@@ -149,4 +136,4 @@ const UserSignUpManager: React.FC<{}> = () => {
   );
 };
 
-export default UserSignUpManager;
+export default VolunteerSignUpManager;

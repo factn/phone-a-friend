@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import media from "styled-media-query";
 
 import LoginPage from "../pages/LoginPage/LoginPage";
 
@@ -17,13 +18,16 @@ import {
   USER_SIGN_UP_PATH,
   VOLUNTEER_PATH,
   USER_PATH,
+  USER_ACCOUNT_PATH,
+  VOLUNTEER_ACCOUNT_PATH,
 } from "../Paths";
 import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
-import VolunteerSignUpPage from "../pages/VolunteerSignUpPage/VolunteerSignUpPage";
-import media from "styled-media-query";
+import VolunteerSignUpManager from "../pages/VolunteerSignUpManager/VolunteerSignUpManager";
+import AccountPage from "../pages/VolunteerAccountPage/VolunteerAccountPage";
+import UserAccountPage from "../pages/UserAccountPage/UserAccountPage";
 
 const MainDiv = styled.div`
-height: 100vh;
+  height: 100vh;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -67,12 +71,20 @@ function App() {
             />
           </Route>
 
+          <ProtectedRoute path={USER_ACCOUNT_PATH}>
+            <UserAccountPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute path={VOLUNTEER_ACCOUNT_PATH}>
+            <AccountPage />
+          </ProtectedRoute>
+
           <ProtectedRoute path={USER_SIGN_UP_PATH}>
             <UserSignUpManager />
           </ProtectedRoute>
 
           <ProtectedRoute path={VOLUNTEER_SIGN_UP_PATH}>
-            <VolunteerSignUpPage />
+            <VolunteerSignUpManager />
           </ProtectedRoute>
 
           <Route default path="/">
