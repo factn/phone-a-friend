@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import *  as Constants  from "../utils/Constants"
-import * as Colors  from  '../Colors'
+import *  as Constants from "../utils/Constants"
+import * as Colors from '../Colors'
 import { FaTwitter, FaFacebookF } from 'react-icons/fa'
 import { OUTSIDE_MARGIN } from '../utils/Constants'
 
@@ -10,7 +10,7 @@ interface Iprops {
     readonly marginLeft?: string;
     readonly marginRight?: string;
     readonly outsideMargin?: string;
-    readonly h?:number;
+    readonly h?: number;
 }
 
 
@@ -53,36 +53,34 @@ type Props = {
 
 
 const Footer: React.FC<Props> = ({ outsideMargin, betweenMargin = '20px' }) => (
-    <Router>
-        <Main color={Colors.DARK_BLUE} h={Constants.FOOTER_HEIGHT}>
-            <BtnsContainer outsideMargin={OUTSIDE_MARGIN}>
-                <div>
-                    <Link to="/">
-                        <Button>
-                            © 2020 PhoneAFriend.care
+    <Main color={Colors.DARK_BLUE} h={Constants.FOOTER_HEIGHT}>
+        <BtnsContainer outsideMargin={OUTSIDE_MARGIN}>
+            <div>
+                <Link to="/">
+                    <Button>
+                        © 2020 PhoneAFriend.care
                         </Button>
-                    </Link>
-                    <Link to="/privacy">
-                        <Button marginLeft={betweenMargin}>
-                            Privacy Policy
+                </Link>
+                <Link to="/privacy">
+                    <Button marginLeft={betweenMargin}>
+                        Privacy Policy
                         </Button>
-                    </Link>
-                </div>
-                <div>
-                    <a href="https://www.twitter.com">
-                        <Navs marginRight={betweenMargin}>
-                            <FaTwitter size={18} />
-                        </Navs>
-                    </a>
-                    <a href="https://www.facebook.com">
-                        <Navs>
-                            <FaFacebookF size={18} />
-                        </Navs>
-                    </a>
-                </div>
-            </BtnsContainer>
-        </Main>
-    </Router>
+                </Link>
+            </div>
+            <div>
+                <a href="https://www.twitter.com">
+                    <Navs marginRight={betweenMargin}>
+                        <FaTwitter size={18} />
+                    </Navs>
+                </a>
+                <a href="https://www.facebook.com">
+                    <Navs>
+                        <FaFacebookF size={18} />
+                    </Navs>
+                </a>
+            </div>
+        </BtnsContainer>
+    </Main>
 )
 
 

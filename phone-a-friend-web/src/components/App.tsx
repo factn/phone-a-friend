@@ -13,13 +13,13 @@ import Intro from "./intro/Intro";
 import * as Colors from "../Colors";
 
 import {
-  LOGIN_PATH,
-  VOLUNTEER_SIGN_UP_PATH,
-  USER_SIGN_UP_PATH,
-  VOLUNTEER_PATH,
-  USER_PATH,
-  USER_ACCOUNT_PATH,
-  VOLUNTEER_ACCOUNT_PATH,
+    LOGIN_PATH,
+    VOLUNTEER_SIGN_UP_PATH,
+    USER_SIGN_UP_PATH,
+    VOLUNTEER_PATH,
+    USER_PATH,
+    USER_ACCOUNT_PATH,
+    VOLUNTEER_ACCOUNT_PATH,
 } from "../Paths";
 import UserSignUpManager from "../pages/UserSignUpManager/UserSignUpManager";
 import VolunteerSignUpManager from "../pages/VolunteerSignUpManager/VolunteerSignUpManager";
@@ -45,56 +45,56 @@ const MainDiv = styled.div`
 `;
 
 function App() {
-  return (
-    <MainDiv>
-      <Header />
-      <Router>
-        <Switch>
-          <Route path={LOGIN_PATH}>
-            <LoginPage />
-            <MainSplash />
-          </Route>
+    return (
+        <MainDiv>
+            <Router>
+                <Header />
+                <Switch>
+                    <Route path={LOGIN_PATH}>
+                        <LoginPage />
+                        <MainSplash />
+                    </Route>
 
-          <Route path={USER_PATH}>
-            <Intro
-              signUpPath={USER_SIGN_UP_PATH}
-              bgColor={Colors.PEACH}
-              copy={"Phone a Friend"}
-            />
-          </Route>
+                    <Route path={USER_PATH}>
+                        <Intro
+                            signUpPath={USER_SIGN_UP_PATH}
+                            bgColor={Colors.PEACH}
+                            copy={"Phone a Friend"}
+                        />
+                    </Route>
 
-          <Route path={VOLUNTEER_PATH}>
-            <Intro
-              signUpPath={VOLUNTEER_SIGN_UP_PATH}
-              bgColor={Colors.LAVENDER}
-              copy={"Receive a Call"}
-            />
-          </Route>
+                    <Route path={VOLUNTEER_PATH}>
+                        <Intro
+                            signUpPath={VOLUNTEER_SIGN_UP_PATH}
+                            bgColor={Colors.LAVENDER}
+                            copy={"Receive a Call"}
+                        />
+                    </Route>
 
-          <ProtectedRoute path={USER_ACCOUNT_PATH}>
-            <UserAccountPage />
-          </ProtectedRoute>
+                    <ProtectedRoute path={USER_ACCOUNT_PATH}>
+                        <UserAccountPage />
+                    </ProtectedRoute>
 
-          <ProtectedRoute path={VOLUNTEER_ACCOUNT_PATH}>
-            <AccountPage />
-          </ProtectedRoute>
+                    <ProtectedRoute path={VOLUNTEER_ACCOUNT_PATH}>
+                        <AccountPage />
+                    </ProtectedRoute>
 
-          <ProtectedRoute path={USER_SIGN_UP_PATH}>
-            <UserSignUpManager />
-          </ProtectedRoute>
+                    <ProtectedRoute path={USER_SIGN_UP_PATH}>
+                        <UserSignUpManager />
+                    </ProtectedRoute>
 
-          <ProtectedRoute path={VOLUNTEER_SIGN_UP_PATH}>
-            <VolunteerSignUpManager />
-          </ProtectedRoute>
+                    <ProtectedRoute path={VOLUNTEER_SIGN_UP_PATH}>
+                        <VolunteerSignUpManager />
+                    </ProtectedRoute>
 
-          <Route default path="/">
-            <MainSplash />
-          </Route>
-        </Switch>
-      </Router>
-      <Footer />
-    </MainDiv>
-  );
+                    <Route default path="/">
+                        <MainSplash />
+                    </Route>
+                </Switch>
+                <Footer />
+            </Router>
+        </MainDiv>
+    );
 }
 
 App.whyDidYouRender = true;
