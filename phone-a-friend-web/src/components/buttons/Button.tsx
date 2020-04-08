@@ -8,6 +8,8 @@ type StyledButtonProps = {
   color: string;
   w: number;
   h: number;
+  paddingRight: number;
+  paddingLeft: number;
   marginBottom: number;
   marginLeft: number;
   marginTop: number;
@@ -19,8 +21,10 @@ type StyledButtonProps = {
 interface IButton {
   bgColor?: string;
   color?: string;
-  w?: number;
+  w?: number | null;
   h?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
   marginBottom?: number;
   marginLeft?: number;
   marginTop?: number;
@@ -37,7 +41,11 @@ const StyledButton = styled.button<IButton>`
   box-sizing: border-box;
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: ${(props) => `${props.marginBottom}px`};
+  padding-left: ${(props) => `${props.paddingLeft}px`};
+  padding-right: ${(props) =>`${props.paddingRight}px`};
+  margin-top: ${(props) =>`${props.marginTop}px`};
+  margin-bottom: ${(props) =>`${props.marginBottom}px`};
+  margin-left: ${(props) => `${props.marginLeft}px`};
   width: ${(props) => `${props.w}px`};
   height: ${(props) => `${props.h}px`};
   display: flex;
@@ -67,6 +75,8 @@ const Button: React.FC<IButton> = ({
   hoverColor = "black",
   hoverBgColor = "transparent",
   hasBorder = true,
+  paddingLeft=0,
+  paddingRight=0
 }) => (
   <StyledButton
     type="button"
@@ -78,7 +88,11 @@ const Button: React.FC<IButton> = ({
     w={w}
     h={h}
     marginBottom={marginBottom}
+    marginTop={marginTop}
+    marginLeft={marginLeft}
     hasBorder={hasBorder}
+    paddingLeft={paddingLeft}
+    paddingRight={paddingRight}
   >
     {children}
   </StyledButton>

@@ -20,6 +20,9 @@ const propsObj = {
     hoverColor: 'white',
     hoverBgColor: Colors.DARK_BLUE,
     color: Colors.DARK_BLUE,
+    w: null,
+    paddingLeft: 40,
+    paddingRight: 40
 }
 
 const Nav: React.FC<Props> = ({ h }) => (
