@@ -10,12 +10,11 @@ import * as Constants from "../../utils/Constants";
 import * as Paths from "../../Paths";
 
 const MainDiv = styled.main`
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    height: 100%;
+    overflow: scroll;
+    display: grid;
+    grid-template-rows: 1fr 1fr 150px;
+    align-items: space-between;
 `;
 
 const IwantDiv = styled.div`
@@ -28,7 +27,7 @@ const IwantDiv = styled.div`
 `;
 
 type Iprops = {
-  top: number;
+    top: number;
 };
 const HeartDiv = styled.div<Iprops>`
   position: absolute;
@@ -42,30 +41,26 @@ const HeartDiv = styled.div<Iprops>`
 `;
 
 const MainSplash: React.FunctionComponent = () => (
-  <MainDiv>
-    <div>
-      <IwantDiv>
-        <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
-          <Heart />
-        </HeartDiv>
-        <CallOrReceive
-          h={Constants.SPLASH_IWANT}
-          bgColor={Colors.PEACH}
-          btnCopy="Phone a Friend"
-          path={Paths.USER_PATH}
-        />
-        <CallOrReceive
-          h={Constants.SPLASH_IWANT}
-          bgColor={Colors.LAVENDER}
-          btnCopy="Take a Call"
-          path={Paths.VOLUNTEER_PATH}
-          leftHandBool={false}
-        />
-      </IwantDiv>
-      <MainJumbo />
-    </div>
-    <BottomBanner />
-  </MainDiv>
+    <MainDiv>
+        <IwantDiv>
+            <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
+                <Heart />
+            </HeartDiv>
+            <CallOrReceive
+                bgColor={Colors.PEACH}
+                btnCopy="Phone a Friend"
+                path={Paths.USER_PATH}
+            />
+            <CallOrReceive
+                bgColor={Colors.LAVENDER}
+                btnCopy="Take a Call"
+                path={Paths.VOLUNTEER_PATH}
+                leftHandBool={false}
+            />
+        </IwantDiv>
+        <MainJumbo />
+        <BottomBanner />
+    </MainDiv>
 );
 
 export default MainSplash;

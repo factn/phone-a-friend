@@ -27,16 +27,18 @@ import AccountPage from "../pages/VolunteerAccountPage/VolunteerAccountPage";
 import UserAccountPage from "../pages/UserAccountPage/UserAccountPage";
 
 const MainDiv = styled.div`
-  height: 100vh;
   overflow: scroll;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 92px auto-fit 50px;
+  align-items: start;
+  /* flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  margin: 0 auto;
+  margin: 0 auto; */
   ${media.greaterThan("medium")`
-  border: 1px solid black;
-  border-radius: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
   `}
 
   ${media.greaterThan("large")`
