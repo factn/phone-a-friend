@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import media from "styled-media-query";
-
+import styled from "styled-components";
+import Media  from "../utils/CustomMedia";
+import * as Constants  from '../utils/Constants';
+import useMediaType from '../hooks/useMediaType'
 import LoginPage from "../pages/LoginPage/LoginPage";
-
 import ProtectedRoute from "./routes/ProtectedRoute";
 import MainSplash from "./splashscreen/MainSplash";
-import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import Intro from "./intro/Intro";
 import * as Colors from "../Colors";
-
 import {
     LOGIN_PATH,
     VOLUNTEER_SIGN_UP_PATH,
@@ -32,25 +31,32 @@ const MainDiv = styled.div`
   height: 100vh;
   grid-template-rows: 92px auto-fit 50px;
   align-items: start;
-  /* flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  margin: 0 auto; */
-  ${media.greaterThan("medium")`
+  ${Media.greaterThan('mobile')`
     border: 1px solid black;
     border-radius: 10px;
   `}
 
-  ${media.greaterThan("large")`
+  ${Media.lessThan('mobile')`
     width: 100vw;
+    border:0;
   `}
 `;
 
 function App() {
+    const mediaType =  useMediaType();
+    const [isMobile, setIsMobile] =  useState(false);
+    useEffect(() => {
+        if (mediaType === Constants.MOBILE) {
+            setIsMobile(true);
+        } else {
+            setIsMobile(false);
+        }
+    },[mediaType])
+
     return (
         <MainDiv>
             <Router>
-                <Header />
+                <Header isMobile={isMobile}/>
                 <Switch>
                     <Route path={LOGIN_PATH}>
                         <LoginPage />

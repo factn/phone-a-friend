@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import * as Constants from "../utils/Constants";
+import Media  from "../utils/CustomMedia";
+import * as Constants  from '../utils/Constants';
 import Nav from "./Nav";
+import HamburgerNav from './HamburgerNav'
 
 interface Iprops {
   outsideMargin?: string;
@@ -23,17 +25,32 @@ const MainDiv = styled.div<Iprops>`
 `;
 
 const Headline = styled.h1`
-  font-size: 1.563rem;
   font-weight: 600;
+  ${Media.greaterThan('mobile')`
+    font-size: 1.563rem;
+  `}
+  ${Media.lessThan('mobile')`
+    font-size:2.125rem;
+  `}
 `;
+type Props = {
+    isMobile:boolean;
+}
 
-const Header = () => {
-  //const windowWidth = useWindowWidth();
+const Header:React.FC<Props> = ({ isMobile }) => {
+    
   return (
     <Container h={Constants.HEADER_HEIGHT}>
       <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
         <Headline>PhoneAFriend.care</Headline>
-        <Nav h={Constants.HEADER_HEIGHT} />
+       
+        {
+            !isMobile ?   
+            <Nav h={Constants.HEADER_HEIGHT} />
+            :
+            <HamburgerNav h={Constants.HEADER_HEIGHT}/>
+        }
+      
       </MainDiv>
     </Container>
   );
