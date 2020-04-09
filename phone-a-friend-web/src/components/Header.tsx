@@ -14,8 +14,6 @@ const Container = styled.div<Iprops>`
   width: 100%;
   height: ${(props) => `${props.h}px`};
   white-space: nowrap;
-  border: blue 1px solid;
-  
 `;
 const MainDiv = styled.div<Iprops>`
     height: 100%;

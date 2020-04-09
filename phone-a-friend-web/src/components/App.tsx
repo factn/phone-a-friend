@@ -60,7 +60,7 @@ function App() {
                 <Switch>
                     <Route path={LOGIN_PATH}>
                         <LoginPage />
-                        <MainSplash />
+                        <MainSplash isMobile={isMobile}/>
                     </Route>
 
                     <Route path={USER_PATH}>
@@ -96,10 +96,10 @@ function App() {
                     </ProtectedRoute>
 
                     <Route default path="/">
-                        <MainSplash />
+                        <MainSplash isMobile={isMobile}/>
                     </Route>
                 </Switch>
-                <Footer />
+                {!isMobile && <Footer />}
             </Router>
         </MainDiv>
     );

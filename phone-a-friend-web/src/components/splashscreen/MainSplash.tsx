@@ -9,21 +9,23 @@ import * as Colors from "../../Colors";
 import * as Constants from "../../utils/Constants";
 import * as Paths from "../../Paths";
 
-const MainDiv = styled.main`
-    height: 100%;
+type Props = {
+    isMobile:boolean;
+}
+
+const MainDiv = styled.main<Props>`
+
     overflow: scroll;
     display: grid;
-    grid-template-rows: 1fr 1fr 150px;
+    grid-template-rows: ${props => props.isMobile ? '1116px 558px' : '1fr 1fr 150px'};
     align-items: space-between;
 `;
 
-const IwantDiv = styled.div`
+const IwantDiv = styled.div<Props>`
   /* overflow: scroll; */
   position: relative;
-  ${media.greaterThan("medium")`
-    display:flex;
-    flex-direction: row;
-  `}
+  display:flex;
+  flex-direction: ${props => props.isMobile ? 'column' : 'row'};
 `;
 
 type Iprops = {
@@ -35,17 +37,17 @@ const HeartDiv = styled.div<Iprops>`
   left: 50%;
   transform: translateX(-50%);
   top: ${(props) => `${props.top}px`};
-  ${media.lessThan("medium")`
-        display:none;
-    `}
 `;
 
-const MainSplash: React.FunctionComponent = () => (
-    <MainDiv>
-        <IwantDiv>
-            <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
-                <Heart />
-            </HeartDiv>
+
+const MainSplash: React.FC<Props> = ({ isMobile }) => (
+    <MainDiv isMobile={isMobile}>
+        <IwantDiv isMobile={isMobile}>
+            {!isMobile &&
+                <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
+                    <Heart />
+                </HeartDiv>
+            }
             <CallOrReceive
                 bgColor={Colors.PEACH}
                 btnCopy="Phone a Friend"
@@ -58,8 +60,8 @@ const MainSplash: React.FunctionComponent = () => (
                 leftHandBool={false}
             />
         </IwantDiv>
-        <MainJumbo />
-        <BottomBanner />
+        <MainJumbo isMobile={isMobile}/>
+       {!isMobile && <BottomBanner />}
     </MainDiv>
 );
 
