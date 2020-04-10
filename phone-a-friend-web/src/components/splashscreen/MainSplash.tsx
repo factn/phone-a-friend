@@ -18,16 +18,11 @@ const MainDiv = styled.main<Props>`
     overflow: scroll;
     display: inline-grid;
     grid-template-columns: 1fr;
-    grid-template-rows: ${props => props.isMobile ? 'auto 657px 150px' : '1fr 1fr 150px'};
+    grid-template-rows: ${props => props.isMobile ? '1116px 694px 482px' : 'minmax(505px,5fr) minmax(400px,4fr) 150px'};
     align-items: space-between;
-    & > div {
-        justify-self:  stretch;
-    }
-    /* justify-items: start; */
 `;
 
 const IwantDiv = styled.div<Props>`
-  /* overflow: scroll; */
   position: relative;
   display:flex;
   flex-direction: ${props => props.isMobile ? 'column' : 'row'};

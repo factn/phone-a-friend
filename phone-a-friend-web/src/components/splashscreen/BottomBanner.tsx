@@ -17,34 +17,40 @@ interface Iprops {
 
 
 const MainDiv = styled.div<Iprops>`
-    display: flex;
-    flex-direction: ${(props) => props.isMobile ? 'column' : 'row'};
-    justify-content: ${(props) => props.isMobile ? 'start' : 'space-between'};
-    align-items: center;
+    display: inline-grid;
+    grid-template-columns: ${(props) => props.isMobile ? '1fr' : 'minmax(322px, auto) minmax(600px, auto) auto'};
+    grid-template-rows:  ${(props) => props.isMobile ? '1fr 1fr 1fr' : '1fr'};
+    justify-content: space-between;
+    align-items:center;
     padding-right: ${(props) => props.outsideMargin};
     padding-left: ${(props) => props.outsideMargin};
-    height: 100%;
     background: ${(props) => props.bgColor};
-    padding-top: 50px;
-    padding-bottom: 50px;
 `;
 
 
 const Input = styled.input<Props>`
-    font-family: "Lora";
-    font-size: 1.875;
+  color: #13273E;
+  font-family: Lora;
+  font-size:${(props) => props.isMobile ? '30px' : '3px'};
+  letter-spacing: 0;
+  line-height: 36px;
     height:${(props) => props.isMobile ? '90px' : '50px'};
-    width:  ${(props) => props.isMobile ? '100%' : '44%'}; 
-    margin-top: 50px;
-    margin-bottom: 50px;
 `;
+
+const Headline = styled.h1`
+    font-size: 3.125rem;
+    letter-spacing: -0.4px;
+    text-align:center;
+`;
+
 
 
 const BottomBanner: React.FC<Props> = ({ isMobile }) => (
     <MainDiv
+        className='container'
         isMobile={isMobile}
         outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
-        <h2>Stay Connected</h2>
+        <Headline>Stay Connected</Headline>
         <Input
             isMobile={isMobile}
             id="namedInput"

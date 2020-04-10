@@ -22,20 +22,10 @@ interface IProps {
 const MainDiv = styled.div<IProps>`
     display: flex;
     flex-direction:column;
-/* // ${(props) => props.isMobile ? 'column' : 'row'}; */
     align-items: center;
     width: 100%;
-    padding: 60px 0 60px 0;
-    /* padding-top:30px;
-    padding-bottom:50px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 40px  auto 40px;
-  align-items: center; */
-  /* flex-direction: column;
-  justify-content: space-around;
-  align-items: center; */
-  background-color: ${(props) => props.bgColor};
+    padding: ${(props) => props.isMobile ? '30px 0 50px' : '60px 0 60px'};
+    background-color: ${(props) => props.bgColor};
 `;
 
 const ImgDiv = styled.div`
