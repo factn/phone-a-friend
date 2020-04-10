@@ -25,21 +25,24 @@ import VolunteerSignUpManager from "../pages/VolunteerSignUpManager/VolunteerSig
 import AccountPage from "../pages/VolunteerAccountPage/VolunteerAccountPage";
 import UserAccountPage from "../pages/UserAccountPage/UserAccountPage";
 
+
 const MainDiv = styled.div`
-  overflow: scroll;
+ 
   display: grid;
-  height: 100vh;
-  grid-template-rows: 92px auto-fit 50px;
-  align-items: start;
   ${Media.greaterThan('mobile')`
+    height: 100vh;
+    grid-template-rows: [header] 92px [main] 1fr [footer] 50px;
     border: 1px solid black;
     border-radius: 10px;
+    
   `}
-
   ${Media.lessThan('mobile')`
-    width: 100vw;
+    grid-template-rows: [header] 92px [main] auto [footer] 50px;
     border:0;
   `}
+  & > div {
+    justify-self:  stretch;
+  }
 `;
 
 function App() {
@@ -65,6 +68,7 @@ function App() {
 
                     <Route path={USER_PATH}>
                         <Intro
+                            isMobile={isMobile}
                             signUpPath={USER_SIGN_UP_PATH}
                             bgColor={Colors.PEACH}
                             copy={"Phone a Friend"}
@@ -73,6 +77,7 @@ function App() {
 
                     <Route path={VOLUNTEER_PATH}>
                         <Intro
+                            isMobile={isMobile}
                             signUpPath={VOLUNTEER_SIGN_UP_PATH}
                             bgColor={Colors.LAVENDER}
                             copy={"Receive a Call"}
@@ -99,7 +104,7 @@ function App() {
                         <MainSplash isMobile={isMobile}/>
                     </Route>
                 </Switch>
-                {!isMobile && <Footer />}
+                <Footer outsideMargin={Constants.OUTSIDE_MARGIN}/>
             </Router>
         </MainDiv>
     );

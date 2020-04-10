@@ -12,10 +12,7 @@ const propsObj = {
     hoverColor: 'white',
     hoverBgColor: Colors.DARK_BLUE,
     color: Colors.DARK_BLUE,
-    w: 200,
-    paddingLeft: 40,
-    paddingRight: 40,
-
+    w: '100%',
 }
 
 const NavContainer = styled.nav`
@@ -30,14 +27,12 @@ const NavContainer = styled.nav`
   display:flex;
   flex-direction: column;
   justify-content:center;
-  align-items:center;
+  align-items:stretch;
 `;
 
-type Props = {
-    h: number;
-}
 
-const HamburgerNav: React.FC<Props> = ({ h }) => {
+
+const HamburgerNav: React.FC = () => {
     const { isToggled, toggle } = useToggle(false);
     return (
         <>
@@ -49,27 +44,27 @@ const HamburgerNav: React.FC<Props> = ({ h }) => {
             {isToggled &&
                 <NavContainer>
                     <Link to="/">
-                        <Button onClick={toggle} h={h} {...propsObj}>
+                        <Button onClick={toggle} {...propsObj}>
                             Home
                     </Button>
                     </Link>
                     <Link to={Paths.USER_PATH}>
-                        <Button onClick={toggle} h={h} {...propsObj}>
+                        <Button onClick={toggle} {...propsObj}>
                             Phone a Friend
                     </Button>
                     </Link>
                     <Link to={Paths.VOLUNTEER_PATH}>
-                        <Button onClick={toggle} h={h} {...propsObj}>
+                        <Button onClick={toggle} {...propsObj}>
                             Take a Call
                     </Button>
                     </Link>
                     <Link to={Paths.CONTACT_PATH}>
-                        <Button onClick={toggle} h={h} {...propsObj}>
+                        <Button onClick={toggle} {...propsObj}>
                             Contact Us
                     </Button>
                     </Link>
                     <Link to={Paths.LOGIN_PATH}>
-                        <Button onClick={toggle} h={h} {...propsObj}>
+                        <Button onClick={toggle} {...propsObj}>
                             Log In
                     </Button>
                     </Link>

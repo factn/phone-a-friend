@@ -31,7 +31,6 @@ const Button = styled(Navs)`
 const Main = styled.div<Iprops>`
     background: ${props => props.color};
     height: ${(props) => `${props.h}px`};
-    width: 100%;
     display:flex;
     flex-direction:column;
     justify-content: center;

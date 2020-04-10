@@ -11,21 +11,30 @@ type Props = {
   bgColor: string;
   path: string;
   leftHandBool?: boolean;
+    isMobile:boolean;
 };
 
 interface IProps {
   readonly bgColor: string;
+  readonly isMobile:boolean;
 }
 
 const MainDiv = styled.div<IProps>`
-
-padding-top:30px;
-padding-bottom:50px;
+    display: flex;
+    flex-direction:column;
+/* // ${(props) => props.isMobile ? 'column' : 'row'}; */
+    align-items: center;
+    width: 100%;
+    padding: 60px 0 60px 0;
+    /* padding-top:30px;
+    padding-bottom:50px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 40px  auto 40px;
+  align-items: center; */
+  /* flex-direction: column;
   justify-content: space-around;
-  align-items: center;
+  align-items: center; */
   background-color: ${(props) => props.bgColor};
 `;
 
@@ -38,9 +47,10 @@ const CallOrReceive: React.FC<Props> = ({
   bgColor,
   btnCopy,
   path,
-  leftHandBool = true,
+  leftHandBool = true, 
+  isMobile
 }) => (
-  <MainDiv bgColor={bgColor} >
+  <MainDiv bgColor={bgColor} isMobile={isMobile} >
     <h2>I want to</h2>
     <ImgDiv>
       {leftHandBool ? (
@@ -50,7 +60,7 @@ const CallOrReceive: React.FC<Props> = ({
       )}
     </ImgDiv>
     <Link to={path}>
-      <Button marginBottom={16}>{btnCopy}</Button>
+      <Button marginBottom={16} w={isMobile ? '96vw' : 256}>{btnCopy}</Button>
     </Link>
   </MainDiv>
 );

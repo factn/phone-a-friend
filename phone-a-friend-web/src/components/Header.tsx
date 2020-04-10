@@ -47,9 +47,9 @@ const Header:React.FC<Props> = ({ isMobile }) => {
        
         {
             !isMobile ?   
-            <Nav h={Constants.HEADER_HEIGHT} />
+            <Nav />
             :
-            <HamburgerNav h={Constants.HEADER_HEIGHT}/>
+            <HamburgerNav />
         }
       
       </MainDiv>

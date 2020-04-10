@@ -6,8 +6,8 @@ import * as Colors from "../../Colors";
 type StyledButtonProps = {
   bgColor: string;
   color: string;
-  w: number;
-  h: number;
+  w: number | string;
+  h: number| string;
   paddingRight: number;
   paddingLeft: number;
   marginBottom: number;
@@ -21,8 +21,8 @@ type StyledButtonProps = {
 interface IButton {
   bgColor?: string;
   color?: string;
-  w?: number | null;
-  h?: number;
+  w?: number | string;
+  h?: number| string;
   paddingLeft?: number;
   paddingRight?: number;
   marginBottom?: number;
@@ -46,8 +46,9 @@ const StyledButton = styled.button<IButton>`
   margin-top: ${(props) =>`${props.marginTop}px`};
   margin-bottom: ${(props) =>`${props.marginBottom}px`};
   margin-left: ${(props) => `${props.marginLeft}px`};
-  width: ${(props) => `${props.w}px`};
-  height: ${(props) => `${props.h}px`};
+  margin-right: ${(props) => `${props.marginRight}px`};
+  width: ${(props) => (typeof props.w) ==='number' ? `${props.w}px` : props.w};
+  height: ${(props) => (typeof props.h) ==='number' ? `${props.h}px` : props.h};
   display: flex;
   flex-direction: column;
   justify-content: center;

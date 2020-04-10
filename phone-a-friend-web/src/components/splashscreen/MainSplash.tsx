@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import media from "styled-media-query";
 import CallOrReceive from "./CallOrReceive";
 import Heart from "./Heart";
 import MainJumbo from "./MainJumbo";
@@ -11,14 +10,20 @@ import * as Paths from "../../Paths";
 
 type Props = {
     isMobile:boolean;
+    outsideMargin?:string;
 }
 
 const MainDiv = styled.main<Props>`
-
+    
     overflow: scroll;
-    display: grid;
-    grid-template-rows: ${props => props.isMobile ? '1116px 558px' : '1fr 1fr 150px'};
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: ${props => props.isMobile ? 'auto 657px 150px' : '1fr 1fr 150px'};
     align-items: space-between;
+    & > div {
+        justify-self:  stretch;
+    }
+    /* justify-items: start; */
 `;
 
 const IwantDiv = styled.div<Props>`
@@ -40,8 +45,10 @@ const HeartDiv = styled.div<Iprops>`
 `;
 
 
-const MainSplash: React.FC<Props> = ({ isMobile }) => (
-    <MainDiv isMobile={isMobile}>
+const MainSplash: React.FC<Props> = ({ isMobile}) => (
+    <MainDiv 
+        isMobile={isMobile}
+        outsideMargin={Constants.OUTSIDE_MARGIN}>  
         <IwantDiv isMobile={isMobile}>
             {!isMobile &&
                 <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
@@ -52,16 +59,18 @@ const MainSplash: React.FC<Props> = ({ isMobile }) => (
                 bgColor={Colors.PEACH}
                 btnCopy="Phone a Friend"
                 path={Paths.USER_PATH}
+                isMobile={isMobile}
             />
             <CallOrReceive
                 bgColor={Colors.LAVENDER}
                 btnCopy="Take a Call"
                 path={Paths.VOLUNTEER_PATH}
                 leftHandBool={false}
+                isMobile={isMobile}
             />
         </IwantDiv>
         <MainJumbo isMobile={isMobile}/>
-       {!isMobile && <BottomBanner />}
+        <BottomBanner isMobile={isMobile}/>
     </MainDiv>
 );
 

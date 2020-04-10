@@ -24,6 +24,9 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    /* div {
+        border: 1px solid black;
+    } */
     
     html {
         font-family: 'Poppins', Fallback, sans-serif;

@@ -12,7 +12,7 @@ const NavContainer = styled.nav`
 
 
 type Props = {
-    h: number;
+    h?: number;
 }
 
 const propsObj = {
@@ -20,7 +20,7 @@ const propsObj = {
     hoverColor: 'white',
     hoverBgColor: Colors.DARK_BLUE,
     color: Colors.DARK_BLUE,
-    w: null,
+    h: '100%',
     paddingLeft: 40,
     paddingRight: 40
 }
@@ -29,27 +29,27 @@ const Nav: React.FC<Props> = ({ h }) => (
 
         <NavContainer>
             <Link to="/">
-                <Button h={h} {...propsObj}>
+                <Button  {...propsObj}>
                     Home
                 </Button>
             </Link>
             <Link to={Paths.USER_PATH}>
-                <Button h={h} {...propsObj}>
+                <Button  {...propsObj}>
                     Phone a Friend
                 </Button>
             </Link>
             <Link to={Paths.VOLUNTEER_PATH}>
-                <Button h={h} {...propsObj}>
+                <Button  {...propsObj}>
                     Take a Call
                 </Button>
             </Link>
             <Link to={Paths.CONTACT_PATH}>
-                <Button h={h} {...propsObj}>
+                <Button  {...propsObj}>
                     Contact Us
                 </Button>
             </Link>
             <Link to={Paths.LOGIN_PATH}>
-                <Button h={h} {...propsObj}>
+                <Button  {...propsObj}>
                     Log In
                 </Button>
             </Link>

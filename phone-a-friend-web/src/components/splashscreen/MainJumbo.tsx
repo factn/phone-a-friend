@@ -1,37 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-interface Iprops {
-  h?: number;
-}
-
 const MainDiv = styled.div<Props>`
-  padding: ${props => props.isMobile ? '0' : '5% 20% 5% 20%'};
-  margin-bottom: 24px;
+  padding: ${props => props.isMobile ? '0 2.5rem' : '0 20%'};
   overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  display: inline-grid;
+  grid-template-rows: 2fr 2fr 1fr;
+  justify-content:space-between;
+  align-items:center;
+  & >  * {
+    justify-self:  stretch;
+  }
 `;
 const CopyDiv = styled.div<Props>`
   font-family: "Lora";
   font-size: ${props => props.isMobile ? '2rem' : '1.375rem'};
   line-height:${props => props.isMobile ? '3.25rem' : '2.25rem'};
   text-align: center;
-  width: ${props => props.isMobile ? null : '894px'};
-  padding-left: ${props => props.isMobile ? '5%' : '0'};
-  padding-right: ${props => props.isMobile ? '5%' : '0'};
 `;
 
 const Disclaimer = styled.div`
-  padding-top: 1rem;
   font-family: "Lora";
   font-size: 0.875rem;
+  text-align: center;
 `;
 
 
 const Headline = styled.h1<Props>`
+  text-align: center;
     font-size: ${props => props.isMobile ? '4.688rem' : '4.375rem'};
 `;
 type Props = {
