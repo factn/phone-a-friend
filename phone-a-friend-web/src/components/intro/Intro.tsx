@@ -35,9 +35,13 @@ const Wrapper = styled.div<Iprops>`
 
 
 const HeadLine = styled.div<Iprops>`
-    font-size: ${props => props.isMobile ?  '4.688rem' : '4.375rem'};
-    line-height: ${props => props.isMobile ?  '5.625rem' : '4.125rem'};
+   
     padding-bottom:${props => props.isMobile ? '40px' : '0'};
+    & > span {
+        font-size: ${props => props.isMobile ?  '4.688rem' : '77px'};
+        line-height: ${props => props.isMobile ?  '5.625rem' : '100px'};
+        font-weight: 600;
+    }
 `;
 
 const Blurb = styled.div<Iprops>`
@@ -67,11 +71,8 @@ const Intro: React.FC<Props> = ({
                 <HeadLine isMobile={isMobile}>
                     {
                         !isMobile ?
-                            <> 
-                            <h1>I want to</h1>
-                            <h1>{copy}</h1>
-                            </>
-                            : <h1>I want to {copy}</h1>
+                                <span>I want to<br />{copy}</span>
+                            : <span>I want to {copy}</span>
                     }
                 </HeadLine>
 

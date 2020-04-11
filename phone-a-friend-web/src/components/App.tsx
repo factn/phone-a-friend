@@ -73,7 +73,7 @@ function App() {
                             isMobile={isMobile}
                             signUpPath={USER_SIGN_UP_PATH}
                             bgColor={Colors.PEACH}
-                            copy={"Phone a Friend"}
+                            copy={"phone a friend"}
                         />
                     </Route>
 
@@ -82,7 +82,7 @@ function App() {
                             isMobile={isMobile}
                             signUpPath={VOLUNTEER_SIGN_UP_PATH}
                             bgColor={Colors.LAVENDER}
-                            copy={"Receive a Call"}
+                            copy={"receive a call"}
                         />
                     </Route>
 
