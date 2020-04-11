@@ -11,12 +11,10 @@ interface Iprops {
 }
 
 const Container = styled.div<Iprops>`
-  width: 100%;
-  height: ${(props) => `${props.h}px`};
   white-space: nowrap;
 `;
 const MainDiv = styled.div<Iprops>`
-    height: 100%;
+white-space: nowrap;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -41,7 +39,6 @@ type Props = {
 const Header:React.FC<Props> = ({ isMobile }) => {
     
   return (
-    <Container h={Constants.HEADER_HEIGHT}>
       <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
         <Headline>PhoneAFriend.care</Headline>
        
@@ -53,7 +50,6 @@ const Header:React.FC<Props> = ({ isMobile }) => {
         }
       
       </MainDiv>
-    </Container>
   );
 };
 

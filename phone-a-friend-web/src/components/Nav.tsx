@@ -8,6 +8,7 @@ import * as Colors from '../Colors'
 const NavContainer = styled.nav`
   display: flex;
   flex-direction: row;
+  height: 100%;
 `;
 
 
@@ -20,9 +21,9 @@ const propsObj = {
     hoverColor: 'white',
     hoverBgColor: Colors.DARK_BLUE,
     color: Colors.DARK_BLUE,
-    h: '100%',
     paddingLeft: 40,
-    paddingRight: 40
+    paddingRight: 40,
+    h:'100%'
 }
 
 const Nav: React.FC<Props> = ({ h }) => (

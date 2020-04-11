@@ -66,7 +66,7 @@ const Button: React.FC<IButton> = ({
   children,
   bgColor = "transparent",
   color = Colors.DARK_BLUE,
-  w = 256,
+  w,
   h = 50,
   onClick,
   marginBottom = 0,
