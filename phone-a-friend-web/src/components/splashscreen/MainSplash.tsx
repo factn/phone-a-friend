@@ -4,6 +4,7 @@ import CallOrReceive from "./CallOrReceive";
 import Heart from "./Heart";
 import MainJumbo from "./MainJumbo";
 import BottomBanner from "./BottomBanner";
+import CallReceiveContainer from './CallReceiveContainer'
 import * as Colors from "../../Colors";
 import * as Constants from "../../utils/Constants";
 import * as Paths from "../../Paths";
@@ -44,26 +45,9 @@ const MainSplash: React.FC<Props> = ({ isMobile}) => (
     <MainDiv 
         isMobile={isMobile}
         outsideMargin={Constants.OUTSIDE_MARGIN}>  
-        <IwantDiv isMobile={isMobile}>
-            {!isMobile &&
-                <HeartDiv top={Constants.HEADER_HEIGHT + 50}>
-                    <Heart />
-                </HeartDiv>
-            }
-            <CallOrReceive
-                bgColor={Colors.PEACH}
-                btnCopy="Phone a Friend"
-                path={Paths.USER_PATH}
-                isMobile={isMobile}
-            />
-            <CallOrReceive
-                bgColor={Colors.LAVENDER}
-                btnCopy="Take a Call"
-                path={Paths.VOLUNTEER_PATH}
-                leftHandBool={false}
-                isMobile={isMobile}
-            />
-        </IwantDiv>
+        <CallReceiveContainer isMobile={isMobile}>
+            
+        </CallReceiveContainer>
         <MainJumbo isMobile={isMobile}/>
         <BottomBanner isMobile={isMobile}/>
     </MainDiv>

@@ -34,6 +34,26 @@ const GlobalStyle = createGlobalStyle`
           /* border-box box model allows us to add padding and border to our elements without increasing their size */
         box-sizing: border-box;
     }
+    body {
+
+    /* min-height: calc(100vh - 100px); */
+  /* margin: 50px; */
+    }
+
+.mobile-bg-top, .mobile-bg-bottom {
+    background-image: url("heart.svg");
+    background-repeat: no-repeat;
+
+}
+
+.mobile-bg-top {
+    background-position: 200% 44%  ;
+}
+
+.mobile-bg-bottom {
+    background-position: -100% 44%  ;
+}
+
     a {
         text-decoration:none;
     }
@@ -48,6 +68,9 @@ const GlobalStyle = createGlobalStyle`
     h2 {
         font-size: 2.5rem;
         /* white-space: break-spaces; */
+    }
+    .center-text {
+        text-align: center;
     }
 
     @media (max-width: 900px) {

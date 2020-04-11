@@ -31,12 +31,14 @@ const MainDiv = styled.div`
   display: grid;
   ${Media.greaterThan('mobile')`
     height: 100vh;
+    grid-template-columns: 1fr;
     grid-template-rows: [header] 92px [main] 1fr [footer] 50px;
     border: 1px solid black;
     border-radius: 10px;
     
   `}
   ${Media.lessThan('mobile')`
+    grid-template-columns: 1fr;
     grid-template-rows: [header] 92px [main] auto [footer] 50px;
     border:0;
   `}

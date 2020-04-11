@@ -22,8 +22,8 @@ const MainDiv = styled.div<Iprops>`
     grid-template-rows:  ${(props) => props.isMobile ? '1fr 1fr 1fr' : '1fr'};
     justify-content: space-between;
     align-items:center;
-    padding-right: ${(props) => props.outsideMargin};
-    padding-left: ${(props) => props.outsideMargin};
+    padding-right: ${(props) => !props.isMobile ? props.outsideMargin : 0};
+    padding-left: ${(props) => !props.isMobile ?  props.outsideMargin : 0};
     background: ${(props) => props.bgColor};
 `;
 
@@ -31,7 +31,7 @@ const MainDiv = styled.div<Iprops>`
 const Input = styled.input<Props>`
   color: #13273E;
   font-family: Lora;
-  font-size:${(props) => props.isMobile ? '30px' : '3px'};
+  font-size:${(props) => props.isMobile ? '30px' : '22px'};
   letter-spacing: 0;
   line-height: 36px;
     height:${(props) => props.isMobile ? '90px' : '50px'};
@@ -45,20 +45,24 @@ const Headline = styled.h1`
 
 
 
+
 const BottomBanner: React.FC<Props> = ({ isMobile }) => (
     <MainDiv
         className='container'
         isMobile={isMobile}
         outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
+        
         <Headline>Stay Connected</Headline>
         <Input
-            isMobile={isMobile}
-            id="namedInput"
-            placeholder="Email address"
-            type="text"
-            name="email"
+                isMobile={isMobile}
+                id="namedInput"
+                placeholder="Email address"
+                type="text"
+                name="email"
         />
-        <Button w={isMobile ? '100%' : 184}>Submit</Button>
+         <Button w={isMobile ? '100%' : 184}>Submit</Button>
+           
+   
     </MainDiv>
 );
 
