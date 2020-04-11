@@ -11,6 +11,7 @@ interface Iprops {
 }
 
 const MainDiv = styled.main<Iprops>`
+min-width: 1160px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -35,6 +36,7 @@ const Blurb = styled.p<Iprops>`
   font-size: ${props => props.isMobile ? '2rem' : '1.375rem'};
   line-height: ${props => props.isMobile ? ' 3.25rem' : '2.25rem'};
   margin-bottom: 30px;
+  max-width:565px;
 `;
 
 const Div50 = styled.div<Iprops>`
