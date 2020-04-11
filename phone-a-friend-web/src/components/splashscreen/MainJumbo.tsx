@@ -5,18 +5,22 @@ const MainDiv = styled.div<Props>`
   padding: ${props => props.isMobile ? '0 2.5rem' : '0 20%'};
   overflow: scroll;
   display: inline-grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
   grid-template-rows: 2fr 2fr 1fr;
   justify-content:space-between;
-  align-items:center;
-  & >  * {
+  justify-items:center;
+  align-items: center;
+  /* & >  * {
     justify-self:  stretch;
-  }
+  } */
 `;
 const CopyDiv = styled.div<Props>`
   font-family: "Lora";
   font-size: ${props => props.isMobile ? '2rem' : '1.375rem'};
   line-height:${props => props.isMobile ? '3.25rem' : '2.25rem'};
   text-align: center;
+  max-width: 894px;
 `;
 
 const Disclaimer = styled.div`
