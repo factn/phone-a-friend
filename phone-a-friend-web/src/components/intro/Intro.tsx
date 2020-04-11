@@ -3,35 +3,44 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../buttons/Button";
 import * as Colors from "../../Colors";
+import * as Constants from '../../utils/Constants'
 
 interface Iprops {
     readonly bgColor?: string;
+    readonly color?: string;
     readonly isMobile: boolean;
-
 }
 
 const MainDiv = styled.main<Iprops>`
-min-width: 1160px;
+    min-width: ${props => props.isMobile ? 0 : '1160px'};
+    margin-bottom:  ${props => props.isMobile ? '90px' : '70px'};
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: ${(props) => props.bgColor};
-  padding-left: 71px;
-  padding-right: 106px;
-  padding-top: 60px;
-  padding-bottom: 80px;
+  padding-left: ${props => props.isMobile ? '40px' : '5%'};
+  padding-right:${props => props.isMobile ? '40px' : '5%'};
+  padding-top: ${props => props.isMobile ? '60px' : '0'};
+  padding-bottom: ${props => props.isMobile ? '80px' : '0'};
   overflow: scroll;
+  border: 1px solid black;
 `;
 
 const Wrapper = styled.div<Iprops>`
   display: grid;
   grid-template-columns: ${props => props.isMobile ? '1fr' : '1fr 1fr'};
-  /* justify-content: space-between; */
-  /* align-items: base-line; */
+  color: ${props => props.color};
 `;
 
-const Blurb = styled.p<Iprops>`
+
+const HeadLine = styled.div<Iprops>`
+    font-size: ${props => props.isMobile ?  '4.688rem' : '4.375rem'};
+    line-height: ${props => props.isMobile ?  '5.625rem' : '4.125rem'};
+    padding-bottom:${props => props.isMobile ? '40px' : '0'};
+`;
+
+const Blurb = styled.div<Iprops>`
   font-family: Lora;
   font-size: ${props => props.isMobile ? '2rem' : '1.375rem'};
   line-height: ${props => props.isMobile ? ' 3.25rem' : '2.25rem'};
@@ -39,20 +48,13 @@ const Blurb = styled.p<Iprops>`
   max-width:565px;
 `;
 
-const Div50 = styled.div<Iprops>`
-  /* width: ${props => props.isMobile ? ' 100%' : '50%'}; */
-`;
-const DivL = styled(Div50)``;
-
-const DivR = styled(Div50)``;
-
 type Props = {
     bgColor?: string;
     copy: string;
     signUpPath: string;
     isMobile: boolean;
 };
-//bgColor={Colors.PEACH},
+
 
 const Intro: React.FC<Props> = ({
     bgColor,
@@ -61,8 +63,8 @@ const Intro: React.FC<Props> = ({
 }) => {
     return (
         <MainDiv isMobile={isMobile} bgColor={bgColor}>
-            <Wrapper isMobile={isMobile}>
-                <DivL isMobile={isMobile}>
+            <Wrapper isMobile={isMobile} color={Colors.DARK_BLUE}>
+                <HeadLine isMobile={isMobile}>
                     {
                         !isMobile ?
                             <> 
@@ -71,10 +73,10 @@ const Intro: React.FC<Props> = ({
                             </>
                             : <h1>I want to {copy}</h1>
                     }
-                </DivL>
+                </HeadLine>
 
-                <DivR isMobile={isMobile}>
-                    <Blurb  isMobile={isMobile}>
+                <div>
+                    <Blurb  isMobile={isMobile} color={Colors.DARK_BLUE}>
                         Welcome! We’ll need to ask you a few questions before we have
                         someone reach out to you when you’re ready. Please note that we are
                         not offering professional advice, just connecting folks who want to
@@ -88,7 +90,7 @@ const Intro: React.FC<Props> = ({
                             Get Started
                         </Button>
                     </Link>
-                </DivR>
+                </div>
             </Wrapper>
         </MainDiv>
     );
