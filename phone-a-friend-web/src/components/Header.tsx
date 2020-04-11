@@ -10,9 +10,7 @@ interface Iprops {
   h?: number;
 }
 
-const Container = styled.div<Iprops>`
-  white-space: nowrap;
-`;
+
 const MainDiv = styled.div<Iprops>`
 white-space: nowrap;
   display: flex;
@@ -40,15 +38,13 @@ const Header:React.FC<Props> = ({ isMobile }) => {
     
   return (
       <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
-        <Headline>PhoneAFriend.care</Headline>
-       
+        <Headline>PhoneAFriend.care</Headline>  
         {
             !isMobile ?   
             <Nav />
             :
             <HamburgerNav />
         }
-      
       </MainDiv>
   );
 };

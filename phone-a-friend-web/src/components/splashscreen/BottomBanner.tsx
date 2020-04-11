@@ -9,7 +9,7 @@ type Props = {
 }
 
 interface Iprops {
-    outsideMargin: string;
+    outsideMargin: number;
     bgColor: string;
     isMobile: boolean;
 }
@@ -20,10 +20,12 @@ const MainDiv = styled.div<Iprops>`
     display: inline-grid;
     grid-template-columns: ${(props) => props.isMobile ? '1fr' : 'minmax(322px, auto) minmax(600px, auto) auto'};
     grid-template-rows:  ${(props) => props.isMobile ? '1fr 1fr 1fr' : '1fr'};
-    justify-content: space-between;
+    justify-items: center;
     align-items:center;
-    padding-right: ${(props) => !props.isMobile ? props.outsideMargin : 0};
-    padding-left: ${(props) => !props.isMobile ?  props.outsideMargin : 0};
+    /* justify-content: space-between;
+    align-items:center; */
+    padding-right: ${(props) => props.isMobile ? `${props.outsideMargin}px` : 0};
+    padding-left: ${(props) => props.isMobile ?  `${props.outsideMargin}px` : 0};
     background: ${(props) => props.bgColor};
 `;
 
@@ -35,6 +37,7 @@ const Input = styled.input<Props>`
   letter-spacing: 0;
   line-height: 36px;
     height:${(props) => props.isMobile ? '90px' : '50px'};
+    width: 100%;
 `;
 
 const Headline = styled.h1`
@@ -50,8 +53,8 @@ const BottomBanner: React.FC<Props> = ({ isMobile }) => (
     <MainDiv
         className='container'
         isMobile={isMobile}
-        outsideMargin={Constants.OUTSIDE_MARGIN} bgColor={Colors.LIGHT_BLUE}>
-        
+        outsideMargin={Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}
+        bgColor={Colors.LIGHT_BLUE}>
         <Headline>Stay Connected</Headline>
         <Input
                 isMobile={isMobile}

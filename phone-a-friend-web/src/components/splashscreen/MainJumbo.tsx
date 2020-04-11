@@ -11,9 +11,6 @@ const MainDiv = styled.div<Props>`
   justify-content:space-between;
   justify-items:center;
   align-items: center;
-  /* & >  * {
-    justify-self:  stretch;
-  } */
 `;
 const CopyDiv = styled.div<Props>`
   font-family: "Lora";
@@ -32,7 +29,7 @@ const Disclaimer = styled.div`
 
 const Headline = styled.h1<Props>`
   text-align: center;
-    font-size: ${props => props.isMobile ? '4.688rem' : '4.375rem'};
+font-size: ${props => props.isMobile ? '4.688rem' : '4.375rem'};
 `;
 type Props = {
     isMobile:boolean;

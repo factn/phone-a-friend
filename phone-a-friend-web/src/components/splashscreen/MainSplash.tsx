@@ -11,7 +11,6 @@ import * as Paths from "../../Paths";
 
 type Props = {
     isMobile:boolean;
-    outsideMargin?:string;
 }
 
 const MainDiv = styled.main<Props>`
@@ -42,12 +41,8 @@ const HeartDiv = styled.div<Iprops>`
 
 
 const MainSplash: React.FC<Props> = ({ isMobile}) => (
-    <MainDiv 
-        isMobile={isMobile}
-        outsideMargin={Constants.OUTSIDE_MARGIN}>  
-        <CallReceiveContainer isMobile={isMobile}>
-            
-        </CallReceiveContainer>
+    <MainDiv isMobile={isMobile}>  
+        <CallReceiveContainer isMobile={isMobile}/>
         <MainJumbo isMobile={isMobile}/>
         <BottomBanner isMobile={isMobile}/>
     </MainDiv>

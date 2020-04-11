@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import RightHandImage from "../../images/takecall_icon.svg";
 import LeftHandImage from '../../images/phonefriend_icon.svg'
 import Button from "../buttons/Button";
+import * as Constants from "../../utils/Constants"
 
 type Props = {
     btnCopy: string;
@@ -16,14 +17,13 @@ interface IProps {
     readonly isMobile: boolean;
     readonly leftHandBool: boolean;
 }
-//background-image: ${(props) => props.isMobile ? url("../../images/heart.svg")
+
 const MainDiv = styled.div<IProps>`
-    
-    /* justify-self: ${(props) => props.leftHandBool ? 'end' : 'start'}; */
+    justify-self: ${(props) => !props.isMobile ?  (props.leftHandBool ? 'end' : 'start') : 'stretch'};
     display: flex;
     flex-direction:column;
     justify-content:center;
-    align-items: center;
+    align-items: center; 
 `;
 
 const ImgDiv = styled.div`
@@ -55,7 +55,12 @@ const CallOrReceive: React.FC<Props> = ({
                     )}
             </ImgDiv>
             <Link to={path}>
-                <Button marginBottom={16} w={isMobile ? '96vw' : 256}>{btnCopy}</Button>
+                <Button 
+                    marginBottom={16} w={isMobile ? '96vw' : 256}
+                    paddingLeft= {isMobile ?  Constants.OUTSIDE_MOBILE_MARGIN_PIXELS : 0}
+                    paddingRight = {isMobile ?  Constants.OUTSIDE_MOBILE_MARGIN_PIXELS : 0}
+                    >{btnCopy}
+                </Button>
             </Link>
         </MainDiv>
     );

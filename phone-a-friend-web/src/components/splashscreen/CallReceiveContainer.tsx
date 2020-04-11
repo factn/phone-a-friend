@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import styled from "styled-components";
 import CallOrReceive from './CallOrReceive';
 import Heart from "./Heart";

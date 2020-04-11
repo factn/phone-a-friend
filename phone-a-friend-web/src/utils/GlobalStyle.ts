@@ -60,7 +60,6 @@ const GlobalStyle = createGlobalStyle`
     h1, h2 {
         font-weight: 600;
         margin:0;
-        /* white-space: nowrap; */
     }
     h1 {
         font-size: 4.375rem;
