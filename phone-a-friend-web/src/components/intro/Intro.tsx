@@ -87,7 +87,8 @@ const Intro: React.FC<Props> = ({
                         services.
                     </Blurb>
                     <Link to={signUpPath}>
-                        <Button w={isMobile ? '100%' : 224} color={Colors.DARK_BLUE}>
+                        <Button w={isMobile ? '100%' : 224} color={Colors.DARK_BLUE}
+                            className='splash-intro-button'>
                             Get Started
                         </Button>
                     </Link>

@@ -51,7 +51,6 @@ const Headline = styled.h1`
 
 const BottomBanner: React.FC<Props> = ({ isMobile }) => (
     <MainDiv
-        className='container'
         isMobile={isMobile}
         outsideMargin={Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}
         bgColor={Colors.LIGHT_BLUE}>
@@ -63,9 +62,11 @@ const BottomBanner: React.FC<Props> = ({ isMobile }) => (
                 type="text"
                 name="email"
         />
-         <Button w={isMobile ? '100%' : 184}>Submit</Button>
-           
-   
+         <Button 
+            className = {isMobile ? 'mobile-splash-intro-button' : 'splash-intro-button'}
+        >
+                 Submit
+        </Button>
     </MainDiv>
 );
 

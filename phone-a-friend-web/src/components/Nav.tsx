@@ -23,7 +23,9 @@ const propsObj = {
     color: Colors.DARK_BLUE,
     paddingLeft: 40,
     paddingRight: 40,
-    h:'100%'
+    h:'100%', 
+    className: 'top-nav-button'
+    
 }
 
 const Nav: React.FC<Props> = ({ h }) => (

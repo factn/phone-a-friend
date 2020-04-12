@@ -17,6 +17,7 @@ type StyledButtonProps = {
   hoverColor: string;
   hoverBgColor: string;
   hasBorder: boolean;
+  className?: string;
 };
 interface IButton {
   bgColor?: string;
@@ -34,13 +35,14 @@ interface IButton {
   hasBorder?: boolean;
   children: ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
 const StyledButton = styled.button<IButton>`
   border: ${(props) => (props.hasBorder ? `3px solid ${props.color}` : 0)};
   box-sizing: border-box;
-  font-size: 1.125rem;
-  font-weight: 600;
+  /* font-size: 1.125rem;
+  font-weight: 600; */
   padding-left: ${(props) => `${props.paddingLeft}px`};
   padding-right: ${(props) =>`${props.paddingRight}px`};
   margin-top: ${(props) =>`${props.marginTop}px`};
@@ -49,17 +51,14 @@ const StyledButton = styled.button<IButton>`
   margin-right: ${(props) => `${props.marginRight}px`};
   width: ${(props) => (typeof props.w) ==='number' ? `${props.w}px` : props.w};
   height: ${(props) => (typeof props.h) ==='number' ? `${props.h}px` : props.h};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: ${(props) => props.color};
   background: ${(props) => props.bgColor};
   cursor: pointer;
   :hover {
     background: ${(props) => props.hoverBgColor};
     color: ${(props) => props.hoverColor};
-  }
+  };
+  className: ${(props) => props.className};
 `;
 
 const Button: React.FC<IButton> = ({
@@ -77,7 +76,8 @@ const Button: React.FC<IButton> = ({
   hoverBgColor = "transparent",
   hasBorder = true,
   paddingLeft=0,
-  paddingRight=0
+  paddingRight=0,
+  className
 }) => (
   <StyledButton
     type="button"
@@ -94,6 +94,7 @@ const Button: React.FC<IButton> = ({
     hasBorder={hasBorder}
     paddingLeft={paddingLeft}
     paddingRight={paddingRight}
+    className={className}
   >
     {children}
   </StyledButton>

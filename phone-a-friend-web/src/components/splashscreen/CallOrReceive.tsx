@@ -16,6 +16,7 @@ type Props = {
 interface IProps {
     readonly isMobile: boolean;
     readonly leftHandBool: boolean;
+    className? : string;
 }
 
 const MainDiv = styled.div<IProps>`
@@ -24,6 +25,7 @@ const MainDiv = styled.div<IProps>`
     flex-direction:column;
     justify-content:center;
     align-items: center; 
+    className:${props => props.className};
 `;
 
 const ImgDiv = styled.div`
@@ -42,7 +44,7 @@ const CallOrReceive: React.FC<Props> = ({
             leftHandBool={leftHandBool}  
             className={
                 (isMobile && leftHandBool) ? 'mobile-bg-top' : 
-                (isMobile && !leftHandBool) ?'mobile-bg-bottom' : ''}
+                (isMobile && !leftHandBool) ? 'mobile-bg-bottom' : ''}
         >
             
                     
@@ -56,9 +58,7 @@ const CallOrReceive: React.FC<Props> = ({
             </ImgDiv>
             <Link to={path}>
                 <Button 
-                    marginBottom={16} w={isMobile ? '96vw' : 256}
-                    paddingLeft= {isMobile ?  Constants.OUTSIDE_MOBILE_MARGIN_PIXELS : 0}
-                    paddingRight = {isMobile ?  Constants.OUTSIDE_MOBILE_MARGIN_PIXELS : 0}
+                    className = {isMobile ? 'mobile-splash-intro-button' : 'splash-intro-button'}
                     >{btnCopy}
                 </Button>
             </Link>
