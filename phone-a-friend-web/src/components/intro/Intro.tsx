@@ -19,18 +19,18 @@ const MainDiv = styled.main<Iprops>`
   flex-direction: column;
   justify-content: center;
   background: ${(props) => props.bgColor};
-  padding-left: ${props => props.isMobile ? '40px' : '5%'};
-  padding-right:${props => props.isMobile ? '40px' : '5%'};
+  padding-left: ${props => props.isMobile ? '4vw' : '5%'};
+  padding-right:${props => props.isMobile ? '4vw' : '5%'};
   padding-top: ${props => props.isMobile ? '60px' : '0'};
   padding-bottom: ${props => props.isMobile ? '80px' : '0'};
   overflow: scroll;
-  border: 1px solid black;
 `;
 
 const Wrapper = styled.div<Iprops>`
   display: grid;
   grid-template-columns: ${props => props.isMobile ? '1fr' : '1fr 1fr'};
   color: ${props => props.color};
+  justify-items: stretch;
 `;
 
 
@@ -87,8 +87,8 @@ const Intro: React.FC<Props> = ({
                         services.
                     </Blurb>
                     <Link to={signUpPath}>
-                        <Button w={isMobile ? '100%' : 224} color={Colors.DARK_BLUE}
-                            className='splash-intro-button'>
+                        <Button 
+                            className = {isMobile ? 'mobile-intro-button' : 'intro-button'}>
                             Get Started
                         </Button>
                     </Link>

@@ -34,9 +34,7 @@ type Props = {
     isMobile:boolean;
 }
 
-const Header:React.FC<Props> = ({ isMobile }) => {
-    
-  return (
+const Header:React.FC<Props> = ({ isMobile }) => (
       <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
         <Headline>PhoneAFriend.care</Headline>  
         {
@@ -47,7 +45,6 @@ const Header:React.FC<Props> = ({ isMobile }) => {
         }
       </MainDiv>
   );
-};
 
 Header.whyDidYouRender = true;
 

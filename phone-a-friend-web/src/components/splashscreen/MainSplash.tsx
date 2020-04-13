@@ -14,7 +14,6 @@ type Props = {
 }
 
 const MainDiv = styled.main<Props>`
-    
     overflow: scroll;
     display: inline-grid;
     grid-template-columns: 1fr;
@@ -22,22 +21,6 @@ const MainDiv = styled.main<Props>`
     align-items: space-between;
 `;
 
-const IwantDiv = styled.div<Props>`
-  position: relative;
-  display:flex;
-  flex-direction: ${props => props.isMobile ? 'column' : 'row'};
-`;
-
-type Iprops = {
-    top: number;
-};
-const HeartDiv = styled.div<Iprops>`
-  position: absolute;
-  z-index: 2;
-  left: 50%;
-  transform: translateX(-50%);
-  top: ${(props) => `${props.top}px`};
-`;
 
 
 const MainSplash: React.FC<Props> = ({ isMobile}) => (

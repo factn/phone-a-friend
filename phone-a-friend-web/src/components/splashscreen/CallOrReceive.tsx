@@ -57,7 +57,7 @@ const CallOrReceive: React.FC<Props> = ({
                     )}
             </ImgDiv>
             <Link to={path}>
-                <Button 
+                <Button w={isMobile ? '100%' : 224}
                     className = {isMobile ? 'mobile-splash-intro-button' : 'splash-intro-button'}
                     >{btnCopy}
                 </Button>

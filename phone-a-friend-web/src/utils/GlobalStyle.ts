@@ -30,7 +30,8 @@ const GlobalStyle = createGlobalStyle`
     
     html {
         font-family: 'Poppins', Fallback, sans-serif;
-        font-size: 16px;
+        font-size:  16px
+        ;
           /* border-box box model allows us to add padding and border to our elements without increasing their size */
         box-sizing: border-box;
     }
@@ -71,14 +72,38 @@ const GlobalStyle = createGlobalStyle`
     .center-text {
         text-align: center;
     }
-
-    @media (max-width: 900px) {
-     html { font-size: 15px; }
+    .top-nav-button {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0;
     }
 
-    @media (max-width: 400px) {
-     html { font-size: 13px; }
+    .splash-intro-button, .mobile-splash-intro-button {
+        font-weight: 600;
+        letter-spacing: 0;
+        color: #13273E;
     }
+
+    .splash-intro-button {
+        font-size: 18px;
+        width: 256px;  
+    }
+    .mobile-splash-intro-button {
+        font-size: 30px;
+        width: 96vw;  
+    }
+
+    .intro-button {
+        font-size: 18px;
+        width: 256px;  
+    }
+    .mobile-intro-button {
+        font-size: 30px;
+        width:100%;
+     
+    }
+
+
 
 
   p {

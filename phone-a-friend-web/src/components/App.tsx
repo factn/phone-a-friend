@@ -32,19 +32,17 @@ const MainDiv = styled.div`
   ${Media.greaterThan('mobile')`
     height: 100vh;
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 92px [main] 1fr [footer] 50px;
+    grid-template-rows: [header] 90px [main] 1fr [footer] 50px;
     border: 1px solid black;
     border-radius: 10px;
     
   `}
   ${Media.lessThan('mobile')`
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 92px [main] auto [footer] 50px;
+    grid-template-rows: [header] 92px [main] auto [footer] 80px;
     border:0;
   `}
-  & > div {
-    justify-self:  stretch;
-  }
+
 `;
 
 function App() {
@@ -106,7 +104,7 @@ function App() {
                         <MainSplash isMobile={isMobile}/>
                     </Route>
                 </Switch>
-                <Footer outsideMargin={Constants.OUTSIDE_MARGIN}/>
+                <Footer isMobile={isMobile}/>
             </Router>
         </MainDiv>
     );
