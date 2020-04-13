@@ -12,7 +12,6 @@ interface Iprops {
 }
 
 const MainDiv = styled.main<Iprops>`
-    min-width: ${props => props.isMobile ? 0 : '1160px'};
     margin-bottom:  ${props => props.isMobile ? '90px' : '70px'};
   height: 100%;
   display: flex;
@@ -35,11 +34,10 @@ const Wrapper = styled.div<Iprops>`
 
 
 const HeadLine = styled.div<Iprops>`
-   
     padding-bottom:${props => props.isMobile ? '40px' : '0'};
     & > span {
-        font-size: ${props => props.isMobile ?  '4.688rem' : '77px'};
-        line-height: ${props => props.isMobile ?  '5.625rem' : '100px'};
+        font-size: ${props => props.isMobile ? '4.688rem' : '77px'};
+        line-height: ${props => props.isMobile ? '5.625rem' : '100px'};
         font-weight: 600;
     }
 `;
@@ -64,20 +62,19 @@ const Intro: React.FC<Props> = ({
     bgColor,
     copy,
     signUpPath, isMobile
-}) => {
-    return (
+}) => (
         <MainDiv isMobile={isMobile} bgColor={bgColor}>
             <Wrapper isMobile={isMobile} color={Colors.DARK_BLUE}>
                 <HeadLine isMobile={isMobile}>
                     {
                         !isMobile ?
-                                <span>I want to<br />{copy}</span>
+                            <span>I want to<br />{copy}</span>
                             : <span>I want to {copy}</span>
                     }
                 </HeadLine>
 
                 <div>
-                    <Blurb  isMobile={isMobile} color={Colors.DARK_BLUE}>
+                    <Blurb isMobile={isMobile} color={Colors.DARK_BLUE}>
                         Welcome! We’ll need to ask you a few questions before we have
                         someone reach out to you when you’re ready. Please note that we are
                         not offering professional advice, just connecting folks who want to
@@ -87,8 +84,8 @@ const Intro: React.FC<Props> = ({
                         services.
                     </Blurb>
                     <Link to={signUpPath}>
-                        <Button 
-                            className = {isMobile ? 'mobile-intro-button' : 'intro-button'}>
+                        <Button
+                            className={isMobile ? 'mobile-intro-button' : 'intro-button'}>
                             Get Started
                         </Button>
                     </Link>
@@ -96,6 +93,5 @@ const Intro: React.FC<Props> = ({
             </Wrapper>
         </MainDiv>
     );
-};
 
 export default Intro;

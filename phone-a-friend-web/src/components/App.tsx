@@ -35,12 +35,14 @@ const MainDiv = styled.div`
     grid-template-rows: [header] 90px [main] 1fr [footer] 50px;
     border: 1px solid black;
     border-radius: 10px;
+    min-width: 890px;
     
   `}
   ${Media.lessThan('mobile')`
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 92px [main] auto [footer] 80px;
+    grid-template-rows: [header] 90px [main] auto [footer] 85px;
     border:0;
+    min-width: 750px;
   `}
 
 `;
