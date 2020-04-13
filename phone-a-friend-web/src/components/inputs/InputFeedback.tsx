@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import styled from "styled-components";
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
 const ErrorMessage = styled.span`
   color: red;
@@ -8,10 +8,9 @@ const ErrorMessage = styled.span`
 
 type InputFeedbackProps = React.HTMLAttributes<HTMLSpanElement>;
 
-const InputFeedback: React.FC<PropsWithChildren<InputFeedbackProps>> = ({
-  children,
-  ...spanProps
-}) => <ErrorMessage {...spanProps}>{children}</ErrorMessage>;
+const InputFeedback: React.FC<PropsWithChildren<InputFeedbackProps>> = ({ children, ...spanProps }) => (
+  <ErrorMessage {...spanProps}>{children}</ErrorMessage>
+);
 
 // Input feedback
 // const InputFeedback: React.FC<{ error: string }> = ({ error }) =>

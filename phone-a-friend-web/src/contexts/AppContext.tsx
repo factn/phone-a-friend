@@ -1,11 +1,11 @@
-import React from "react";
-import createCtx from "./CtxBuilder";
-import envConfig from "../config/environment";
-import { User } from "../model/user";
-import { Volunteer } from "../model/volunteer";
+import React from 'react';
+import createCtx from './CtxBuilder';
+import envConfig from '../config/environment';
+import { User } from '../model/user';
+import { Volunteer } from '../model/volunteer';
 
 const initialState = {
-  userAuthId: "",
+  userAuthId: '',
   currentUser: {} as User,
   currentVolunteer: {} as Volunteer,
 };
@@ -13,9 +13,9 @@ const initialState = {
 type AppState = typeof initialState;
 
 type Action =
-  | { type: "USER_LOGIN"; userId: string }
-  | { type: "USER_STORE_DETAILS"; user: Partial<User> }
-  | { type: "VOLUNTEER_STORE_DETAILS"; volunteer: Partial<Volunteer> };
+  | { type: 'USER_LOGIN'; userId: string }
+  | { type: 'USER_STORE_DETAILS'; user: Partial<User> }
+  | { type: 'VOLUNTEER_STORE_DETAILS'; volunteer: Partial<Volunteer> };
 
 /**
  * Redux style reducer for the whole app
@@ -25,14 +25,14 @@ type Action =
  */
 function globalReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case "USER_LOGIN":
+    case 'USER_LOGIN':
       return { ...state, userAuthId: action.userId };
-    case "USER_STORE_DETAILS":
+    case 'USER_STORE_DETAILS':
       return {
         ...state,
         currentUser: { ...state.currentUser, ...action.user },
       };
-    case "VOLUNTEER_STORE_DETAILS":
+    case 'VOLUNTEER_STORE_DETAILS':
       return {
         ...state,
         currentVolunteer: { ...state.currentVolunteer, ...action.volunteer },
@@ -49,11 +49,11 @@ function globalReducer(state: AppState, action: Action): AppState {
  */
 function globalReducerWithLogging(state: AppState, action: Action): AppState {
   if (envConfig.isLocalDevelopment) {
-    console.log("BEFORE: ", state);
-    console.log("ACTION: ", action);
+    console.log('BEFORE: ', state);
+    console.log('ACTION: ', action);
   }
   const newState = globalReducer(state, action);
-  if (envConfig.isLocalDevelopment) console.log("AFTER: ", newState);
+  if (envConfig.isLocalDevelopment) console.log('AFTER: ', newState);
   return newState;
 }
 
@@ -62,9 +62,5 @@ type UseStateValue = {
   dispatch: React.Dispatch<Action>;
 };
 
-export const [AppContext, AppProvider] = createCtx(
-  globalReducerWithLogging,
-  initialState
-);
-export const useStateValue: () => UseStateValue = () =>
-  React.useContext(AppContext);
+export const [AppContext, AppProvider] = createCtx(globalReducerWithLogging, initialState);
+export const useStateValue: () => UseStateValue = () => React.useContext(AppContext);

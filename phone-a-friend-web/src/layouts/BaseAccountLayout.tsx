@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from "react";
-import styled from "styled-components";
-import { OUTSIDE_MARGIN } from "../utils/Constants";
-import media from "styled-media-query";
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
+import { OUTSIDE_MARGIN } from '../utils/Constants';
+import media from 'styled-media-query';
 
 const Container = styled.div`
   width: 100%;
@@ -9,7 +9,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 150px 1fr;
 
-  ${media.greaterThan("medium")`
+  ${media.greaterThan('medium')`
   padding: 0 ${OUTSIDE_MARGIN};
   `}
 `;
@@ -22,7 +22,7 @@ const TopDivContainer = styled.div<{ backgroundColor: string }>`
   h2 {
     font-size: 1.5em;
   }
-  ${media.greaterThan("medium")`
+  ${media.greaterThan('medium')`
     padding: 24px 72px 0;
   `}
 `;
@@ -35,7 +35,7 @@ const TabsContainer = styled.div`
 
 const ChildrenContainer = styled.div`
   padding: 24px;
-  ${media.greaterThan("medium")`
+  ${media.greaterThan('medium')`
   padding: 24px 72px 24px;
   `}
 `;
@@ -62,12 +62,7 @@ const BaseAccountLayout: React.FC<PropsWithChildren<BaseAccountLayout>> = ({
         <h2>{title}</h2>
         <TabsContainer>
           {tabs.map((tab) => (
-            <TabItem
-              key={tab}
-              label={tab}
-              selected={selectedTab === tab}
-              onClick={() => onTabClick(tab)}
-            />
+            <TabItem key={tab} label={tab} selected={selectedTab === tab} onClick={() => onTabClick(tab)} />
           ))}
         </TabsContainer>
       </TopDivContainer>
@@ -99,7 +94,7 @@ const TabItem: React.FC<TabItemProps> = ({ label, selected, onClick }) => {
   return (
     <Tab onClick={onClick}>
       <span>{label}</span>
-      <div style={selected ? { backgroundColor: "#0d2138" } : {}} />
+      <div style={selected ? { backgroundColor: '#0d2138' } : {}} />
     </Tab>
   );
 };

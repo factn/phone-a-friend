@@ -1,13 +1,10 @@
-import { db } from "../config/firebase";
-import { VolunteerDto, Volunteer } from "../model/volunteer";
-import { mapResponseError } from "./responseMappers";
-import { as } from "../utils/types.util";
-import {
-  mapLocalTimePeriodsToUTC,
-  mapUTCTimePeriodsToLocalTime,
-} from "./availabilityTransformer";
+import { db } from '../config/firebase';
+import { VolunteerDto, Volunteer } from '../model/volunteer';
+import { mapResponseError } from './responseMappers';
+import { as } from '../utils/types.util';
+import { mapLocalTimePeriodsToUTC, mapUTCTimePeriodsToLocalTime } from './availabilityTransformer';
 
-const VOLUNTEER_COLLECTIONS = "volunteers";
+const VOLUNTEER_COLLECTIONS = 'volunteers';
 
 export async function createVolunteer(volunteer: VolunteerDto): Promise<void> {
   const volunteerWithAvailabilityInUTCTime = {
@@ -24,9 +21,7 @@ export async function createVolunteer(volunteer: VolunteerDto): Promise<void> {
 
 type UpdateVolunteer = Partial<Volunteer> & { id: string };
 
-export async function updateVolunteer(
-  volunteer: UpdateVolunteer
-): Promise<UpdateVolunteer> {
+export async function updateVolunteer(volunteer: UpdateVolunteer): Promise<UpdateVolunteer> {
   const finalVolunteer = volunteer.localTimeAvailability
     ? {
         ...volunteer,
@@ -54,15 +49,12 @@ export async function getVolunteer(volunteerId: string): Promise<VolunteerDto> {
 
         const volunteerWithAvailabilityInLocalTime: VolunteerDto = {
           ...volunteer,
-          ...mapUTCTimePeriodsToLocalTime(
-            volunteer.utcAvailability,
-            volunteer.timezone
-          ),
+          ...mapUTCTimePeriodsToLocalTime(volunteer.utcAvailability, volunteer.timezone),
         };
 
         return volunteerWithAvailabilityInLocalTime;
       } else {
-        throw new Error("No user found");
+        throw new Error('No user found');
       }
     })
     .catch(mapResponseError);

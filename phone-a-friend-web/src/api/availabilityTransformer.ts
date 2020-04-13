@@ -8,9 +8,9 @@ import {
   TIME_PERIOD_LOOKUP,
   getStartingHourOfTimePeriod,
   getTimePeriodForHour,
-} from "../model/availability";
-import { as } from "../utils/types.util";
-import moment from "moment-timezone";
+} from '../model/availability';
+import { as } from '../utils/types.util';
+import moment from 'moment-timezone';
 
 /**
  * Maps local time to the UTC equivalent
@@ -42,22 +42,13 @@ export function mapLocalTimePeriodsToUTC(
     timePeriods.forEach((timePeriod) => {
       const tempDate = new Date(dateTimeNow.getTime());
       const dayOfTheWeek = mapDayToDayOfWeek(day);
-      const timePeriodStartingHour = parseInt(
-        getStartingHourOfTimePeriod(timePeriod)
-      );
+      const timePeriodStartingHour = parseInt(getStartingHourOfTimePeriod(timePeriod));
 
       // Set date to be of day {day}
-      tempDate.setDate(
-        7 - tempDate.getDay() + dayOfTheWeek + tempDate.getDate()
-      );
+      tempDate.setDate(7 - tempDate.getDay() + dayOfTheWeek + tempDate.getDate());
 
       // Set date hours with offset applied (may change day)
-      tempDate.setHours(
-        timePeriodStartingHour +
-          calculateLocalToUTCOffset(tempDate.getTimezoneOffset()),
-        0,
-        0
-      );
+      tempDate.setHours(timePeriodStartingHour + calculateLocalToUTCOffset(tempDate.getTimezoneOffset()), 0, 0);
 
       const utcDay = mapDayOfWeekToDay(tempDate.getDay());
       const utcHourPeriod = as<TimePeriodIndex>(`${tempDate.getHours()}`);
@@ -101,32 +92,24 @@ export function mapUTCTimePeriodsToLocalTime(
     timePeriods.forEach((timePeriod) => {
       const tempDate = new Date(Date.now());
       const dayOfTheWeek = mapDayToDayOfWeek(day);
-      const hour = parseInt(timePeriod.split(":")[0]);
+      const hour = parseInt(timePeriod.split(':')[0]);
 
       // Set date to be of day {day}
-      tempDate.setDate(
-        7 - Math.abs(tempDate.getDay() - dayOfTheWeek) + tempDate.getDate()
-      );
+      tempDate.setDate(7 - Math.abs(tempDate.getDay() - dayOfTheWeek) + tempDate.getDate());
 
       // Build current date string without any offset
-      const dateString = `${tempDate.getUTCFullYear()}-${
-        tempDate.getUTCMonth() + 1
-      }-${
+      const dateString = `${tempDate.getUTCFullYear()}-${tempDate.getUTCMonth() + 1}-${
         7 - Math.abs(tempDate.getDay() - dayOfTheWeek) + tempDate.getDate()
       } ${hour}:00`;
 
       const utcDateMoment = moment(dateString);
       const offsetDateMoment = moment.tz(dateString, timezone);
 
-      const offset = calculateUTCToLocalOffset(
-        offsetDateMoment.diff(utcDateMoment) / 1000 / 60
-      );
-      const localDateTime = utcDateMoment.add(offset, "hours");
+      const offset = calculateUTCToLocalOffset(offsetDateMoment.diff(utcDateMoment) / 1000 / 60);
+      const localDateTime = utcDateMoment.add(offset, 'hours');
 
       const localDay = mapDayOfWeekToDay(localDateTime.day());
-      const localTimePeriodStartingHour = as<TimePeriodIndex>(
-        `${localDateTime.hours()}`
-      );
+      const localTimePeriodStartingHour = as<TimePeriodIndex>(`${localDateTime.hours()}`);
       const localHourPeriod = getTimePeriodForHour(localTimePeriodStartingHour);
 
       localAvailability[localDay].push(localHourPeriod);
@@ -144,8 +127,7 @@ export function mapUTCTimePeriodsToLocalTime(
  * @param timezoneOffset
  */
 function calculateLocalToUTCOffset(timezoneOffset: number): number {
-  const offsetToNearestTwoHours =
-    2 * Math.floor(Math.floor(timezoneOffset / 120) / 2);
+  const offsetToNearestTwoHours = 2 * Math.floor(Math.floor(timezoneOffset / 120) / 2);
   return offsetToNearestTwoHours;
 }
 
@@ -154,7 +136,6 @@ function calculateLocalToUTCOffset(timezoneOffset: number): number {
  * @param timezoneOffset
  */
 function calculateUTCToLocalOffset(timezoneOffset: number): number {
-  const offsetToNearestTwoHours =
-    2 * Math.ceil(Math.ceil(timezoneOffset / 120) / 2);
+  const offsetToNearestTwoHours = 2 * Math.ceil(Math.ceil(timezoneOffset / 120) / 2);
   return offsetToNearestTwoHours;
 }

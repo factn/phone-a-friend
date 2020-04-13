@@ -42,10 +42,23 @@
     "predeploy": "npm run build && cp build/index.html build/404.html && cp CNAME build/",
     "deploy": "surge build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --check \"./src/**/*.{json,md,scss,yaml,yml}\"",
+    "prettier:fix": "prettier \"./src/**/*.{json,md,scss,yaml,yml}\"",
+    "eslint": "eslint -c .eslintrc.json './src/**/*.{js,ts,tsx}'",
+    "eslint:fix": "eslint -c .eslintrc.json './src/**/*.{js,ts,tsx}' --fix",
+    "lint": "yarn prettier || yarn eslint",
+    "lint:fix": "yarn prettier:fix || yarn eslint:fix"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/**/*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "browserslist": {
     "production": [
@@ -62,6 +75,15 @@
   "devDependencies": {
     "@types/react-select": "^3.0.11",
     "@types/yup": "^0.26.34",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "2.0.2",
     "surge": "^0.21.3"
   }
 }

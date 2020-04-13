@@ -1,34 +1,25 @@
-import { as } from "../utils/types.util";
+import { as } from '../utils/types.util';
 
 export const TIME_PERIOD_LOOKUP = {
-  "0": "00:00-02:00",
-  "2": "02:00-04:00",
-  "4": "04:00-06:00",
-  "6": "06:00-08:00",
-  "8": "08:00-10:00",
-  "10": "10:00-12:00",
-  "12": "12:00-14:00",
-  "14": "14:00-16:00",
-  "16": "16:00-18:00",
-  "18": "18:00-20:00",
-  "20": "20:00-22:00",
-  "22": "22:00-00:00",
+  '0': '00:00-02:00',
+  '2': '02:00-04:00',
+  '4': '04:00-06:00',
+  '6': '06:00-08:00',
+  '8': '08:00-10:00',
+  '10': '10:00-12:00',
+  '12': '12:00-14:00',
+  '14': '14:00-16:00',
+  '16': '16:00-18:00',
+  '18': '18:00-20:00',
+  '20': '20:00-22:00',
+  '22': '22:00-00:00',
 } as const;
 
-export const getStartingHourOfTimePeriod = (timePeriod: TimePeriod) =>
-  timePeriod.split(":")[0];
+export const getStartingHourOfTimePeriod = (timePeriod: TimePeriod) => timePeriod.split(':')[0];
 
-export const getTimePeriodForHour = (hour: TimePeriodIndex) =>
-  TIME_PERIOD_LOOKUP[hour];
+export const getTimePeriodForHour = (hour: TimePeriodIndex) => TIME_PERIOD_LOOKUP[hour];
 
-export type DaysOfTheWeek =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
+export type DaysOfTheWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 export type TimePeriodIndex = keyof typeof TIME_PERIOD_LOOKUP;
 export type TimePeriod = typeof TIME_PERIOD_LOOKUP[TimePeriodIndex];
@@ -53,19 +44,19 @@ export const emptyAvailability: Availability = {
 
 export function mapDayToDayOfWeek(day: DaysOfTheWeek): number {
   switch (day) {
-    case "sunday":
+    case 'sunday':
       return 0;
-    case "monday":
+    case 'monday':
       return 1;
-    case "tuesday":
+    case 'tuesday':
       return 2;
-    case "wednesday":
+    case 'wednesday':
       return 3;
-    case "thursday":
+    case 'thursday':
       return 4;
-    case "friday":
+    case 'friday':
       return 5;
-    case "saturday":
+    case 'saturday':
       return 6;
   }
 }
@@ -74,19 +65,19 @@ export function mapDayOfWeekToDay(index: number): DaysOfTheWeek {
   const i = as<0 | 1 | 2 | 3 | 4 | 5 | 6>(index);
   switch (i) {
     case 0:
-      return "sunday";
+      return 'sunday';
     case 1:
-      return "monday";
+      return 'monday';
     case 2:
-      return "tuesday";
+      return 'tuesday';
     case 3:
-      return "wednesday";
+      return 'wednesday';
     case 4:
-      return "thursday";
+      return 'thursday';
     case 5:
-      return "friday";
+      return 'friday';
     case 6:
-      return "saturday";
+      return 'saturday';
   }
 }
 
@@ -95,9 +86,7 @@ type AvailabilityOption = {
   value: string;
 };
 
-export const availabilityOptions: AvailabilityOption[] = Object.values(
-  TIME_PERIOD_LOOKUP
-).map((timePeriod) => ({
+export const availabilityOptions: AvailabilityOption[] = Object.values(TIME_PERIOD_LOOKUP).map((timePeriod) => ({
   label: timePeriod,
   value: timePeriod,
 }));

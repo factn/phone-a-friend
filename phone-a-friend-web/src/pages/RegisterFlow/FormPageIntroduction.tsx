@@ -1,26 +1,23 @@
-import React from "react";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { FormPage } from "../UserSignUpManager/UserSignUpManager";
-import NextButton from "../../components/buttons/NextButton";
-import TextAreaField from "../../components/inputs/TextAreaField";
+import React from 'react';
+import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
+import { FormPage } from '../UserSignUpManager/UserSignUpManager';
+import NextButton from '../../components/buttons/NextButton';
+import TextAreaField from '../../components/inputs/TextAreaField';
 
 type FormPageIntroductionProps = {
   introduction: string;
 };
 
 const basicInfoSchema = Yup.object().shape({
-  introduction: Yup.string().required("Introduction is required")
+  introduction: Yup.string().required('Introduction is required'),
 });
 
-const FormPageIntroduction: React.FC<FormPage<FormPageIntroductionProps>> = ({
-  onSubmit,
-  initialValues
-}) => {
+const FormPageIntroduction: React.FC<FormPage<FormPageIntroductionProps>> = ({ onSubmit, initialValues }) => {
   return (
     <Formik
       initialValues={{
-        introduction: initialValues?.introduction || ""
+        introduction: initialValues?.introduction || '',
       }}
       onSubmit={onSubmit}
       validationSchema={basicInfoSchema}

@@ -1,5 +1,5 @@
-import { GenderPreference, Gender } from "./gender";
-import { Availability, UTCAvailabilityPeriods } from "./availability";
+import { GenderPreference, Gender } from './gender';
+import { Availability, UTCAvailabilityPeriods } from './availability';
 
 export type User = {
   phoneNumber: string;

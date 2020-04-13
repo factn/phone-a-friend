@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import firebase from "firebase";
-import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom";
-import { User } from "../../model/user";
-import { emptyAvailability } from "../../model/availability";
-import FormBasicInfoPage from "../RegisterFlow/FormBasicInfoPage";
-import BaseFormLayout from "../../layouts/BaseFormLayout";
-import FormPageGenderLanguages from "../RegisterFlow/FormPageGenderLanguages";
-import FormPageIntroduction from "../RegisterFlow/FormPageIntroduction";
-import FormPagePreferences from "../RegisterFlow/FormPagePreferences";
-import FormAvailability from "../RegisterFlow/FormAvailability";
-import { useStateValue } from "../../contexts/AppContext";
-import { createUser } from "../../api/user";
-import useUser from "../../hooks/useUser";
-import { USER_BACKGROUND_COLOR } from "../../Colors";
+import React, { useState } from 'react';
+import firebase from 'firebase';
+import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
+import { User } from '../../model/user';
+import { emptyAvailability } from '../../model/availability';
+import FormBasicInfoPage from '../RegisterFlow/FormBasicInfoPage';
+import BaseFormLayout from '../../layouts/BaseFormLayout';
+import FormPageGenderLanguages from '../RegisterFlow/FormPageGenderLanguages';
+import FormPageIntroduction from '../RegisterFlow/FormPageIntroduction';
+import FormPagePreferences from '../RegisterFlow/FormPagePreferences';
+import FormAvailability from '../RegisterFlow/FormAvailability';
+import { useStateValue } from '../../contexts/AppContext';
+import { createUser } from '../../api/user';
+import useUser from '../../hooks/useUser';
+import { USER_BACKGROUND_COLOR } from '../../Colors';
 
 const initialState: User & AcceptedTerms = {
-  phoneNumber: "",
-  name: "",
-  email: "",
-  country: "",
-  zipcode: "",
+  phoneNumber: '',
+  name: '',
+  email: '',
+  country: '',
+  zipcode: '',
   languages: [],
-  introduction: "",
-  genderPreference: "noPreference",
-  gender: "male",
+  introduction: '',
+  genderPreference: 'noPreference',
+  gender: 'male',
   localTimeAvailability: emptyAvailability,
   utcAvailability: emptyAvailability,
-  timezone: "",
+  timezone: '',
   acceptTerms: false,
 };
 
@@ -46,13 +46,11 @@ const UserSignUpManager: React.FC<{}> = () => {
   const { path, url } = useRouteMatch();
   const history = useHistory();
   const [step, setStep] = useState<number>(1);
-  const [formValues, setFormValues] = useState<User & AcceptedTerms>(
-    initialState
-  );
+  const [formValues, setFormValues] = useState<User & AcceptedTerms>(initialState);
 
   const { isFetching, setIsFetching } = useUser(
-    () => history.replace("/account/user"),
-    (err) => history.replace(url + "/" + 1)
+    () => history.replace('/account/user'),
+    () => history.replace(url + '/' + 1)
   );
 
   function handleSubmit(values: Partial<User>) {
@@ -70,8 +68,8 @@ const UserSignUpManager: React.FC<{}> = () => {
       })
         .then(() => {
           setIsFetching(false);
-          dispatch({ type: "USER_STORE_DETAILS", user: newJourneyValues });
-          history.push("/account/user");
+          dispatch({ type: 'USER_STORE_DETAILS', user: newJourneyValues });
+          history.push('/account/user');
         })
         .catch((err) => {
           console.log(err);
@@ -80,7 +78,7 @@ const UserSignUpManager: React.FC<{}> = () => {
     } else {
       const nextPage = step + 1;
       setStep(nextPage);
-      history.push(url + "/" + nextPage);
+      history.push(url + '/' + nextPage);
     }
   }
 
@@ -128,7 +126,7 @@ const UserSignUpManager: React.FC<{}> = () => {
               <FormPageGenderLanguages onSubmit={handleSubmit} />
             </BaseFormLayout>
           </Route>
-          <Route path={""}>
+          <Route path={''}>
             <BaseFormLayout
               backgroundColor={USER_BACKGROUND_COLOR}
               title="Let's start with an introduction and some contact info."
@@ -137,7 +135,7 @@ const UserSignUpManager: React.FC<{}> = () => {
             >
               <FormBasicInfoPage
                 initialValues={{
-                  phoneNumber: firebase.auth().currentUser?.phoneNumber || "",
+                  phoneNumber: firebase.auth().currentUser?.phoneNumber || '',
                 }}
                 onSubmit={handleSubmit}
               />

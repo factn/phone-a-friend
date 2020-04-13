@@ -1,13 +1,10 @@
-import React from "react";
-import { Formik, Field } from "formik";
-import * as Yup from "yup";
-import { FormPage } from "../UserSignUpManager/UserSignUpManager";
-import NextButton from "../../components/buttons/NextButton";
-import { GenderPreference } from "../../model/gender";
-import {
-  RadioButtonGroup,
-  RadioButton,
-} from "../../components/inputs/RadioButtonGroupField";
+import React from 'react';
+import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
+import { FormPage } from '../UserSignUpManager/UserSignUpManager';
+import NextButton from '../../components/buttons/NextButton';
+import { GenderPreference } from '../../model/gender';
+import { RadioButtonGroup, RadioButton } from '../../components/inputs/RadioButtonGroupField';
 
 type FormPagePreferencesProps = {
   genderPreference: GenderPreference;
@@ -15,18 +12,15 @@ type FormPagePreferencesProps = {
 };
 
 const basicInfoSchema = Yup.object().shape({
-  genderPreference: Yup.string().required("Gender preference is required"),
+  genderPreference: Yup.string().required('Gender preference is required'),
   // canChatNow: Yup.string().required("Introduction is required"),
 });
 
-const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({
-  onSubmit,
-  initialValues,
-}) => {
+const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({ onSubmit, initialValues }) => {
   return (
     <Formik
       initialValues={{
-        genderPreference: initialValues?.genderPreference || "noPreference",
+        genderPreference: initialValues?.genderPreference || 'noPreference',
         // canChatNow: initialValues?.canChatNow || "yes",
       }}
       onSubmit={onSubmit}
@@ -41,12 +35,7 @@ const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({
             error={errors.genderPreference}
             touched={touched.genderPreference}
           >
-            <Field
-              component={RadioButton}
-              name="genderPreference"
-              id="noPreference"
-              label="Anyone"
-            />
+            <Field component={RadioButton} name="genderPreference" id="noPreference" label="Anyone" />
             <Field
               component={RadioButton}
               name="genderPreference"

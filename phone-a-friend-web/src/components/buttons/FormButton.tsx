@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { DARK_BLUE } from "../../Colors";
+import React from 'react';
+import styled from 'styled-components';
+import { DARK_BLUE } from '../../Colors';
 
 type FormButtonProps = {
   title: string;
@@ -11,7 +11,7 @@ const StyledFormButton = styled.button`
   padding: 8px 32px;
   background: transparent;
   border: 3px solid ${DARK_BLUE};
-  font-family: "Poppins";
+  font-family: 'Poppins';
   margin-bottom: 16px;
   cursor: pointer;
 

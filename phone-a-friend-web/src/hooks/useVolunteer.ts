@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import { useStateValue } from "../contexts/AppContext";
-import { isEmptyObject } from "../utils/object.utils";
-import { getVolunteer } from "../api/volunteer";
-import { Volunteer } from "../model/volunteer";
+import { useEffect, useState } from 'react';
+import { useStateValue } from '../contexts/AppContext';
+import { isEmptyObject } from '../utils/object.utils';
+import { getVolunteer } from '../api/volunteer';
+import { Volunteer } from '../model/volunteer';
 
-function useVolunteer(
-  successCallback: (volunteer: Volunteer) => void,
-  errorCallback: (err: string) => void
-) {
+function useVolunteer(successCallback: (volunteer: Volunteer) => void, errorCallback: (err: string) => void) {
   const { state, dispatch } = useStateValue();
   const [isFetching, setIsFetching] = useState(false);
 
@@ -16,7 +13,7 @@ function useVolunteer(
       setIsFetching(true);
       getVolunteer(state.userAuthId)
         .then((volunteer) => {
-          dispatch({ type: "VOLUNTEER_STORE_DETAILS", volunteer });
+          dispatch({ type: 'VOLUNTEER_STORE_DETAILS', volunteer });
           setIsFetching(false);
           successCallback(volunteer);
         })

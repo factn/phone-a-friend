@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-
-
-export const useToggle = (initial:boolean) => {
+export const useToggle = (initial: boolean) => {
   const [isToggled, setToggle] = useState(initial);
-  const toggle = () => setToggle(prevState => !prevState);
+  const toggle = () => setToggle((prevState) => !prevState);
   // Rename output, multiple uses of hook
   // return [isToggled, setToggle, toggle];
 

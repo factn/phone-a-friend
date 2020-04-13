@@ -1,24 +1,17 @@
-import { db } from "../config/firebase";
-import { UserDto, User } from "../model/user";
-import { mapResponseError } from "./responseMappers";
-import { as } from "../utils/types.util";
-import {
-  mapLocalTimePeriodsToUTC,
-  mapUTCTimePeriodsToLocalTime,
-} from "./availabilityTransformer";
+import { db } from '../config/firebase';
+import { UserDto, User } from '../model/user';
+import { mapResponseError } from './responseMappers';
+import { as } from '../utils/types.util';
+import { mapLocalTimePeriodsToUTC, mapUTCTimePeriodsToLocalTime } from './availabilityTransformer';
 
-const USERS_COLLECTIONS = "users";
+const USERS_COLLECTIONS = 'users';
 
 export async function createUser(user: UserDto): Promise<void> {
   const userWithAvailabilityInUTCTime = {
     ...user,
     ...mapLocalTimePeriodsToUTC(user.localTimeAvailability),
   };
-  return db
-    .collection(USERS_COLLECTIONS)
-    .doc(user.id)
-    .set(userWithAvailabilityInUTCTime)
-    .catch(mapResponseError);
+  return db.collection(USERS_COLLECTIONS).doc(user.id).set(userWithAvailabilityInUTCTime).catch(mapResponseError);
 }
 
 type UpdateUser = Partial<User> & { id: string };
@@ -55,7 +48,7 @@ export async function getUser(userId: string): Promise<User> {
         };
         return userWithAvailabilityInLocalTime;
       } else {
-        throw new Error("No user found");
+        throw new Error('No user found');
       }
     })
     .catch(mapResponseError);

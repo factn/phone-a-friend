@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
-import "sanitize.css";
-import Poppins from "../fonts/Poppins/Poppins-Regular.ttf";
-import PoppinsSemiBold from "../fonts/Poppins/Poppins-SemiBold.ttf";
-import Lora from "../fonts/Lora/Lora-VariableFont_wght.ttf";
+import { createGlobalStyle } from 'styled-components';
+import 'sanitize.css';
+import Poppins from '../fonts/Poppins/Poppins-Regular.ttf';
+import PoppinsSemiBold from '../fonts/Poppins/Poppins-SemiBold.ttf';
+import Lora from '../fonts/Lora/Lora-VariableFont_wght.ttf';
 
 const GlobalStyle = createGlobalStyle`
 @font-face {

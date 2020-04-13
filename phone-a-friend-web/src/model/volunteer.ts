@@ -1,5 +1,5 @@
-import { Gender } from "./gender";
-import { Availability, UTCAvailabilityPeriods } from "./availability";
+import { Gender } from './gender';
+import { Availability, UTCAvailabilityPeriods } from './availability';
 
 export type VolunteerDto = {
   id: string;

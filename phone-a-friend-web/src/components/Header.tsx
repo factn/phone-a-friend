@@ -1,18 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import Media  from "../utils/CustomMedia";
-import * as Constants  from '../utils/Constants';
-import Nav from "./Nav";
-import HamburgerNav from './HamburgerNav'
+import React from 'react';
+import styled from 'styled-components';
+import Media from '../utils/CustomMedia';
+import * as Constants from '../utils/Constants';
+import Nav from './Nav';
+import HamburgerNav from './HamburgerNav';
 
 interface Iprops {
   outsideMargin?: string;
   h?: number;
 }
 
-
 const MainDiv = styled.div<Iprops>`
-white-space: nowrap;
+  white-space: nowrap;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,20 +30,15 @@ const Headline = styled.h1`
   `}
 `;
 type Props = {
-    isMobile:boolean;
-}
+  isMobile: boolean;
+};
 
-const Header:React.FC<Props> = ({ isMobile }) => (
-      <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
-        <Headline>PhoneAFriend.care</Headline>  
-        {
-            !isMobile ?   
-            <Nav />
-            :
-            <HamburgerNav />
-        }
-      </MainDiv>
-  );
+const Header: React.FC<Props> = ({ isMobile }) => (
+  <MainDiv outsideMargin={Constants.OUTSIDE_MARGIN}>
+    <Headline>PhoneAFriend.care</Headline>
+    {!isMobile ? <Nav /> : <HamburgerNav />}
+  </MainDiv>
+);
 
 Header.whyDidYouRender = true;
 

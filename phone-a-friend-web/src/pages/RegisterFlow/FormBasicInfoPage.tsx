@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import TextField from "../../components/inputs/TextField";
-import { FormPage } from "../UserSignUpManager/UserSignUpManager";
-import { ReactComponent as NextArrow } from "../../components/icons/NextArrow.svg";
-import InputFeedback from "../../components/inputs/InputFeedback";
+import React from 'react';
+import styled from 'styled-components';
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import TextField from '../../components/inputs/TextField';
+import { FormPage } from '../UserSignUpManager/UserSignUpManager';
+import { ReactComponent as NextArrow } from '../../components/icons/NextArrow.svg';
+import InputFeedback from '../../components/inputs/InputFeedback';
 
 type UserFormPageOne = {
   name: string;
@@ -32,70 +32,50 @@ const NextContainer = styled.button`
 `;
 
 const basicInfoSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string()
-    .email("Must be in correct email format")
-    .required("Email is required"),
-  country: Yup.string().required("Country is required"),
-  zipcode: Yup.string().required("Zipcode is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Must be in correct email format').required('Email is required'),
+  country: Yup.string().required('Country is required'),
+  zipcode: Yup.string().required('Zipcode is required'),
+  phoneNumber: Yup.string().required('Phone number is required'),
 });
 
-const UserFormPageOne: React.FC<FormPage<UserFormPageOne>> = ({
-  onSubmit,
-  initialValues,
-}) => {
+const UserFormPageOne: React.FC<FormPage<UserFormPageOne>> = ({ onSubmit, initialValues }) => {
   return (
     <Formik
       initialValues={{
-        name: "",
-        email: "",
-        phoneNumber: "",
-        zipcode: "",
-        country: "United States of America",
+        name: '',
+        email: '',
+        phoneNumber: '',
+        zipcode: '',
+        country: 'United States of America',
         ...initialValues,
       }}
       onSubmit={onSubmit}
       validationSchema={basicInfoSchema}
     >
-      {({ submitForm, errors }) => (
+      {({ submitForm }) => (
         <>
-          <Field
-            name="name"
-            placeholder="Your name"
-            label="Full name"
-            component={TextField}
-          />
-          <Field
-            name="email"
-            placeholder="Your email address"
-            label="Email address"
-            component={TextField}
-          />
+          <Field name="name" placeholder="Your name" label="Full name" component={TextField} />
+          <Field name="email" placeholder="Your email address" label="Email address" component={TextField} />
           <Field
             name="phoneNumber"
             placeholder="+__ _________"
             label="What's the best phone number to reach you?"
             component={TextField}
           />
-          <Field
-            name="zipcode"
-            placeholder="Your zip code / postcode"
-            label="Zip/Post Code"
-            component={TextField}
-          />
+          <Field name="zipcode" placeholder="Your zip code / postcode" label="Zip/Post Code" component={TextField} />
           <div>
-            <label style={{ display: "block", marginBottom: 6 }}>Country</label>
+            <label style={{ display: 'block', marginBottom: 6 }}>Country</label>
             <Field
               name="country"
               placeholder="Country"
               label="Country"
               component="select"
               style={{
-                padding: "14px 10px",
-                width: "100%",
-                backgroundColor: "#ffffff",
-                border: "none",
+                padding: '14px 10px',
+                width: '100%',
+                backgroundColor: '#ffffff',
+                border: 'none',
               }}
             >
               {AllCountryOptions}

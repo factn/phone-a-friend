@@ -1,11 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { FieldInputProps, FormikState } from "formik";
-import InputFeedback from "./InputFeedback";
+import React from 'react';
+import styled from 'styled-components';
+import { FieldInputProps, FormikState } from 'formik';
+import InputFeedback from './InputFeedback';
 
 type TextAreaFieldProps = {
   label: string;
   field: FieldInputProps<string>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: FormikState<any>;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
@@ -27,19 +28,12 @@ const TextArea = styled.textarea`
   border: none;
 `;
 
-const TextAreaField: React.FC<TextAreaFieldProps> = ({
-  label,
-  field,
-  form: { touched, errors },
-  ...inputProps
-}) => {
+const TextAreaField: React.FC<TextAreaFieldProps> = ({ label, field, form: { touched, errors }, ...inputProps }) => {
   return (
     <Wrapper>
       <Label htmlFor={`${label}-id`}>{label}</Label>
       <TextArea id={`${label}-id`} {...field} {...inputProps} />
-      {touched[field.name] && errors[field.name] && (
-        <InputFeedback>{errors[field.name]}</InputFeedback>
-      )}
+      {touched[field.name] && errors[field.name] && <InputFeedback>{errors[field.name]}</InputFeedback>}
     </Wrapper>
   );
 };

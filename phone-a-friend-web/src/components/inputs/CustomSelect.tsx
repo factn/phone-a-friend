@@ -1,9 +1,9 @@
-import { FieldProps } from "formik";
-import React from "react";
-import Select from "react-select";
-import { OptionsType, ValueType } from "react-select";
-import styled from "styled-components";
-import InputFeedback from "./InputFeedback";
+import { FieldProps } from 'formik';
+import React from 'react';
+import Select from 'react-select';
+import { OptionsType, ValueType } from 'react-select';
+import styled from 'styled-components';
+import InputFeedback from './InputFeedback';
 
 interface Option {
   label: string;
@@ -38,11 +38,7 @@ export const CustomSelect = ({
     }
     form.setFieldValue(
       field.name,
-      !option
-        ? []
-        : isMulti
-        ? (option as Option[]).map((item: Option) => item.value)
-        : (option as Option).value
+      !option ? [] : isMulti ? (option as Option[]).map((item: Option) => item.value) : (option as Option).value
     );
   };
 
@@ -52,7 +48,8 @@ export const CustomSelect = ({
         ? options.filter((option) => field.value.indexOf(option.value) >= 0)
         : options.find((option) => option.value === field.value);
     } else {
-      return isMulti ? [] : ("" as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return isMulti ? [] : ('' as any);
     }
   };
 
@@ -68,9 +65,7 @@ export const CustomSelect = ({
         options={options}
         isMulti={isMulti}
       />
-      {form.touched[field.name] && form.errors[field.name] && (
-        <InputFeedback>{form.errors[field.name]}</InputFeedback>
-      )}
+      {form.touched[field.name] && form.errors[field.name] && <InputFeedback>{form.errors[field.name]}</InputFeedback>}
     </Wrapper>
   );
 };

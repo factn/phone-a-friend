@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import firebase from "firebase";
-import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom";
-import { User } from "../../model/user";
-import { emptyAvailability } from "../../model/availability";
-import FormBasicInfoPage from "../RegisterFlow/FormBasicInfoPage";
-import BaseFormLayout from "../../layouts/BaseFormLayout";
-import FormPageGenderLanguages from "../RegisterFlow/FormPageGenderLanguages";
-import FormPageIntroduction from "../RegisterFlow/FormPageIntroduction";
-import FormAvailability from "../RegisterFlow/FormAvailability";
-import { useStateValue } from "../../contexts/AppContext";
-import { Volunteer } from "../../model/volunteer";
-import { createVolunteer } from "../../api/volunteer";
-import useVolunteer from "../../hooks/useVolunteer";
-import { VOLUNTEER_BACKGROUND_COLOR } from "../../Colors";
+import React, { useState } from 'react';
+import firebase from 'firebase';
+import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
+import { User } from '../../model/user';
+import { emptyAvailability } from '../../model/availability';
+import FormBasicInfoPage from '../RegisterFlow/FormBasicInfoPage';
+import BaseFormLayout from '../../layouts/BaseFormLayout';
+import FormPageGenderLanguages from '../RegisterFlow/FormPageGenderLanguages';
+import FormPageIntroduction from '../RegisterFlow/FormPageIntroduction';
+import FormAvailability from '../RegisterFlow/FormAvailability';
+import { useStateValue } from '../../contexts/AppContext';
+import { Volunteer } from '../../model/volunteer';
+import { createVolunteer } from '../../api/volunteer';
+import useVolunteer from '../../hooks/useVolunteer';
+import { VOLUNTEER_BACKGROUND_COLOR } from '../../Colors';
 
 const initialState: Volunteer & AcceptedTerms = {
-  phoneNumber: "",
-  name: "",
-  email: "",
-  dateOfBirth: "",
-  country: "",
-  zipcode: "",
+  phoneNumber: '',
+  name: '',
+  email: '',
+  dateOfBirth: '',
+  country: '',
+  zipcode: '',
   languages: [],
-  introduction: "",
-  gender: "male",
+  introduction: '',
+  gender: 'male',
   localTimeAvailability: emptyAvailability,
   utcAvailability: emptyAvailability,
-  timezone: "",
+  timezone: '',
   acceptTerms: false,
 };
 
@@ -41,13 +41,11 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
   const { path, url } = useRouteMatch();
   const history = useHistory();
   const [step, setStep] = useState<number>(1);
-  const [formValues, setFormValues] = useState<Volunteer & AcceptedTerms>(
-    initialState
-  );
+  const [formValues, setFormValues] = useState<Volunteer & AcceptedTerms>(initialState);
 
   const { isFetching, setIsFetching } = useVolunteer(
-    () => history.replace("/account/volunteer"),
-    (err) => history.replace(url + "/" + 1)
+    () => history.replace('/account/volunteer'),
+    () => history.replace(url + '/' + 1)
   );
 
   function handleSubmit(values: Partial<User>) {
@@ -65,19 +63,19 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
       })
         .then(() => {
           dispatch({
-            type: "VOLUNTEER_STORE_DETAILS",
+            type: 'VOLUNTEER_STORE_DETAILS',
             volunteer: newJourneyValues,
           });
           setIsFetching(false);
-          history.push("/account/volunteer");
+          history.push('/account/volunteer');
         })
-        .catch((err) => {
+        .catch(() => {
           setIsFetching(false);
         });
     } else {
       const nextPage = step + 1;
       setStep(nextPage);
-      history.push(url + "/" + nextPage);
+      history.push(url + '/' + nextPage);
     }
   }
 
@@ -115,7 +113,7 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
               <FormPageGenderLanguages onSubmit={handleSubmit} />
             </BaseFormLayout>
           </Route>
-          <Route path={""}>
+          <Route path={''}>
             <BaseFormLayout
               backgroundColor={VOLUNTEER_BACKGROUND_COLOR}
               title="Let's start with an introduction and some contact info."
@@ -124,7 +122,7 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
             >
               <FormBasicInfoPage
                 initialValues={{
-                  phoneNumber: firebase.auth().currentUser?.phoneNumber || "",
+                  phoneNumber: firebase.auth().currentUser?.phoneNumber || '',
                 }}
                 onSubmit={handleSubmit}
               />

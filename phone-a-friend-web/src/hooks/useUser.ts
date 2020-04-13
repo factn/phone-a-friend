@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import { useStateValue } from "../contexts/AppContext";
-import { isEmptyObject } from "../utils/object.utils";
-import { getUser } from "../api/user";
-import { User } from "../model/user";
+import { useEffect, useState } from 'react';
+import { useStateValue } from '../contexts/AppContext';
+import { isEmptyObject } from '../utils/object.utils';
+import { getUser } from '../api/user';
+import { User } from '../model/user';
 
-function useUser(
-  successCallback: (user: User) => void,
-  errorCallback: (err: string) => void
-) {
+function useUser(successCallback: (user: User) => void, errorCallback: (err: string) => void) {
   const { state, dispatch } = useStateValue();
   const [isFetching, setIsFetching] = useState(false);
 
@@ -16,7 +13,7 @@ function useUser(
       setIsFetching(true);
       getUser(state.userAuthId)
         .then((user) => {
-          dispatch({ type: "USER_STORE_DETAILS", user });
+          dispatch({ type: 'USER_STORE_DETAILS', user });
           setIsFetching(false);
           successCallback(user);
         })

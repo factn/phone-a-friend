@@ -1,29 +1,13 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
-import * as Colors from "../../Colors";
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import * as Colors from '../../Colors';
 
 // props passed into the styled component
-type StyledButtonProps = {
-  bgColor: string;
-  color: string;
-  w: number | string;
-  h: number| string;
-  paddingRight: number;
-  paddingLeft: number;
-  marginBottom: number;
-  marginLeft: number;
-  marginTop: number;
-  marginRight: number;
-  hoverColor: string;
-  hoverBgColor: string;
-  hasBorder: boolean;
-  className?: string;
-};
-interface IButton {
+interface StyledButtonProps {
   bgColor?: string;
   color?: string;
   w?: number | string;
-  h?: number| string;
+  h?: number | string;
   paddingLeft?: number;
   paddingRight?: number;
   marginBottom?: number;
@@ -38,32 +22,32 @@ interface IButton {
   className?: string;
 }
 
-const StyledButton = styled.button<IButton>`
+const StyledButton = styled.button<StyledButtonProps>`
   border: ${(props) => (props.hasBorder ? `3px solid ${props.color}` : 0)};
   box-sizing: border-box;
   /* font-size: 1.125rem;
   font-weight: 600; */
   padding-left: ${(props) => `${props.paddingLeft}px`};
-  padding-right: ${(props) =>`${props.paddingRight}px`};
-  margin-top: ${(props) =>`${props.marginTop}px`};
-  margin-bottom: ${(props) =>`${props.marginBottom}px`};
+  padding-right: ${(props) => `${props.paddingRight}px`};
+  margin-top: ${(props) => `${props.marginTop}px`};
+  margin-bottom: ${(props) => `${props.marginBottom}px`};
   margin-left: ${(props) => `${props.marginLeft}px`};
   margin-right: ${(props) => `${props.marginRight}px`};
-  width: ${(props) => (typeof props.w) ==='number' ? `${props.w}px` : props.w};
-  height: ${(props) => (typeof props.h) ==='number' ? `${props.h}px` : props.h};
+  width: ${(props) => (typeof props.w === 'number' ? `${props.w}px` : props.w)};
+  height: ${(props) => (typeof props.h === 'number' ? `${props.h}px` : props.h)};
   color: ${(props) => props.color};
   background: ${(props) => props.bgColor};
   cursor: pointer;
   :hover {
     background: ${(props) => props.hoverBgColor};
     color: ${(props) => props.hoverColor};
-  };
-  className: ${(props) => props.className};
+  }
+  /* classname: ${(props) => props.className}; */
 `;
 
-const Button: React.FC<IButton> = ({
+const Button: React.FC<StyledButtonProps> = ({
   children,
-  bgColor = "transparent",
+  bgColor = 'transparent',
   color = Colors.DARK_BLUE,
   w,
   h = 50,
@@ -71,13 +55,13 @@ const Button: React.FC<IButton> = ({
   marginBottom = 0,
   marginLeft = 0,
   marginTop = 0,
-  marginRight = 0,
-  hoverColor = "black",
-  hoverBgColor = "transparent",
+  // marginRight = 0,
+  hoverColor = 'black',
+  hoverBgColor = 'transparent',
   hasBorder = true,
-  paddingLeft=0,
-  paddingRight=0,
-  className
+  paddingLeft = 0,
+  paddingRight = 0,
+  className,
 }) => (
   <StyledButton
     type="button"

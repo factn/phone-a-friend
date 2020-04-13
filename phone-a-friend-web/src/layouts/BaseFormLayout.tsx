@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
+import React, { PropsWithChildren } from 'react';
+import styled from 'styled-components';
+import media from 'styled-media-query';
 
 type BaseFormLayoutProps = {
   title: string;
@@ -17,12 +17,12 @@ const BaseFormLayoutWrapper = styled.div<WrapperProps>`
   width: 100%;
   display: grid;
   grid-template-areas:
-    "message"
-    "form";
+    'message'
+    'form';
   padding: 24px;
   background-color: ${(props) => `${props.backgroundColor}`};
 
-  ${media.greaterThan("medium")`
+  ${media.greaterThan('medium')`
     grid-template-areas: "message form"; 
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 100%;
@@ -38,7 +38,7 @@ const BaseFormLayoutWrapper = styled.div<WrapperProps>`
 
 const StepCounter = styled.h4`
   margin: 0;
-  ${media.greaterThan("medium")`
+  ${media.greaterThan('medium')`
     font-size: 24px;
   `}
 `;

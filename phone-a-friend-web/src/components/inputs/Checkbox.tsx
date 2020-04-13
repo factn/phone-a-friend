@@ -1,7 +1,7 @@
-import React from "react";
-import { FieldProps } from "formik";
-import InputFeedback from "./InputFeedback";
-import styled from "styled-components";
+import React from 'react';
+import { FieldProps } from 'formik';
+import InputFeedback from './InputFeedback';
+import styled from 'styled-components';
 
 type CheckboxProps = {
   label?: React.ReactNode;
@@ -13,8 +13,8 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 9fr;
   grid-template-areas:
-    "input label"
-    "error error";
+    'input label'
+    'error error';
   margin-bottom: 16px;
 
   label {
@@ -28,20 +28,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const Checkbox: React.FC<CheckboxProps> = ({
-  field,
-  form: { touched, errors },
-  label,
-  ...inputProps
-}) => {
+const Checkbox: React.FC<CheckboxProps> = ({ field, form: { touched, errors }, label, ...inputProps }) => {
   return (
     <Wrapper>
       <input id={field.name} {...field} {...inputProps} />
       {label}
       {touched[field.name] && errors[field.name] && (
-        <InputFeedback style={{ gridArea: "error" }}>
-          {errors[field.name]}
-        </InputFeedback>
+        <InputFeedback style={{ gridArea: 'error' }}>{errors[field.name]}</InputFeedback>
       )}
     </Wrapper>
   );

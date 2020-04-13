@@ -1,5 +1,5 @@
-import * as firebase from "firebase";
-import config from "./environment";
+import * as firebase from 'firebase';
+import config from './environment';
 
 // Initialize Firebase and Firebase Analytics
 const app = firebase.initializeApp(config.firebaseConfig);

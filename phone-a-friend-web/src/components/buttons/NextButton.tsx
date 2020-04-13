@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { ReactComponent as NextArrow } from "../../components/icons/NextArrow.svg";
+import React from 'react';
+import styled from 'styled-components';
+import { ReactComponent as NextArrow } from '../../components/icons/NextArrow.svg';
 
 const NextContainer = styled.button`
   float: right;

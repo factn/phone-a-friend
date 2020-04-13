@@ -1,15 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import InputFeedback from "./InputFeedback";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
+import styled from 'styled-components';
+import InputFeedback from './InputFeedback';
 
 // Radio input
-const RadioButton: React.FC<any> = ({
-  field: { name, value, onChange, onBlur },
-  id,
-  label,
-  className,
-  ...props
-}) => {
+const RadioButton: React.FC<any> = ({ field: { name, value, onChange, onBlur }, id, label, ...props }) => {
   return (
     <div>
       <input
@@ -20,7 +15,7 @@ const RadioButton: React.FC<any> = ({
         checked={id === value}
         onChange={onChange}
         onBlur={onBlur}
-        className={"radio-button"}
+        className={'radio-button'}
         {...props}
       />
       <label htmlFor={id}>{label}</label>
@@ -41,15 +36,7 @@ const Legend = styled.legend`
 `;
 
 // Radio group
-const RadioButtonGroup: React.FC<any> = ({
-  value,
-  error,
-  touched,
-  id,
-  label,
-  className,
-  children,
-}) => {
+const RadioButtonGroup: React.FC<any> = ({ error, touched, label, children }) => {
   // const classes = classNames(
   //   "input-field",
   //   {

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import firebase from "firebase";
-import { useStateValue } from "../../contexts/AppContext";
-import MobileAuthPopup from "../../components/mobileauth/MobileAuthPopup";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import firebase from 'firebase';
+import { useStateValue } from '../../contexts/AppContext';
+import MobileAuthPopup from '../../components/mobileauth/MobileAuthPopup';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export type RedirectedLocationProps = {
   state: {
@@ -10,10 +10,9 @@ export type RedirectedLocationProps = {
   };
 };
 
-function hasFromInLocationState(
-  location: any
-): location is RedirectedLocationProps {
-  return location.state && "from" in location.state;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function hasFromInLocationState(location: any): location is RedirectedLocationProps {
+  return location.state && 'from' in location.state;
 }
 
 const LoginPage = () => {
@@ -25,13 +24,11 @@ const LoginPage = () => {
   useEffect(() => {
     const unlistenToAuth = firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
-        dispatch({ type: "USER_LOGIN", userId: authUser.uid });
-        const { from } = hasFromInLocationState(location)
-          ? location.state
-          : { from: "/account" };
+        dispatch({ type: 'USER_LOGIN', userId: authUser.uid });
+        const { from } = hasFromInLocationState(location) ? location.state : { from: '/account' };
         history.replace(from);
       } else {
-        dispatch({ type: "USER_LOGIN", userId: "" });
+        dispatch({ type: 'USER_LOGIN', userId: '' });
       }
     });
     return () => {
@@ -44,7 +41,7 @@ const LoginPage = () => {
   const closeAuth = () => setAuthVisible(false);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       Log in
       <button onClick={openAuth}>Log In</button>
       <MobileAuthPopup open={authVisible} onClose={closeAuth} />

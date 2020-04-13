@@ -1,15 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import * as firebaseui from "firebaseui";
-import styled from "styled-components";
-import firebase from "../../config/firebase";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import * as firebaseui from 'firebaseui';
+import styled from 'styled-components';
+import firebase from '../../config/firebase';
 
 export type AuthResult = {
   additionalUserInfo: {
     providerId: string; // "phone"
     isNewUser: boolean;
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   credential: any | undefined;
   operationType: string; // "signIn"
   user: {
@@ -20,11 +21,11 @@ export type AuthResult = {
 };
 
 const uiConfig: firebaseui.auth.Config = {
-  signInFlow: "popup", // Popup vs redirect
+  signInFlow: 'popup', // Popup vs redirect
   callbacks: {
-    signInSuccessWithAuthResult: (authResult: AuthResult) => false
+    signInSuccessWithAuthResult: () => false,
   },
-  signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID]
+  signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID],
 };
 
 const PopupBackground = styled.div`
@@ -51,11 +52,8 @@ const MobileAuthPopup: React.FC<MobileAuthPopupProps> = ({ open, onClose }) => {
   return ReactDOM.createPortal(
     open && (
       <PopupBackground onClick={onClose}>
-        <div onClick={e => e.stopPropagation()}>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
+        <div onClick={(e) => e.stopPropagation()}>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
         </div>
       </PopupBackground>
     ),
