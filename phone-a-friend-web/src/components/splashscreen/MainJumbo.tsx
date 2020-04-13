@@ -14,8 +14,8 @@ const MainDiv = styled.div<Props>`
 `;
 const CopyDiv = styled.div<Props>`
   font-family: 'Lora';
-  font-size: ${(props) => (props.isMobile ? '2rem' : '1.375rem')};
-  line-height: ${(props) => (props.isMobile ? '3.25rem' : '2.25rem')};
+  font-size: ${(props) => (props.isMobile ? '1.2rem' : '1.375rem')};
+  line-height: ${(props) => (props.isMobile ? '1.2rem' : '2.25rem')};
   text-align: center;
   max-width: 894px;
 `;
@@ -28,7 +28,7 @@ const Disclaimer = styled.div`
 
 const Headline = styled.h1<Props>`
   text-align: center;
-  font-size: ${(props) => (props.isMobile ? '4.688rem' : '4.375rem')};
+  font-size: ${(props) => (props.isMobile ? '2.5rem' : '4.375rem')};
 `;
 type Props = {
   isMobile: boolean;

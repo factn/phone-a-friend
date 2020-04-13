@@ -41,20 +41,6 @@ const GlobalStyle = createGlobalStyle`
   /* margin: 50px; */
     }
 
-.mobile-bg-top, .mobile-bg-bottom {
-    background-image: url("heart.svg");
-    background-repeat: no-repeat;
-
-}
-
-.mobile-bg-top {
-    background-position: 200% 44%  ;
-}
-
-.mobile-bg-bottom {
-    background-position: -100% 44%  ;
-}
-
     a {
         text-decoration:none;
     }

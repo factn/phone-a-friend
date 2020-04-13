@@ -19,8 +19,8 @@ const MainDiv = styled.main<Iprops>`
   background: ${(props) => props.bgColor};
   padding-left: ${(props) => (props.isMobile ? '4vw' : '5%')};
   padding-right: ${(props) => (props.isMobile ? '4vw' : '5%')};
-  padding-top: ${(props) => (props.isMobile ? '60px' : '0')};
-  padding-bottom: ${(props) => (props.isMobile ? '80px' : '0')};
+  padding-top: ${(props) => (props.isMobile ? '30px' : '0')};
+  padding-bottom: ${(props) => (props.isMobile ? '30px' : '0')};
   overflow: scroll;
 `;
 
@@ -34,16 +34,16 @@ const Wrapper = styled.div<Iprops>`
 const HeadLine = styled.div<Iprops>`
   padding-bottom: ${(props) => (props.isMobile ? '40px' : '0')};
   & > span {
-    font-size: ${(props) => (props.isMobile ? '4.688rem' : '77px')};
-    line-height: ${(props) => (props.isMobile ? '5.625rem' : '100px')};
+    font-size: ${(props) => (props.isMobile ? '2rem' : '77px')};
+    line-height: ${(props) => (props.isMobile ? '2rem' : '100px')};
     font-weight: 600;
   }
 `;
 
 const Blurb = styled.div<Iprops>`
   font-family: Lora;
-  font-size: ${(props) => (props.isMobile ? '2rem' : '1.375rem')};
-  line-height: ${(props) => (props.isMobile ? ' 3.25rem' : '2.25rem')};
+  font-size: ${(props) => (props.isMobile ? '1rem' : '1.375rem')};
+  line-height: ${(props) => (props.isMobile ? ' 2rem' : '2.25rem')};
   margin-bottom: 30px;
   max-width: ${(props) => !props.isMobile && '565px'};
 `;

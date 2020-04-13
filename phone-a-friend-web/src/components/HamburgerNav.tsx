@@ -1,5 +1,6 @@
 import React from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoMdClose } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './buttons/Button';
@@ -35,12 +36,16 @@ const HamburgerNav: React.FC = () => {
     <>
       {!isToggled && (
         <div role="button" onClick={toggle}>
-          <GiHamburgerMenu size={36} />
+          <GiHamburgerMenu style={{ cursor: 'pointer' }} size={36} />
         </div>
       )}
 
       {isToggled && (
         <NavContainer>
+          <IoMdClose
+            onClick={toggle}
+            style={{ position: 'absolute', cursor: 'pointer', top: 16, right: 16, fontSize: 48 }}
+          />
           <Link to="/">
             <Button onClick={toggle} {...propsObj}>
               Home

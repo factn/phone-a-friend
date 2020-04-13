@@ -38,7 +38,7 @@ const MainDiv = styled.div`
   `}
   ${Media.lessThan('mobile')`
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 90px [main] auto [footer] 85px;
+    grid-template-rows: [header] 90px [main] auto [footer] auto;
     border:0;
     min-width: 370px;
   `}
