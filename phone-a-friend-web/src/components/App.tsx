@@ -42,7 +42,7 @@ const MainDiv = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: [header] 90px [main] auto [footer] 85px;
     border:0;
-    min-width: 750px;
+    min-width: 370px;
   `}
 
 `;

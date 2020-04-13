@@ -47,7 +47,7 @@ const Blurb = styled.div<Iprops>`
   font-size: ${props => props.isMobile ? '2rem' : '1.375rem'};
   line-height: ${props => props.isMobile ? ' 3.25rem' : '2.25rem'};
   margin-bottom: 30px;
-  max-width:565px;
+  max-width: ${props => (!props.isMobile && '565px')};
 `;
 
 type Props = {
