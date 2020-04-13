@@ -24,6 +24,7 @@ const MainDiv = styled.div<MainDivProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px 0;
   classname: ${(props) => props.className};
 `;
 
