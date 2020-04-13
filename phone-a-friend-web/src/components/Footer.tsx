@@ -4,13 +4,13 @@ import styled from "styled-components";
 import *  as Constants from "../utils/Constants"
 import * as Colors from '../Colors'
 import { FaTwitter, FaFacebookF } from 'react-icons/fa'
-import { OUTSIDE_MARGIN } from '../utils/Constants'
 
 interface Iprops {
     readonly marginLeft?: string;
     readonly marginRight?: string;
     readonly outsideMargin?: string;
     readonly h?: number;
+    readonly isMobile?: boolean;
 }
 
 
@@ -23,8 +23,13 @@ const Navs = styled.span<Iprops>`
     margin-right: ${props => props.marginRight};
 `;
 
-const Button = styled(Navs)`
-    font-size: .6em;
+const FooterButton = styled(Navs)`
+    font-size:${props => props.isMobile ? '.75rem' : '0.75rem'};
+    /* letter-spacing:${props => props.isMobile ? '0.1px': '0.17px'}; */
+    font-weight: 500;
+`;
+const PrivacyButton = styled(FooterButton)`
+  font-weight: 600;
 `;
 
 
@@ -46,35 +51,34 @@ const BtnsContainer = styled.div<Iprops>`
 `;
 
 type Props = {
-    outsideMargin?: string;
-    betweenMargin?: string;
+    isMobile:boolean;
 }
 
 
-const Footer: React.FC<Props> = ({ outsideMargin, betweenMargin = '20px' }) => (
+const Footer: React.FC<Props> = ({ isMobile }) => (
     <Main color={Colors.DARK_BLUE} h={Constants.FOOTER_HEIGHT}>
-        <BtnsContainer outsideMargin={OUTSIDE_MARGIN}>
+        <BtnsContainer outsideMargin={Constants.OUTSIDE_MARGIN}>
             <div>
                 <Link to="/">
-                    <Button>
+                    <FooterButton isMobile={isMobile}>
                         © 2020 PhoneAFriend.care
-                        </Button>
+                    </FooterButton>
                 </Link>
                 <Link to="/privacy">
-                    <Button marginLeft={betweenMargin}>
+                    <PrivacyButton isMobile={isMobile} marginLeft={isMobile ? '40px' : '29px' }>
                         Privacy Policy
-                        </Button>
+                        </PrivacyButton>
                 </Link>
             </div>
             <div>
                 <a href="https://www.twitter.com">
-                    <Navs marginRight={betweenMargin}>
-                        <FaTwitter size={18} />
+                    <Navs marginRight={isMobile ? '40px' : '20px' }>
+                        <FaTwitter size={isMobile ?  22 : 18} />
                     </Navs>
                 </a>
                 <a href="https://www.facebook.com">
                     <Navs>
-                        <FaFacebookF size={18} />
+                        <FaFacebookF size={isMobile ?  22 : 18} />
                     </Navs>
                 </a>
             </div>
