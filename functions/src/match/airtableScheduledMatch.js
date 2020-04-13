@@ -4,30 +4,52 @@ const {
   VOLUNTEERS_COLLECTION,
   airTableFields,
   TIME_PERIODS,
-  CURRENT_MATCHES_COLLECTION
+  CURRENT_MATCHES_COLLECTION,
 } = require("../config/constants");
 
-  async function matchUsersAndVolunteers() {
+const daysFields = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
+
+async function matchUsersAndVolunteers() {
   const usersCollection = db.collection(USERS_COLLECTION);
   const volunteersCollection = db.collection(VOLUNTEERS_COLLECTION);
 
   const currentPeriod = getCurrentHourAsString();
-  console.log(currentPeriod);
+  const currentDay = daysFields[new Date().getDay()];
+  console.log(`Matching for - ${currentDay} : ${currentPeriod}`);
   /**
    * Find users available
    * @typedef User[]
    */
   const usersAvailable = await usersCollection
-    .where(airTableFields.availability, "array-contains", currentPeriod)
+    .where(
+      airTableFields.availability + "." + currentDay,
+      "array-contains",
+      currentPeriod
+    )
     .get()
-    .then(querySnapshot => querySnapshot.docs.map(s => s.data()));
+    .then((querySnapshot) => querySnapshot.docs.map((s) => s.data()));
 
   console.log("Users found: " + usersAvailable.length);
-  // Find volunteer available
+  /**
+   * Find volunteers available
+   * @typedef Volunteer[]
+   */
   const volunteersAvailable = await volunteersCollection
-    .where(airTableFields.availability, "array-contains", currentPeriod)
+    .where(
+      airTableFields.availability + "." + currentDay,
+      "array-contains",
+      currentPeriod
+    )
     .get()
-    .then(querySnapshot => querySnapshot.docs.map(s => s.data()));
+    .then((querySnapshot) => querySnapshot.docs.map((s) => s.data()));
 
   console.log("Volunteers found: " + volunteersAvailable.length);
 
@@ -38,7 +60,7 @@ const {
   } else {
     let batch = db.batch();
 
-    matches.forEach(match => {
+    matches.forEach((match) => {
       let docRef = db.collection(CURRENT_MATCHES_COLLECTION).doc();
       const currentMatchDocument = {
         id: docRef.id,
@@ -52,12 +74,12 @@ const {
         userId: match.user.uid,
         userName: match.user.name,
         userPhoneNumber: match.user.phoneNumber,
-        userIntroduction: match.user.introduction
+        userIntroduction: match.user.introduction,
       };
       batch.set(docRef, currentMatchDocument);
     });
 
-    return batch.commit().then(commitResponse => {
+    return batch.commit().then((commitResponse) => {
       console.log(commitResponse);
       return;
     });
@@ -81,7 +103,7 @@ function buildMatches(users, volunteers) {
       currentUserToMatch["genderPreference"] && // If they dont have this answered, we assume no preference - for backwards compatibility with older data
       currentUserToMatch.genderPreference !== "Anyone"
         ? volunteersAvailable.find(
-            volunteer =>
+            (volunteer) =>
               volunteer.gender === currentUserToMatch.genderPreference
           )
         : volunteersAvailable[0];
@@ -89,13 +111,13 @@ function buildMatches(users, volunteers) {
     if (matchingVolunteer) {
       matches.push({
         user: currentUserToMatch,
-        volunteer: matchingVolunteer
+        volunteer: matchingVolunteer,
       });
 
       // Remove the matched volunteer
       volunteersAvailable.splice(
         volunteersAvailable.findIndex(
-          volunteer => matchingVolunteer === volunteer
+          (volunteer) => matchingVolunteer === volunteer
         ),
         1
       );
@@ -120,6 +142,18 @@ module.exports = matchUsersAndVolunteers;
 
 /**
  * A User
+ * @typedef {Object} Availability
+ * @property {string[]} monday
+ * @property {string[]} tuesday
+ * @property {string[]} wednesday
+ * @property {string[]} thursday
+ * @property {string[]} friday
+ * @property {string[]} saturday
+ * @property {string[]} sunday
+ */
+
+/**
+ * A User
  * @typedef {Object} User
  * @property {string} name - Users name
  * @property {string} gender -
@@ -129,7 +163,7 @@ module.exports = matchUsersAndVolunteers;
  * @property {string} zipCode -
  * @property {string} createdtime -
  * @property {string} uid -
- * @property {string[]} availability -
+ * @property {Availability} availability -
  */
 
 /**
@@ -143,5 +177,5 @@ module.exports = matchUsersAndVolunteers;
  * @property {string} zipCode -
  * @property {string} createdtime -
  * @property {string} uid -
- * @property {string[]} availability -
+ * @property {Availability} availability -
  */

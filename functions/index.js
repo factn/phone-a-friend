@@ -4,9 +4,7 @@ const firestoreMatchingFunction = require("./src/match/firestore");
 const updateUserAvailability = require("./src/update/userAvailability");
 const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
 
-// exports.updateUserAvailability = functions.https.onRequest(
-// updateUserAvailability
-// );
+const { migrate } = require("./src/migrations/V1-oldAvailabilityToMap");
 
 // exports.matchMeAirTable = functions.https.onRequest(airTableMatchingFunction);
 
@@ -22,6 +20,15 @@ exports.scheduledmatchUsersAndVolunteers = functions.pubsub
     matchUsersAndVolunteers();
     return null;
   });
+
+// exports.testingMatcher = functions.https.onRequest((req, res) => {
+// matchUsersAndVolunteers();
+// });
+
+// exports.migrate = functions.https.onRequest(async (req, res) => {
+// const result = await migrate();
+// res.send(result);
+// });
 
 exports.reformatAvailability = functions.firestore
   .document("users/{userId}")
