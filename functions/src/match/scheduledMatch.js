@@ -79,8 +79,7 @@ function buildMatches(users, volunteers) {
     const currentUserToMatch = usersAvailable[0];
     const matchingVolunteer =
       currentUserToMatch["genderPreference"] && // If they dont have this answered, we assume no preference - for backwards compatibility with older data
-      // currentUserToMatch.genderPreference !== "Anyone"
-      currentUserToMatch.genderPreference !== "noPreference"
+      currentUserToMatch.genderPreference !== "Anyone"
         ? volunteersAvailable.find(
             volunteer =>
               volunteer.gender === currentUserToMatch.genderPreference
