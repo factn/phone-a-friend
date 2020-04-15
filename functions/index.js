@@ -1,14 +1,5 @@
-const { functions } = require("./src/config");
-const airTableMatchingFunction = require("./src/match/airtable");
-const firestoreMatchingFunction = require("./src/match/firestore");
-const updateUserAvailability = require("./src/update/userAvailability");
+const { functions, deleteField } = require("./src/config");
 const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
-
-const { migrate } = require("./src/migrations/V1-oldAvailabilityToMap");
-
-// exports.matchMeAirTable = functions.https.onRequest(airTableMatchingFunction);
-
-// exports.matchMeNow = functions.https.onRequest(firestoreMatchingFunction);
 
 /**
  * Run at 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm
@@ -21,26 +12,30 @@ exports.scheduledmatchUsersAndVolunteers = functions.pubsub
     return null;
   });
 
-// exports.testingMatcher = functions.https.onRequest((req, res) => {
-// matchUsersAndVolunteers();
-// });
-
-// exports.migrate = functions.https.onRequest(async (req, res) => {
-// const result = await migrate();
-// res.send(result);
-// });
+const allDays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 exports.reformatAvailability = functions.firestore
   .document("users/{userId}")
   .onCreate((snap, context) => {
     console.log("---NEW USER CREATED---");
     const newValue = snap.data();
-    const timesAsArray = newValue.availability.split(",");
-    const daysAsArray = newValue.days.split(",");
+    const timesAsArray = newValue.availability
+      ? newValue.availability.split(",")
+      : [];
+    const daysAsArray = newValue.days ? newValue.days.split(",") : allDays;
     return snap.ref.set(
       {
         ...newValue,
         availability: createAvailabilityObject(daysAsArray, timesAsArray),
+        days: deleteField(),
       },
       { merge: true }
     );
@@ -51,12 +46,15 @@ exports.reformatVolunteerAvailability = functions.firestore
   .onCreate((snap, context) => {
     console.log("---NEW VOLUNTEER CREATED---");
     const newValue = snap.data();
-    const timesAsArray = newValue.availability.split(",");
-    const daysAsArray = newValue.days.split(",");
+    const timesAsArray = newValue.availability
+      ? newValue.availability.split(",")
+      : [];
+    const daysAsArray = newValue.days ? newValue.days.split(",") : allDays;
     return snap.ref.set(
       {
         ...newValue,
         availability: createAvailabilityObject(daysAsArray, timesAsArray),
+        days: deleteField(),
       },
       { merge: true }
     );
@@ -76,7 +74,8 @@ const SUNDAY = "Sunday";
  * @param {string[]} times
  */
 function createAvailabilityObject(days, times) {
-  const hasSelectedDay = (day) => (days.includes(day) ? [...times] : []);
+  const hasSelectedDay = (day) =>
+    days.includes(day) || days.includes("Anytime") ? [...times] : [];
   return {
     [MONDAY.toLowerCase()]: hasSelectedDay(MONDAY),
     [TUESDAY.toLowerCase()]: hasSelectedDay(TUESDAY),
