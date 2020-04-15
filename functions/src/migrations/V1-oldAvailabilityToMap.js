@@ -54,5 +54,4 @@ async function migrate() {
 
 module.exports = {
   migrate,
-  createBackup,
 };
