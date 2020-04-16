@@ -1,3 +1,4 @@
+export const HOME = '/';
 export const VOLUNTEER_PATH = '/volunteer';
 export const USER_PATH = '/user';
 export const LOGIN_PATH = '/login';

@@ -18,15 +18,15 @@ interface StyledButtonProps {
   hoverBgColor?: string;
   hasBorder?: boolean;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  selected?: boolean;
+  ref?: HTMLButtonElement;
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   border: ${(props) => (props.hasBorder ? `3px solid ${props.color}` : 0)};
   box-sizing: border-box;
-  /* font-size: 1.125rem;
-  font-weight: 600; */
   padding-left: ${(props) => `${props.paddingLeft}px`};
   padding-right: ${(props) => `${props.paddingRight}px`};
   margin-top: ${(props) => `${props.marginTop}px`};
@@ -37,12 +37,13 @@ const StyledButton = styled.button<StyledButtonProps>`
   height: ${(props) => (typeof props.h === 'number' ? `${props.h}px` : props.h)};
   color: ${(props) => props.color};
   background: ${(props) => props.bgColor};
+  color: ${(props) => props.selected && props.hoverColor};
+  background: ${(props) => props.selected && props.hoverBgColor};
   cursor: pointer;
   :hover {
     background: ${(props) => props.hoverBgColor};
     color: ${(props) => props.hoverColor};
   }
-  /* classname: ${(props) => props.className}; */
 `;
 
 const Button: React.FC<StyledButtonProps> = ({
@@ -62,10 +63,14 @@ const Button: React.FC<StyledButtonProps> = ({
   paddingLeft = 0,
   paddingRight = 0,
   className,
+  selected = false,
+  ref,
 }) => (
   <StyledButton
     type="button"
     onClick={onClick}
+    disabled={selected}
+    selected={selected}
     bgColor={bgColor}
     color={color}
     hoverColor={hoverColor}
