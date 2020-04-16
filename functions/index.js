@@ -24,11 +24,6 @@ exports.scheduledmatchUsersAndVolunteers = functions.pubsub
     return null;
   });
 
-exports.testmatchUsersAndVolunteers = functions.https.onRequest((req, res) => {
-  matchUsersAndVolunteersUS()
-  res.send("test");
-});
-
 exports.reformatAvailability = functions.firestore
   .document("users/{userId}")
   .onCreate((snap, context) => {
