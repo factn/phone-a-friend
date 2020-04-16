@@ -3,6 +3,7 @@ const airTableMatchingFunction = require("./src/match/airtable");
 const firestoreMatchingFunction = require("./src/match/firestore");
 const updateUserAvailability = require("./src/update/userAvailability");
 const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
+const matchUsersAndVolunteersUS = require("./src/match/ScheduledMatch");
 
 const { migrate } = require("./src/migrations/V1-oldAvailabilityToMap");
 
