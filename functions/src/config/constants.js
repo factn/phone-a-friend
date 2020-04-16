@@ -13,7 +13,7 @@ const airTableFields = {
   phoneNumber: "phoneNumber",
   yearBorn: "yearBorn",
   id: "uid",
-  zipCode: "zipCode"
+  zipCode: "zipCode",
 };
 
 const TIME_PERIODS = {
@@ -24,7 +24,7 @@ const TIME_PERIODS = {
   "16": "4pm-6pm",
   "18": "6pm-8pm",
   "20": "8pm-10pm",
-  "22": "10pm-12am"
+  "22": "10pm-12am",
 };
 
 const TIME_PERIODS_US = {

@@ -1,3 +1,6 @@
+const { db } = require("../config/index");
+const { VOLUNTEERS_COLLECTION } = require("../config/constants");
+
 const MONDAY = "Monday";
 const TUESDAY = "Tuesday";
 const WEDNESDAY = "Wednesday";
@@ -23,18 +26,32 @@ function createAvailabilityObject(days, times) {
     [SUNDAY.toLowerCase()]: hasSelectedDay(SUNDAY),
   };
 }
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Friday"];
-const times = ["6pm-8pm", "4pm-6pm"];
-console.log(createAvailabilityObject(days, times));
 
-const daysArray = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+async function migrate() {
+  const batch = db.batch();
 
-console.log(daysArray[new Date().getDay()]);
+  await db
+    .collection(VOLUNTEERS_COLLECTION)
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        const volunteer = doc.data();
+        const fieldsToUpdate = {
+          availability: createAvailabilityObject(
+            volunteer.days.split(","),
+            volunteer.availability
+          ),
+        };
+        batch.set(doc.ref, fieldsToUpdate, { merge: true });
+      });
+    });
+
+  return batch.commit().then((commitResponse) => {
+    console.log(commitResponse);
+    return;
+  });
+}
+
+module.exports = {
+  migrate,
+};
