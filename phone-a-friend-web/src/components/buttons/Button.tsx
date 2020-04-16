@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import * as Colors from '../../Colors';
 
+
 // props passed into the styled component
 interface StyledButtonProps {
   bgColor?: string;
@@ -22,6 +23,7 @@ interface StyledButtonProps {
   className?: string;
   selected?: boolean;
   ref?: HTMLButtonElement;
+  btnType?: 'submit' | 'button';
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -64,10 +66,10 @@ const Button: React.FC<StyledButtonProps> = ({
   paddingRight = 0,
   className,
   selected = false,
-  ref,
+  btnType = 'button'
 }) => (
   <StyledButton
-    type="button"
+    type={btnType}
     onClick={onClick}
     disabled={selected}
     selected={selected}

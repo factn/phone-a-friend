@@ -25,7 +25,6 @@ const MainDiv = styled.div<MainDivProps>`
   justify-content: center;
   align-items: center;
   padding: 20px 0;
-  classname: ${(props) => props.className};
 `;
 
 const ImgDiv = styled.div`

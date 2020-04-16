@@ -5,7 +5,11 @@ import PoppinsSemiBold from '../fonts/Poppins/Poppins-SemiBold.ttf';
 import Lora from '../fonts/Lora/Lora-VariableFont_wght.ttf';
 
 const GlobalStyle = createGlobalStyle`
-@font-face {
+    :root {
+        --button-font: 1.125rem;
+        --mobile-button-font: 1.875rem;
+    }
+  @font-face {
     font-family: 'Poppins';
     src: url(${Poppins}) format('truetype');
     src: url(${PoppinsSemiBold}) format('truetype');
@@ -71,22 +75,26 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .splash-intro-button {
-        font-size: 18px;
+        font-size: var(--button-font);
         width: 256px;  
     }
     .mobile-splash-intro-button {
-        font-size: 30px;
+        font-size: var(--mobile-button-font);
         width: 96vw;  
     }
 
     .intro-button {
-        font-size: 18px;
+        font-size: var(--button-font);
         width: 256px;  
     }
     .mobile-intro-button {
-        font-size: 30px;
+        font-size: var(--mobile-button-font);
         width:100%;
-     
+    }
+    .button-font {
+        font-size: var(--button-font);
+        font-weight: 600;
+        font-family: Poppins;
     }
 
 
