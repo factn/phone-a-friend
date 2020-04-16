@@ -120,6 +120,9 @@ function getToday() {
   let today = "";
   let dayOfWeek = new Date().getUTCDay();
   switch (dayOfWeek) {
+    case 0:
+      today = "sunday";
+      break;
     case 1:
       today = "monday";
       break;
@@ -136,10 +139,7 @@ function getToday() {
       today = "friday";
       break;
     case 6:
-      today = "saturdat";
-      break;
-    case 7:
-      today = "sunday";
+      today = "saturday";
       break;
   }
   return today;
