@@ -16,7 +16,7 @@ const StyledFormButton = styled.button`
   cursor: pointer;
 
   &:active {
-    background-color: ${DARK_BLUE}40;
+    background-color: ${DARK_BLUE};
   }
 `;
 
