@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "phoneafriend-airtable"
+    "default": "phoneafriend-dev",
+    "PROD": "phoneafriend-us"
   }
 }
