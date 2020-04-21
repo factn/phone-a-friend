@@ -1,23 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import Media from '../../utils/CustomMedia';
 
-const MainDiv = styled.div<Props>`
-  padding: ${(props) => (props.isMobile ? '0 2.5rem' : '0 20%')};
+const MainDiv = styled.div`
   overflow: scroll;
-  display: inline-grid;
+  display: grid;
   gap: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 2fr 1fr;
-  justify-content: space-between;
+  align-content: space-around;
   justify-items: center;
-  align-items: center;
 `;
-const CopyDiv = styled.div<Props>`
+const CopyDiv = styled.div`
   font-family: 'Lora';
-  font-size: ${(props) => (props.isMobile ? '1.2rem' : '1.375rem')};
-  line-height: ${(props) => (props.isMobile ? '1.2rem' : '2.25rem')};
+  ${Media.greaterThan('mobile')`
+    font-size:1.375rem;
+    line-height: 2.25rem;
+    margin: 0 20%;
+  `}
+  ${Media.lessThan('mobile')`
+    font-size:1.2rem;
+    line-height: 1.2rem : 2.25rem;
+    margin: 0 2.5rem;
+  `}
   text-align: center;
   max-width: 894px;
+  text-align: center;
 `;
 
 const Disclaimer = styled.div`
@@ -26,17 +33,20 @@ const Disclaimer = styled.div`
   text-align: center;
 `;
 
-const Headline = styled.h1<Props>`
+const Headline = styled.h1`
   text-align: center;
-  font-size: ${(props) => (props.isMobile ? '2.5rem' : '4.375rem')};
+  ${Media.lessThan('mobile')`
+    font-size:2.5rem;
+  `};
+  ${Media.greaterThan('mobile')`
+    font-size:4.375rem;
+  `}
 `;
-type Props = {
-  isMobile: boolean;
-};
-const MainJumbo: React.FC<Props> = ({ isMobile }) => (
-  <MainDiv isMobile={isMobile}>
-    <Headline isMobile={isMobile}>Hi! Let&apos;s Connect</Headline>
-    <CopyDiv isMobile={isMobile}>
+
+const MainJumbo = () => (
+  <MainDiv>
+    <Headline>Hi! Let&apos;s Connect</Headline>
+    <CopyDiv>
       We understand how important human connection is, especially in times of isolation and uncertainty. Whether you
       want to phone someone for a chat or take a call from someone reaching out, PhoneAFriend.care will get you set up
       in no time.
