@@ -4,6 +4,7 @@
 .DS_Store
 **/.env
 **/.env*
+/functions/.runtimeconfig.json
 /phone-a-friend-web/.vscode
 /phone-a-friend-web/build
 
