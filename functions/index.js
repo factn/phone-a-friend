@@ -9,7 +9,7 @@ exports.scheduledmatchUsersAndVolunteers = functions.pubsub
   .schedule(functions.config().scheduledmatchvariables.intervals)
   .timeZone(functions.config().scheduledmatchvariables.timezone)
   .onRun((context) => {
-    matchUsersAndVolunteers();
+    matchUsersAndVolunteersUS();
     return null;
   });
 
