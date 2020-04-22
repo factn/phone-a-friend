@@ -7,7 +7,7 @@ import Lora from '../fonts/Lora/Lora-VariableFont_wght.ttf';
 const GlobalStyle = createGlobalStyle`
     :root {
         --button-font: 1.125rem;
-        --mobile-button-font: 1.875rem;
+        --mobile-button-font: 1rem;
     }
   @font-face {
     font-family: 'Poppins';

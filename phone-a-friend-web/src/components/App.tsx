@@ -36,7 +36,7 @@ position: relative;
   ${Media.greaterThan('mobile')`
     height: 100vh;
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 90px [main] 1fr [footer] 50px;
+    grid-template-rows: [header] 92px [main] 1fr [footer] 50px;
     border: 1px solid black;
     border-radius: 10px;
     min-width: 890px;
@@ -44,9 +44,10 @@ position: relative;
   `}
   ${Media.lessThan('mobile')`
     grid-template-columns: 1fr;
-    grid-template-rows: [header] 90px [main] auto [footer] auto;
+    grid-template-rows: [header] 45px [main] 1fr [footer] 43px;
     border:0;
     min-width: 370px;
+    min-height: 100vh;
   `}
 `;
 

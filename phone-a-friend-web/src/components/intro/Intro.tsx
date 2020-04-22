@@ -35,16 +35,15 @@ const MainDiv = styled.main<Iprops>`
 
 const Wrapper = styled.div<Iprops>`
   display: grid;
-  grid-template-columns: ${(props) => (props.isMobile ? '1fr' : '1fr 1fr')};
+  grid-template-columns: ${(props) => (props.isMobile ? '1fr' : '1fr 1fr')}
   color: ${(props) => props.color};
-  justify-items: stretch;
 `;
 
 const HeadLine = styled.div<Iprops>`
   padding-bottom: ${(props) => (props.isMobile ? '40px' : '0')};
   & > span {
     font-size: ${(props) => (props.isMobile ? '2.344rem' : '77px')};
-    line-height: ${(props) => (props.isMobile ? '2.188rem' : '100px')};
+    line-height: ${(props) => (props.isMobile ? '2.813rem' : '100px')};
     font-weight: 600;
   }
 `;
