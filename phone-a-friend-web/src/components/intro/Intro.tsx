@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Media from '../../utils/CustomMedia';
+import * as Constants from '../../utils/Constants';
 import { Link } from 'react-router-dom';
 import Button from '../buttons/Button';
 import * as Colors from '../../Colors';
@@ -17,10 +19,17 @@ const MainDiv = styled.main<Iprops>`
   flex-direction: column;
   justify-content: center;
   background: ${(props) => props.bgColor};
-  padding-left: ${(props) => (props.isMobile ? '4vw' : '5%')};
-  padding-right: ${(props) => (props.isMobile ? '4vw' : '5%')};
-  padding-top: ${(props) => (props.isMobile ? '30px' : '0')};
-  padding-bottom: ${(props) => (props.isMobile ? '30px' : '0')};
+
+  ${Media.greaterThan('mobile')`
+    padding-left: ${Constants.OUTSIDE_MARGIN}px;
+    padding-right: ${Constants.OUTSIDE_MARGIN}px;
+  `}
+  ${Media.lessThan('mobile')`
+    padding-left: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
+    padding-right: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  `}
   overflow: scroll;
 `;
 
@@ -34,8 +43,8 @@ const Wrapper = styled.div<Iprops>`
 const HeadLine = styled.div<Iprops>`
   padding-bottom: ${(props) => (props.isMobile ? '40px' : '0')};
   & > span {
-    font-size: ${(props) => (props.isMobile ? '2rem' : '77px')};
-    line-height: ${(props) => (props.isMobile ? '2rem' : '100px')};
+    font-size: ${(props) => (props.isMobile ? '2.344rem' : '77px')};
+    line-height: ${(props) => (props.isMobile ? '2.188rem' : '100px')};
     font-weight: 600;
   }
 `;
@@ -43,7 +52,7 @@ const HeadLine = styled.div<Iprops>`
 const Blurb = styled.div<Iprops>`
   font-family: Lora;
   font-size: ${(props) => (props.isMobile ? '1rem' : '1.375rem')};
-  line-height: ${(props) => (props.isMobile ? ' 2rem' : '2.25rem')};
+  line-height: ${(props) => (props.isMobile ? '1.625rem' : '2.25rem')};
   margin-bottom: 30px;
   max-width: ${(props) => !props.isMobile && '565px'};
 `;

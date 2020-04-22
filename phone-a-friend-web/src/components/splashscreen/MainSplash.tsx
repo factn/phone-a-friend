@@ -11,7 +11,6 @@ const MainDiv = styled.main<Props>`
   overflow: scroll;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${(props) => (props.isMobile ? '5fr 2fr' : 'minmax(505px,5fr) minmax(400px,4fr)')};
   align-items: space-between;
 `;
 

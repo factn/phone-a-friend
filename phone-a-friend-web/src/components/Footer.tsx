@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Media from '../utils/CustomMedia';
 import * as Constants from '../utils/Constants';
 import * as Colors from '../Colors';
 import { FaTwitter, FaFacebookF } from 'react-icons/fa';
@@ -23,7 +24,7 @@ const Navs = styled.span<Iprops>`
 `;
 
 const FooterButton = styled(Navs)`
-    font-size:${(props) => (props.isMobile ? '.75rem' : '0.75rem')};
+    font-size:${(props) => (props.isMobile ? '0.625rem' : '0.75rem')};
     /* letter-spacing:${(props) => (props.isMobile ? '0.1px' : '0.17px')}; */
     font-weight: 500;
 `;
@@ -40,8 +41,14 @@ const Main = styled.div<Iprops>`
 `;
 
 const BtnsContainer = styled.div<Iprops>`
-  margin-left: ${(props) => props.outsideMargin};
-  margin-right: ${(props) => props.outsideMargin};
+  ${Media.greaterThan('mobile')`
+    margin-left: ${Constants.OUTSIDE_MARGIN}px;
+    margin-right: ${Constants.OUTSIDE_MARGIN}px;
+  `}
+  ${Media.lessThan('mobile')`
+    margin-left: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
+    margin-right: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
+  `}
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -54,7 +61,7 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ isMobile }) => (
   <Main color={Colors.DARK_BLUE} h={Constants.FOOTER_HEIGHT}>
-    <BtnsContainer outsideMargin={Constants.OUTSIDE_MARGIN}>
+    <BtnsContainer>
       <div>
         <Link to="/">
           <FooterButton isMobile={isMobile}>© 2020 PhoneAFriend.care</FooterButton>
@@ -67,7 +74,7 @@ const Footer: React.FC<Props> = ({ isMobile }) => (
       </div>
       <div>
         <a href="https://www.twitter.com">
-          <Navs marginRight={isMobile ? '40px' : '20px'}>
+          <Navs marginRight="10px">
             <FaTwitter size={isMobile ? 22 : 18} />
           </Navs>
         </a>

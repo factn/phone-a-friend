@@ -9,6 +9,9 @@ const MainDiv = styled.div`
   grid-template-columns: 1fr;
   align-content: space-around;
   justify-items: center;
+  ${Media.lessThan('mobile')`
+    padding: 35px 0 35px 0;
+  `}
 `;
 const CopyDiv = styled.div`
   font-family: 'Lora';
@@ -18,8 +21,8 @@ const CopyDiv = styled.div`
     margin: 0 20%;
   `}
   ${Media.lessThan('mobile')`
-    font-size:1.2rem;
-    line-height: 1.2rem : 2.25rem;
+    font-size:1rem;
+    line-height: 1.625rem;
     margin: 0 2.5rem;
   `}
   text-align: center;
@@ -36,7 +39,7 @@ const Disclaimer = styled.div`
 const Headline = styled.h1`
   text-align: center;
   ${Media.lessThan('mobile')`
-    font-size:2.5rem;
+    font-size:1.625rem;
   `};
   ${Media.greaterThan('mobile')`
     font-size:4.375rem;
