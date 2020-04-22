@@ -54,7 +54,7 @@ const MainJumbo = () => (
       want to phone someone for a chat or take a call from someone reaching out, PhoneAFriend.care will get you set up
       in no time.
     </CopyDiv>
-    <Disclaimer>Note - we do not offer professional advice</Disclaimer>
+    <Disclaimer>Note: We do not offer professional advice</Disclaimer>
   </MainDiv>
 );
 MainJumbo.whyDidYouRender = true;

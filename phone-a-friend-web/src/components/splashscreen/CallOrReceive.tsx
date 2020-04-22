@@ -24,12 +24,12 @@ const MainDiv = styled.div<MainDivProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 0 30px;
 `;
 
 const ImgDiv = styled.div`
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 40px;
 `;
 
 const CallOrReceive: React.FC<Props> = ({ btnCopy, path, leftHandBool = true, isMobile }) => (
