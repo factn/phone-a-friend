@@ -35,7 +35,7 @@ const MainDiv = styled.main<Iprops>`
 
 const Wrapper = styled.div<Iprops>`
   display: grid;
-  grid-template-columns: ${(props) => (props.isMobile ? '1fr' : '1fr 1fr')}
+  grid-template-columns: ${(props) => (props.isMobile ? '1fr' : '1fr 1fr')};
   color: ${(props) => props.color};
 `;
 
