@@ -9,26 +9,29 @@ import * as Colors from '../Colors';
 import { useToggle } from '../hooks';
 
 const propsObj = {
-  hasBorder: false,
-  hoverColor: 'white',
-  hoverBgColor: Colors.DARK_BLUE,
+  hasBorder: true,
   color: Colors.DARK_BLUE,
-  w: '100%',
+  className: 'top-nav-button',
+  w:300,
 };
 
 const NavContainer = styled.nav`
-  width: 100%;
-  height: 100%;
-  background: whitesmoke;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255, 1);
   top: 0;
   left: 0;
   position: absolute;
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
+ 
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: center;
 `;
+
+
 
 const HamburgerNav: React.FC = () => {
   const { isToggled, toggle } = useToggle(false);

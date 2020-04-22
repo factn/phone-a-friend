@@ -63,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
         text-align: center;
     }
     .top-nav-button {
-        font-size: 18px;
+        font-size: 1.125rem;
         font-weight: 500;
         letter-spacing: 0;
     }
