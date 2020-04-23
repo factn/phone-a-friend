@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
+
+
 import Media from '../utils/CustomMedia';
-import * as Constants from '../utils/Constants';
 import useMediaType from '../hooks/useMediaType';
-import LoginPage from '../pages/LoginPage/LoginPage';
 import LoginMenu from './LoginMenu';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MainSplash from './splashscreen/MainSplash';
 import Header from './Header';
 import Footer from './Footer';
 import Intro from './intro/Intro';
-
+import * as Constants from '../utils/Constants';
 import * as Colors from '../Colors';
 import * as Paths from '../Paths';
 import UserSignUpManager from '../pages/UserSignUpManager/UserSignUpManager';
@@ -22,16 +22,16 @@ import UserAccountPage from '../pages/UserAccountPage/UserAccountPage';
 
 
 const Wrapper = styled.div`
-position:absolute;
-z-index: 4;
-top: 92px;
-right: 0;
-margin-right: 4vw;
+    position:absolute;
+    z-index: 4;
+    right: ${Constants.OUTSIDE_MARGIN}px;
+    top: ${Constants.HEADER_HEIGHT}px;
+  
 `;
 
 
 const MainDiv = styled.div`
-position: relative;
+    position: relative;
   display: grid;
   ${Media.greaterThan('mobile')`
     height: 100vh;
@@ -40,7 +40,6 @@ position: relative;
     border: 1px solid black;
     border-radius: 10px;
     min-width: 890px;
-    
   `}
   ${Media.lessThan('mobile')`
     grid-template-columns: 1fr;

@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// import { ThemeProvider } from 'styled-components';
-
-// import 'sanitize.css';
-// import theme from './utils/theme';
 import GlobalStyle from './utils/GlobalStyle';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';

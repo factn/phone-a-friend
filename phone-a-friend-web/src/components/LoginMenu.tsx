@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 import * as Colors from '../Colors';
+import * as Constants from '../utils/Constants';
+
 
 
 interface Iprops {
     bgColor: string;
 }
 const MainDiv = styled.div<Iprops>`
+font-family: unset;
     color:white;
     background: ${props => props.bgColor};
     height: 469px;
@@ -14,28 +17,19 @@ const MainDiv = styled.div<Iprops>`
     padding: 40px 50px 0 50px;
 `;
 
-
-const LoginMenu = () => {
-    const handleSubmit = () => {
-        console.log('submit')
-    }
-
-    const Form = styled.form`
+const Form = styled.form`
     display:grid;
     gap: 20px;
-    `;
+`;
 
 const Label = styled.label`
     display:grid;
     gap: 20px;
-    font-size: 1rem;
-    font-family: Poppins;
 `;
 
 const Input = styled.input`
    width: 316px;
    height: 50px;
-
   background: white;
   color: #13273E;
   font-family: Lora;
@@ -48,36 +42,35 @@ const Submit = styled(Input)`
    border: 3px solid white;
    background: transparent;
    color: white;
-   font-family: Poppins;
+   cursor: pointer;
 `;
 
-type SelectProps ={
-    color: string;
-}
-const Select = styled.select<SelectProps>`
- font-family: Poppins;
+// type SelectProps = {
+//     color?: string;
+// }
+const Select = styled.select`
     width: 316px;
    height: 50px;
    border:0;
-   border-radius:0;
-   color: ${props => props.color};
-   > option {
-        font-size: var(--mobile-button-font);
-   }
+   border-radius:0 !important;
+   font-size: 1.125rem;
+   font-family: Poppins;
+/* color: ${props => props.color}; */
+
 `;
 
-
-
+const LoginMenu = () => {
+    const handleSubmit = () => {
+        console.log('submit')
+    }
     return (
         <MainDiv bgColor={Colors.DARK_BLUE}>
             <Form onSubmit={handleSubmit}>
                 <Label>
                     Select an account
-                    <Select color={Colors.DARK_BLUE}>
-                        <option value="grapefruit">Grapefruit</option>
-                        <option value="lime">Lime</option>
-                        <option selected value="coconut">Coconut</option>
-                        <option value="mango">Mango</option>
+                    <Select className="select-css">
+                        <option defaultValue="take">Take a Call</option>
+                        <option value="receive">Receive a Call</option>
                     </Select>
                 </Label>
                 <Label>
