@@ -1,6 +1,6 @@
 const { functions, deleteField } = require("./src/config");
 const matchUsersAndVolunteers = require("./src/match/airtableScheduledMatch");
-const matchUsersAndVolunteersUS = require("./src/match/ScheduledMatch");
+const matchUsersAndVolunteersUS = require("./src/match/scheduledMatch");
 
 /**
  * Run at 8am, 10am, 12pm, 2pm, 4pm, 6pm, 8pm, 10pm
