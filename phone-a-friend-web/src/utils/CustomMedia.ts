@@ -8,6 +8,7 @@ const breakPoint = {
 };
 
 const Screen = generateMedia({
+  desktop: breakPoint.large,
   mobile: breakPoint.medium,
 });
 

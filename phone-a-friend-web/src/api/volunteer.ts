@@ -2,9 +2,11 @@ import { db } from '../config/firebase';
 import { VolunteerDto, Volunteer } from '../model/volunteer';
 import { mapResponseError } from './responseMappers';
 import { as } from '../utils/types.util';
-import { mapLocalTimePeriodsToUTC, mapUTCTimePeriodsToLocalTime } from './availabilityTransformer';
+import { mapLocalTimePeriodsToUTC } from './availabilityTransformer';
 
 const VOLUNTEER_COLLECTIONS = 'volunteers';
+
+export const VOLUNTEER_NOT_FOUND_MESSAGE = 'No volunteer found';
 
 export async function createVolunteer(volunteer: VolunteerDto): Promise<void> {
   const volunteerWithAvailabilityInUTCTime = {
@@ -45,16 +47,9 @@ export async function getVolunteer(volunteerId: string): Promise<VolunteerDto> {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        const volunteer = as<VolunteerDto>(doc.data());
-
-        const volunteerWithAvailabilityInLocalTime: VolunteerDto = {
-          ...volunteer,
-          ...mapUTCTimePeriodsToLocalTime(volunteer.utcAvailability, volunteer.timezone),
-        };
-
-        return volunteerWithAvailabilityInLocalTime;
+        return as<VolunteerDto>(doc.data());
       } else {
-        throw new Error('No user found');
+        throw new Error(VOLUNTEER_NOT_FOUND_MESSAGE);
       }
     })
     .catch(mapResponseError);

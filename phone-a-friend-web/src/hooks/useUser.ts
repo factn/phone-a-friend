@@ -9,7 +9,7 @@ function useUser(successCallback: (user: User) => void, errorCallback: (err: str
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    if (isEmptyObject(state.currentVolunteer)) {
+    if (isEmptyObject(state.currentUser)) {
       setIsFetching(true);
       getUser(state.userAuthId)
         .then((user) => {

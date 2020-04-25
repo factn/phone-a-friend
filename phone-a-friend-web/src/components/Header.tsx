@@ -17,11 +17,9 @@ const MainDiv = styled.div<Iprops>`
   align-items: center;
   ${Media.greaterThan('mobile')`
     margin-left: ${Constants.OUTSIDE_MARGIN}px;
-    margin-right: ${Constants.OUTSIDE_MARGIN}px;
   `}
   ${Media.lessThan('mobile')`
     margin-left: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
-    margin-right: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
   `}
 `;
 

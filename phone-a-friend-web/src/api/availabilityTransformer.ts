@@ -98,11 +98,11 @@ export function mapUTCTimePeriodsToLocalTime(
       tempDate.setDate(7 - Math.abs(tempDate.getDay() - dayOfTheWeek) + tempDate.getDate());
 
       // Build current date string without any offset
-      const dateString = `${tempDate.getUTCFullYear()}-${tempDate.getUTCMonth() + 1}-${
-        7 - Math.abs(tempDate.getDay() - dayOfTheWeek) + tempDate.getDate()
-      } ${hour}:00`;
+      const dateString = `${tempDate.getUTCFullYear()}-${
+        tempDate.getUTCMonth() + 1
+      }-${tempDate.getUTCDay()} ${hour}:00`;
 
-      const utcDateMoment = moment(dateString);
+      const utcDateMoment = moment(tempDate);
       const offsetDateMoment = moment.tz(dateString, timezone);
 
       const offset = calculateUTCToLocalOffset(offsetDateMoment.diff(utcDateMoment) / 1000 / 60);

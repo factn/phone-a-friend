@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import CallOrReceive from './CallOrReceive';
 import Heart from './Heart';
 import * as Colors from '../../Colors';
-import * as Paths from '../../Paths';
 
 interface Imain {
   bgColorLeftTop: string;
@@ -20,10 +19,17 @@ const MainDiv = styled.div<Imain>`
     `linear-gradient(${props.rotation}, ${props.bgColorLeftTop} 50%, ${props.bgColorRightBottom} 50%)`};
 `;
 
+type CallOrReceiveProps = {
+  copy: string;
+  redirect: string;
+};
+
 type Props = {
   isMobile: boolean;
+  volunteerProps: CallOrReceiveProps;
+  userProps: CallOrReceiveProps;
 };
-const CallReceiveContainer: React.FC<Props> = ({ isMobile }) => {
+const CallReceiveContainer: React.FC<Props> = ({ isMobile, volunteerProps, userProps }) => {
   return (
     <MainDiv
       rotation={isMobile ? '180deg' : '90deg'}
@@ -31,9 +37,14 @@ const CallReceiveContainer: React.FC<Props> = ({ isMobile }) => {
       bgColorRightBottom={Colors.LAVENDER}
       isMobile={isMobile}
     >
-      <CallOrReceive btnCopy="Phone a Friend" path={Paths.USER_PATH} isMobile={isMobile} />
+      <CallOrReceive btnCopy={userProps.copy} path={userProps.redirect} isMobile={isMobile} />
       {!isMobile && <Heart />}
-      <CallOrReceive btnCopy="Take a Call" path={Paths.VOLUNTEER_PATH} leftHandBool={false} isMobile={isMobile} />
+      <CallOrReceive
+        btnCopy={volunteerProps.copy}
+        path={volunteerProps.redirect}
+        leftHandBool={false}
+        isMobile={isMobile}
+      />
     </MainDiv>
   );
 };

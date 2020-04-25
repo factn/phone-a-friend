@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import firebase from 'firebase';
 import { useStateValue } from '../../contexts/AppContext';
 import MobileAuthPopup from '../../components/mobileauth/MobileAuthPopup';
-import { useHistory, useLocation } from 'react-router-dom';
 
 export type RedirectedLocationProps = {
   state: {
@@ -16,7 +16,6 @@ function hasFromInLocationState(location: any): location is RedirectedLocationPr
 }
 
 const LoginPage = () => {
-  const [authVisible, setAuthVisible] = useState<boolean>(true);
   const { dispatch } = useStateValue();
   const history = useHistory();
   const location = useLocation();
@@ -37,14 +36,23 @@ const LoginPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  const openAuth = () => setAuthVisible(true);
-  const closeAuth = () => setAuthVisible(false);
+  const handleOnClose = () => {
+    history.push('/');
+  };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      Log in
-      <button onClick={openAuth}>Log In</button>
-      <MobileAuthPopup open={authVisible} onClose={closeAuth} />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      }}
+    >
+      <MobileAuthPopup open={true} onClose={handleOnClose} />
     </div>
   );
 };

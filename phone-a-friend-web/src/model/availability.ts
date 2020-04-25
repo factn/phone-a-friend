@@ -86,7 +86,20 @@ type AvailabilityOption = {
   value: string;
 };
 
-export const availabilityOptions: AvailabilityOption[] = Object.values(TIME_PERIOD_LOOKUP).map((timePeriod) => ({
-  label: timePeriod,
-  value: timePeriod,
-}));
+const availableOptions: TimePeriod[] = [
+  '08:00-10:00',
+  '10:00-12:00',
+  '12:00-14:00',
+  '14:00-16:00',
+  '16:00-18:00',
+  '18:00-20:00',
+  '20:00-22:00',
+  '22:00-00:00',
+];
+
+export const availabilityOptions: AvailabilityOption[] = Object.values(TIME_PERIOD_LOOKUP)
+  .filter((timePeriod) => availableOptions.includes(timePeriod))
+  .map((timePeriod) => ({
+    label: timePeriod,
+    value: timePeriod,
+  }));

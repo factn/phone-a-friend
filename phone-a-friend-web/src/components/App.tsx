@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 import Media from '../utils/CustomMedia';
 import useMediaType from '../hooks/useMediaType';
-import LoginMenu from './LoginMenu';
 import ProtectedRoute from './routes/ProtectedRoute';
 import MainSplash from './splashscreen/MainSplash';
 import Header from './Header';
@@ -16,25 +14,17 @@ import * as Colors from '../Colors';
 import * as Paths from '../Paths';
 import UserSignUpManager from '../pages/UserSignUpManager/UserSignUpManager';
 import VolunteerSignUpManager from '../pages/VolunteerSignUpManager/VolunteerSignUpManager';
-import AccountPage from '../pages/VolunteerAccountPage/VolunteerAccountPage';
+import VolunteerAccountPage from '../pages/VolunteerAccountPage/VolunteerAccountPage';
 import UserAccountPage from '../pages/UserAccountPage/UserAccountPage';
-
-
-
-const Wrapper = styled.div`
-    position:absolute;
-    z-index: 4;
-    right: ${Constants.OUTSIDE_MARGIN}px;
-    top: ${Constants.HEADER_HEIGHT}px;
-  
-`;
-
+import LoginPage from '../pages/LoginPage/LoginPage';
+import AccountPageRedirect from '../pages/AccountPageRedirect/AccountPageRedirect';
+import LogoutPage from '../pages/LogoutPage/LogoutPage';
 
 const MainDiv = styled.div`
-    position: relative;
+  position: relative;
   display: grid;
   ${Media.greaterThan('mobile')`
-    height: 100vh;
+    min-height: 100vh;
     grid-template-columns: 1fr;
     grid-template-rows: [header] 92px [main] 1fr [footer] 50px;
     border: 1px solid black;
@@ -68,18 +58,17 @@ function App() {
 
         <Switch>
           <Route path={Paths.LOGIN_PATH}>
-            {/* <LoginPage /> */}
-            {!isMobile && 
-                <Wrapper>
-                    <LoginMenu />
-                </Wrapper>
-            }
+            <LoginPage />
             <MainSplash isMobile={isMobile} />
           </Route>
 
           <Route path={Paths.USER_PATH}>
-           
-            <Intro isMobile={isMobile} signUpPath={Paths.USER_SIGN_UP_PATH} bgColor={Colors.PEACH} copy={'phone a friend'} />
+            <Intro
+              isMobile={isMobile}
+              signUpPath={Paths.USER_SIGN_UP_PATH}
+              bgColor={Colors.PEACH}
+              copy={'phone a friend'}
+            />
           </Route>
 
           <Route path={Paths.VOLUNTEER_PATH}>
@@ -91,12 +80,20 @@ function App() {
             />
           </Route>
 
+          <Route path={Paths.LOGOUT_PATH}>
+            <LogoutPage />
+          </Route>
+
           <ProtectedRoute path={Paths.USER_ACCOUNT_PATH}>
             <UserAccountPage />
           </ProtectedRoute>
 
           <ProtectedRoute path={Paths.VOLUNTEER_ACCOUNT_PATH}>
-            <AccountPage />
+            <VolunteerAccountPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute path={Paths.ACCOUNT_PATH}>
+            <AccountPageRedirect isMobile={isMobile} />
           </ProtectedRoute>
 
           <ProtectedRoute path={Paths.USER_SIGN_UP_PATH}>

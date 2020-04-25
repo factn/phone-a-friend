@@ -7,23 +7,24 @@ import Button from './buttons/Button';
 import * as Paths from '../Paths';
 import * as Colors from '../Colors';
 import { useToggle } from '../hooks';
+import { useStateValue } from '../contexts/AppContext';
 
 const propsObj = {
   hasBorder: true,
   color: Colors.DARK_BLUE,
   className: 'top-nav-button',
-  w:300,
+  w: 300,
 };
 
 const NavContainer = styled.nav`
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255, 1);
+  background: rgba(255, 255, 255, 1);
   top: 0;
   left: 0;
   position: absolute;
   z-index: 3;
- 
+
   display: grid;
   gap: 50px;
   grid-template-columns: 1fr;
@@ -31,10 +32,9 @@ const NavContainer = styled.nav`
   justify-items: center;
 `;
 
-
-
 const HamburgerNav: React.FC = () => {
   const { isToggled, toggle } = useToggle(false);
+  const { state } = useStateValue();
   return (
     <>
       {!isToggled && (
@@ -69,11 +69,26 @@ const HamburgerNav: React.FC = () => {
               Contact Us
             </Button>
           </Link>
-          <Link to={Paths.LOGIN_PATH}>
-            <Button onClick={toggle} {...propsObj}>
-              Log In
-            </Button>
-          </Link>
+          {state.userAuthId === '' ? (
+            <Link to={Paths.LOGIN_PATH}>
+              <Button key="logIn" onClick={toggle} {...propsObj}>
+                Log In
+              </Button>
+            </Link>
+          ) : (
+            <>
+              <Link to={Paths.ACCOUNT_PATH}>
+                <Button key="accountPage" onClick={toggle} {...propsObj}>
+                  My Account
+                </Button>
+              </Link>
+              <Link to={Paths.LOGOUT_PATH}>
+                <Button key="logOut" onClick={toggle} {...propsObj} selected={false}>
+                  Logout
+                </Button>
+              </Link>
+            </>
+          )}
         </NavContainer>
       )}
     </>

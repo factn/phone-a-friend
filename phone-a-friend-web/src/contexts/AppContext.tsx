@@ -4,8 +4,10 @@ import envConfig from '../config/environment';
 import { User } from '../model/user';
 import { Volunteer } from '../model/volunteer';
 
+const NO_USER = '';
+
 const initialState = {
-  userAuthId: '',
+  userAuthId: NO_USER,
   currentUser: {} as User,
   currentVolunteer: {} as Volunteer,
 };
@@ -14,9 +16,9 @@ type AppState = typeof initialState;
 
 type Action =
   | { type: 'USER_LOGIN'; userId: string }
+  | { type: 'USER_LOGOUT' }
   | { type: 'USER_STORE_DETAILS'; user: Partial<User> }
   | { type: 'VOLUNTEER_STORE_DETAILS'; volunteer: Partial<Volunteer> };
-
 /**
  * Redux style reducer for the whole app
  * It takes the current state and an action, and returns the new state
@@ -27,6 +29,8 @@ function globalReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'USER_LOGIN':
       return { ...state, userAuthId: action.userId };
+    case 'USER_LOGOUT':
+      return { ...state, userAuthId: NO_USER };
     case 'USER_STORE_DETAILS':
       return {
         ...state,

@@ -86,10 +86,7 @@ const Intro: React.FC<Props> = ({ bgColor, copy, signUpPath, isMobile }) => (
           or another health professional who can connect you to the right services.
         </Blurb>
         <Link to={signUpPath}>
-          <Button 
-            className={isMobile ? 'mobile-intro-button' : 'intro-button'}>
-                Get Started
-            </Button>
+          <Button className={isMobile ? 'mobile-intro-button' : 'intro-button'}>Get Started</Button>
         </Link>
       </div>
     </Wrapper>

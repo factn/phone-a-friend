@@ -4,12 +4,20 @@ import styled from 'styled-components';
 import Button from './buttons/Button';
 import * as Paths from '../Paths';
 import * as Colors from '../Colors';
+import { useStateValue } from '../contexts/AppContext';
+import Media from '../utils/CustomMedia';
 
 const NavContainer = styled.nav`
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(6, 160px);
   grid-template-rows: 1fr;
   height: 100%;
+  margin-right: 71px;
+  ${Media.lessThan('desktop')`
+    margin-right: 0;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+  `}
 `;
 
 type Props = {
@@ -21,14 +29,16 @@ const propsObj = {
   hoverColor: 'white',
   hoverBgColor: Colors.DARK_BLUE,
   color: Colors.DARK_BLUE,
-  paddingLeft: 40,
-  paddingRight: 40,
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  w: '100%',
   h: '100%',
   className: 'top-nav-button',
 };
 
 const Nav: React.FC<Props> = () => {
   const location = useLocation();
+  const { state } = useStateValue();
 
   return (
     <NavContainer>
@@ -52,11 +62,26 @@ const Nav: React.FC<Props> = () => {
           Contact Us
         </Button>
       </Link>
-      <Link to={Paths.LOGIN_PATH}>
-        <Button key="logIn" {...propsObj} selected={location.pathname === Paths.LOGIN_PATH}>
-          Log In
-        </Button>
-      </Link>
+      {state.userAuthId === '' ? (
+        <Link to={Paths.LOGIN_PATH}>
+          <Button key="logIn" {...propsObj} selected={location.pathname === Paths.LOGIN_PATH}>
+            Log In
+          </Button>
+        </Link>
+      ) : (
+        <>
+          <Link to={Paths.ACCOUNT_PATH}>
+            <Button key="accountPage" {...propsObj} selected={location.pathname.includes(Paths.ACCOUNT_PATH)}>
+              My Account
+            </Button>
+          </Link>
+          <Link to={Paths.LOGOUT_PATH}>
+            <Button key="logOut" {...propsObj} selected={false}>
+              Logout
+            </Button>
+          </Link>
+        </>
+      )}
     </NavContainer>
   );
 };

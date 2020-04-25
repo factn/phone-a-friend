@@ -2,15 +2,14 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import * as Colors from '../../Colors';
 
-
 // props passed into the styled component
 interface StyledButtonProps {
   bgColor?: string;
   color?: string;
   w?: number | string;
   h?: number | string;
-  paddingLeft?: number;
-  paddingRight?: number;
+  paddingLeft?: string;
+  paddingRight?: string;
   marginBottom?: number;
   marginLeft?: number;
   marginTop?: number;
@@ -24,8 +23,8 @@ interface StyledButtonProps {
 const StyledButton = styled.button<StyledButtonProps>`
   border: ${(props) => (props.hasBorder ? `3px solid ${props.color}` : 0)};
   box-sizing: border-box;
-  padding-left: ${(props) => `${props.paddingLeft}px`};
-  padding-right: ${(props) => `${props.paddingRight}px`};
+  padding-left: ${(props) => `${props.paddingLeft}`};
+  padding-right: ${(props) => `${props.paddingRight}`};
   margin-top: ${(props) => `${props.marginTop}px`};
   margin-bottom: ${(props) => `${props.marginBottom}px`};
   margin-left: ${(props) => `${props.marginLeft}px`};
@@ -44,18 +43,21 @@ const StyledButton = styled.button<StyledButtonProps>`
 `;
 
 interface StyledButtonProps {
-    children: ReactNode;
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    className?: string;
-    selected?: boolean;
+  children: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
+  selected?: boolean;
 }
 
 const Button: React.FC<StyledButtonProps> = ({
-  children, w,  onClick, className,
+  children,
+  w,
+  onClick,
+  className,
   bgColor = 'transparent',
   color = Colors.DARK_BLUE,
   h = 50,
-  btnType='button',
+  btnType = 'button',
   marginBottom = 0,
   marginLeft = 0,
   marginTop = 0,
@@ -63,9 +65,9 @@ const Button: React.FC<StyledButtonProps> = ({
   hoverColor = 'black',
   hoverBgColor = 'transparent',
   hasBorder = true,
-  paddingLeft = 0,
-  paddingRight = 0,
-  selected = false
+  paddingLeft = '0px',
+  paddingRight = '0px',
+  selected = false,
 }) => (
   <StyledButton
     type={btnType}
@@ -73,7 +75,6 @@ const Button: React.FC<StyledButtonProps> = ({
     disabled={selected}
     selected={selected}
     className={className}
-
     bgColor={bgColor}
     color={color}
     hoverColor={hoverColor}

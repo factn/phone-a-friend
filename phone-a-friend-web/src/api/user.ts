@@ -2,9 +2,11 @@ import { db } from '../config/firebase';
 import { UserDto, User } from '../model/user';
 import { mapResponseError } from './responseMappers';
 import { as } from '../utils/types.util';
-import { mapLocalTimePeriodsToUTC, mapUTCTimePeriodsToLocalTime } from './availabilityTransformer';
+import { mapLocalTimePeriodsToUTC } from './availabilityTransformer';
 
 const USERS_COLLECTIONS = 'users';
+
+export const USER_NOT_FOUND_MESSAGE = 'No user found';
 
 export async function createUser(user: UserDto): Promise<void> {
   const userWithAvailabilityInUTCTime = {
@@ -40,15 +42,9 @@ export async function getUser(userId: string): Promise<User> {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        const user = as<User>(doc.data());
-
-        const userWithAvailabilityInLocalTime: User = {
-          ...user,
-          ...mapUTCTimePeriodsToLocalTime(user.utcAvailability, user.timezone),
-        };
-        return userWithAvailabilityInLocalTime;
+        return as<User>(doc.data());
       } else {
-        throw new Error('No user found');
+        throw new Error(USER_NOT_FOUND_MESSAGE);
       }
     })
     .catch(mapResponseError);

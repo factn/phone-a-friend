@@ -61,7 +61,6 @@ const BaseFormLayout: React.FC<PropsWithChildren<BaseFormLayoutProps>> = ({
   totalSteps,
   children,
 }) => {
-  console.log(backgroundColor);
   return (
     <BaseFormLayoutWrapper backgroundColor={backgroundColor}>
       <div>

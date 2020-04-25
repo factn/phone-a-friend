@@ -36,30 +36,26 @@ const Disclaimer = styled.p`
   text-align: center;
 `;
 
-interface classI {
-    className?:string;
+interface ClassI {
+  className?: string;
 }
 
-interface IProps  {
-    isMobile: boolean;
-  };
+interface IsMobileProp {
+  isMobile: boolean;
+}
 
 const Headline = styled.h1`
   text-align: center;
 `;
 
 type Props = {
-    isMobile: boolean;
-  };
+  isMobile: boolean;
+};
 
-
-  //className={`bold center-text ${!isMobile ? 'font-headline' : 'font-mobile-headline'}`}
-const MainJumbo:React.FC<Props> = ({ isMobile }) => (
+//className={`bold center-text ${!isMobile ? 'font-headline' : 'font-mobile-headline'}`}
+const MainJumbo: React.FC<Props> = ({ isMobile }) => (
   <MainDiv>
-    <Headline 
-        className={!isMobile ? 'font-headline' : 'font-mobile-headline'}>
-        Hi! Let&apos;s Connect
-    </Headline>
+    <Headline className={!isMobile ? 'font-headline' : 'font-mobile-headline'}>Hi! Let&apos;s Connect</Headline>
     <CopyDiv>
       We understand how important human connection is, especially in times of isolation and uncertainty. Whether you
       want to phone someone for a chat or take a call from someone reaching out, PhoneAFriend.care will get you set up
