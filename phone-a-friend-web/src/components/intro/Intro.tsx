@@ -42,8 +42,8 @@ const Wrapper = styled.div<Iprops>`
 const HeadLine = styled.div<Iprops>`
   padding-bottom: ${(props) => (props.isMobile ? '40px' : '0')};
   & > span {
-    font-size: ${(props) => (props.isMobile ? '2.344rem' : '77px')};
-    line-height: ${(props) => (props.isMobile ? '2.813rem' : '100px')};
+    font-size: ${(props) => (props.isMobile ? '2.344rem' : '4.813rem')};
+    line-height: ${(props) => (props.isMobile ? '2.813rem' : '6.25rem')};
     font-weight: 600;
   }
 `;
@@ -86,7 +86,10 @@ const Intro: React.FC<Props> = ({ bgColor, copy, signUpPath, isMobile }) => (
           or another health professional who can connect you to the right services.
         </Blurb>
         <Link to={signUpPath}>
-          <Button className={isMobile ? 'mobile-intro-button' : 'intro-button'}>Get Started</Button>
+          <Button 
+            className={isMobile ? 'mobile-intro-button' : 'intro-button'}>
+                Get Started
+            </Button>
         </Link>
       </div>
     </Wrapper>

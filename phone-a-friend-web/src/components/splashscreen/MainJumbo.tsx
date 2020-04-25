@@ -13,7 +13,7 @@ const MainDiv = styled.div`
     padding: 35px 0 35px 0;
   `}
 `;
-const CopyDiv = styled.div`
+const CopyDiv = styled.p`
   font-family: 'Lora';
   ${Media.greaterThan('mobile')`
     font-size:1.375rem;
@@ -21,7 +21,7 @@ const CopyDiv = styled.div`
     margin: 0 20%;
   `}
   ${Media.lessThan('mobile')`
-    font-size:1rem;
+    font-size: 1rem;
     line-height: 1.625rem;
     margin: 0 2.5rem;
   `}
@@ -30,25 +30,36 @@ const CopyDiv = styled.div`
   text-align: center;
 `;
 
-const Disclaimer = styled.div`
+const Disclaimer = styled.p`
   font-family: 'Lora';
   font-size: 0.875rem;
   text-align: center;
 `;
 
+interface classI {
+    className?:string;
+}
+
+interface IProps  {
+    isMobile: boolean;
+  };
+
 const Headline = styled.h1`
   text-align: center;
-  ${Media.lessThan('mobile')`
-    font-size:1.625rem;
-  `};
-  ${Media.greaterThan('mobile')`
-    font-size:4.375rem;
-  `}
 `;
 
-const MainJumbo = () => (
+type Props = {
+    isMobile: boolean;
+  };
+
+
+  //className={`bold center-text ${!isMobile ? 'font-headline' : 'font-mobile-headline'}`}
+const MainJumbo:React.FC<Props> = ({ isMobile }) => (
   <MainDiv>
-    <Headline>Hi! Let&apos;s Connect</Headline>
+    <Headline 
+        className={!isMobile ? 'font-headline' : 'font-mobile-headline'}>
+        Hi! Let&apos;s Connect
+    </Headline>
     <CopyDiv>
       We understand how important human connection is, especially in times of isolation and uncertainty. Whether you
       want to phone someone for a chat or take a call from someone reaching out, PhoneAFriend.care will get you set up

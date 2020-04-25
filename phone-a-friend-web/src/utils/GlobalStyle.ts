@@ -8,7 +8,14 @@ const GlobalStyle = createGlobalStyle`
     :root {
         --button-font: 1.125rem;
         --mobile-button-font: 1rem;
+        --headline-font-size: 4.375rem;
+        --headline-mobile-font-size:2.344rem;
+        --dark-blue:#0D2138;
+        --default-headline-color: var(--dark-blue);
+        --copy-blue: #13273E;
+        --default-font-color: var(--copy-blue);
     }
+   
   @font-face {
     font-family: 'Poppins';
     src: url(${Poppins}) format('truetype');
@@ -39,31 +46,34 @@ const GlobalStyle = createGlobalStyle`
           /* border-box box model allows us to add padding and border to our elements without increasing their size */
         box-sizing: border-box;
     }
-    body {
-
-    /* min-height: calc(100vh - 100px); */
-  /* margin: 50px; */
+    h1, h2 {
+        color: var(--default-headline-color);
+    }
+    p {
+        color: var(--default-font-color);
     }
 
     a {
         text-decoration:none;
     }
-    h1, h2 {
+    .font-headline, .font-mobile-headline {
         font-weight: 600;
         margin:0;
+        letter-spacing: 0.035rem;
     }
-    h1 {
-        font-size: 4.375rem;
+    .font-headline {
+        font-size: var(--headline-font-size);
+        line-height: 4.125rem;
     }
-    h2 {
-        font-size: 2.5rem;
-        /* white-space: break-spaces; */
+    .font-mobile-headline {
+        font-size: var(--headline-mobile-font-size);
+        line-height: 5.625rem;
     }
     .center-text {
         text-align: center;
     }
     .top-nav-button {
-        font-size: 1.125rem;
+        font-size: var(--button-font);
         font-weight: 500;
         letter-spacing: 0;
     }
@@ -71,14 +81,13 @@ const GlobalStyle = createGlobalStyle`
     .splash-intro-button, .mobile-splash-intro-button {
         font-weight: 600;
         letter-spacing: 0;
-        color: #13273E;
     }
 
     .splash-intro-button {
         font-size: var(--button-font);
         width: 256px;  
     }
-    .mobile-splash-intro-button {
+    .mobile-splash-intro-button, .mobile-intro-button {
         font-size: var(--mobile-button-font);
         width: 96vw;  
     }
@@ -87,22 +96,11 @@ const GlobalStyle = createGlobalStyle`
         font-size: var(--button-font);
         width: 256px;  
     }
-    .mobile-intro-button {
-        font-size: var(--mobile-button-font);
-        width:100%;
-    }
     .button-font {
         font-size: var(--button-font);
         font-weight: 600;
-        font-family: Poppins;
     }
 
-
-
-
-  p {
-      font-size: 1em;
-  }
 
 `;
 

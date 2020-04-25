@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
 import * as Colors from '../Colors';
-import * as Constants from '../utils/Constants';
 
 
 

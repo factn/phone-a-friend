@@ -17,7 +17,7 @@ const MainDiv = styled.main<Props>`
 const MainSplash: React.FC<Props> = ({ isMobile }) => (
   <MainDiv isMobile={isMobile}>
     <CallReceiveContainer isMobile={isMobile} />
-    <MainJumbo />
+    <MainJumbo isMobile={isMobile} />
   </MainDiv>
 );
 
