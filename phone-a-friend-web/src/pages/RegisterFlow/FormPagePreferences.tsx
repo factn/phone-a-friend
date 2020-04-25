@@ -20,7 +20,7 @@ const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({ onS
   return (
     <Formik
       initialValues={{
-        genderPreference: initialValues?.genderPreference || 'noPreference',
+        genderPreference: initialValues?.genderPreference || 'Anyone',
         // canChatNow: initialValues?.canChatNow || "yes",
       }}
       onSubmit={onSubmit}
@@ -35,17 +35,17 @@ const FormPagePreferences: React.FC<FormPage<FormPagePreferencesProps>> = ({ onS
             error={errors.genderPreference}
             touched={touched.genderPreference}
           >
-            <Field component={RadioButton} name="genderPreference" id="noPreference" label="Anyone" />
+            <Field component={RadioButton} name="genderPreference" id="Anyone" label="Anyone" />
             <Field
               component={RadioButton}
               name="genderPreference"
-              id="female"
+              id="Female"
               label="I am a female who only wants to speak to another female"
             />
             <Field
               component={RadioButton}
               name="genderPreference"
-              id="male"
+              id="Male"
               label="I am a male who only wants to speak to another male"
             />
           </RadioButtonGroup>

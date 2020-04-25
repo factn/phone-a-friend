@@ -13,6 +13,7 @@ import { useStateValue } from '../../contexts/AppContext';
 import { createUser } from '../../api/user';
 import useUser from '../../hooks/useUser';
 import { USER_BACKGROUND_COLOR } from '../../Colors';
+import { successToast, errorToast } from '../../utils/toast.utils';
 
 const initialState: User & AcceptedTerms = {
   phoneNumber: '',
@@ -22,8 +23,8 @@ const initialState: User & AcceptedTerms = {
   zipcode: '',
   languages: [],
   introduction: '',
-  genderPreference: 'noPreference',
-  gender: 'male',
+  genderPreference: 'Anyone',
+  gender: 'Male',
   localTimeAvailability: emptyAvailability,
   utcAvailability: emptyAvailability,
   timezone: '',
@@ -67,12 +68,16 @@ const UserSignUpManager: React.FC<{}> = () => {
         id: state.userAuthId,
       })
         .then(() => {
-          setIsFetching(false);
+          successToast('User successfully created');
           dispatch({ type: 'USER_STORE_DETAILS', user: newJourneyValues });
+          setIsFetching(false);
           history.push('/account/user');
         })
         .catch((err) => {
           console.log(err);
+          errorToast('Error creating user - please try again and if the issue persists please contact the team', {
+            autoClose: false,
+          });
           setIsFetching(false);
         });
     } else {

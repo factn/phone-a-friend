@@ -1,2 +1,2 @@
-export type Gender = 'male' | 'female';
-export type GenderPreference = Gender | 'noPreference';
+export type Gender = 'Male' | 'Female';
+export type GenderPreference = Gender | 'Anyone';

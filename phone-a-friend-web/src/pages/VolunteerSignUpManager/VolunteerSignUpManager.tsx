@@ -13,6 +13,7 @@ import { Volunteer } from '../../model/volunteer';
 import { createVolunteer } from '../../api/volunteer';
 import useVolunteer from '../../hooks/useVolunteer';
 import { VOLUNTEER_BACKGROUND_COLOR } from '../../Colors';
+import { successToast, errorToast } from '../../utils/toast.utils';
 
 const initialState: Volunteer & AcceptedTerms = {
   phoneNumber: '',
@@ -23,7 +24,7 @@ const initialState: Volunteer & AcceptedTerms = {
   zipcode: '',
   languages: [],
   introduction: '',
-  gender: 'male',
+  gender: 'Male',
   localTimeAvailability: emptyAvailability,
   utcAvailability: emptyAvailability,
   timezone: '',
@@ -62,6 +63,7 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
         id: state.userAuthId,
       })
         .then(() => {
+          successToast('Volunteer successfully created');
           dispatch({
             type: 'VOLUNTEER_STORE_DETAILS',
             volunteer: newJourneyValues,
@@ -70,6 +72,9 @@ const VolunteerSignUpManager: React.FC<{}> = () => {
           history.push('/account/volunteer');
         })
         .catch(() => {
+          errorToast('Error creating volunteer - please try again and if the issue persists please contact the team', {
+            autoClose: false,
+          });
           setIsFetching(false);
         });
     } else {
