@@ -1,6 +1,6 @@
 # Phone A Friend 
 
-Phone a friend is a react/firebase app for connecting people in isolation (or otherwise) that would like to have a chat with someone who is avialable to chat with them. It is being used by http://coronaunity.org and https://phoneafriend.care possibly amongst others. 
+Phone a friend is a react/firebase app for connecting people in isolation (or otherwise) that would like to have a chat with someone who is avialable to chat with them. It is 100% open source GPLv3. Being actively used by http://coronaunity.org and https://phoneafriend.care possibly amongst others. 
 
 
 ## Community Tech for COVID Mutual Aid Groups
