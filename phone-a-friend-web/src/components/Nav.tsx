@@ -11,11 +11,11 @@ const NavContainer = styled.nav`
   display: grid;
   height: 100%;
   
-  ${Media.greaterThan('desktop')`
+  ${Media.greaterThan('mobile')`
     grid-auto-flow:column ;
     margin-right: 71px;
   `}
-  ${Media.lessThan('desktop')`
+  ${Media.lessThan('mobile')`
     margin-right: 0;
     grid-template-columns: repeat(auto-fill);
     grid-gap: 10px;
