@@ -20,6 +20,7 @@ const MainDiv = styled.div<Iprops>`
   `}
   ${Media.lessThan('mobile')`
     margin-left: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
+    margin-right: ${Constants.OUTSIDE_MOBILE_MARGIN_PIXELS}px;
   `}
 `;
 
