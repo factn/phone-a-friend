@@ -9,13 +9,15 @@ import Media from '../utils/CustomMedia';
 
 const NavContainer = styled.nav`
   display: grid;
-  grid-template-columns: repeat(6, 160px);
-  grid-template-rows: 1fr;
   height: 100%;
-  margin-right: 71px;
+  
+  ${Media.greaterThan('desktop')`
+    grid-auto-flow:column ;
+    margin-right: 71px;
+  `}
   ${Media.lessThan('desktop')`
     margin-right: 0;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(auto-fill);
     grid-gap: 10px;
   `}
 `;
