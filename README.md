@@ -1,7 +1,6 @@
-# Phone A Friend 
+# Phone A Friend
 
-Phone a friend is a react/firebase app for connecting people in isolation (or otherwise) that would like to have a chat with someone who is avialable to chat with them. It is 100% open source GPLv3. Being actively used by http://coronaunity.org and https://phoneafriend.care possibly amongst others.
-
+Phone a friend is a react/firebase app for connecting people in isolation (or otherwise) that would like to have a chat with someone who is available to chat with them. It is 100% open source GPLv3. Being actively used by http://coronaunity.org and https://phoneafriend.care possibly amongst others.
 
 ## Community Tech for COVID Mutual Aid Groups
 
@@ -11,7 +10,7 @@ This is to be contrasted with our [#resilience-app](https://github.com/factn/res
 
 ## What does success look like?
 
-- Be helpful, on the ground, for real world organisers **fast**
+- Be helpful, on the ground, for real world organizers **fast**
 - Iterate fast, commit good code and build solutions that work
 - Listen to the community groups and through rapid iteration and development learn a lot about their real on the ground needs **right freaking now**
 
@@ -19,4 +18,3 @@ You might also want to check out the [code of conduct] and [contributing] guidel
 
 [code of conduct]: /CODE_OF_CONDUCT.md
 [contributing]: /CONTRIBUTING.md
-
